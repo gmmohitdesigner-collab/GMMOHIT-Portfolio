@@ -45,8 +45,8 @@ const ProjectCard = ({ title, description, videoSrc, containerVariants, itemVari
             </div>
 
             <div className="w-full px-4 md:px-12 lg:px-16 max-w-[1400px]">
-                <div className="w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[1.4/1] bg-gray-200 relative overflow-hidden group">
-                    <motion.div style={{ y: yMove }} className="w-full h-[120%] absolute top-[-10%] sm:h-full sm:top-0">
+                <div className="w-full aspect-[4/3] md:aspect-[21/9] lg:aspect-[2.35/1] bg-[#1A1818] relative overflow-hidden group">
+                    <motion.div style={{ y: yMove }} className="w-full h-[130%] absolute top-[-15%] sm:h-[120%] sm:top-[-10%]">
                         {/* Placeholder video - no controls, looping */}
                         <video
                             autoPlay
@@ -54,7 +54,7 @@ const ProjectCard = ({ title, description, videoSrc, containerVariants, itemVari
                             loop
                             playsInline
                             aria-label={`Demo video of ${title}`}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
                         >
                             <source src={videoSrc} type="video/mp4" />
                         </video>
