@@ -71,7 +71,7 @@ export default function NavBar() {
                     <MagneticNavLink href="mailto:HELLO@GMMOHIT.COM" className="font-circular font-normal text-[12px] uppercase">
                         HELLO@GMMOHIT.COM
                     </MagneticNavLink>
-                    <MagneticNavLink href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-widest mt-[2px] border-b border-current pb-[2px]">
+                    <MagneticNavLink href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-widest mt-[2px]">
                         SEND PROJECT INQUIRY
                     </MagneticNavLink>
                 </div>
