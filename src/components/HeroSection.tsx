@@ -29,7 +29,7 @@ export default function HeroSection() {
         hidden: { clipPath: "inset(0 0 0 100%)" },
         show: {
             clipPath: "inset(0 0 0 0%)",
-            transition: { duration: 0.8, ease: "circOut" as const, delay: 2 }
+            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1], delay: 2 }
         },
     };
 
