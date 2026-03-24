@@ -46,7 +46,7 @@ export default function HeroSection() {
                     staggerDuration={0.2}
                 />
 
-                <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-end md:justify-end gap-10 md:gap-16 lg:gap-32">
+                <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-center md:justify-end gap-10 md:gap-16 lg:gap-32">
 
                     <motion.div
                         className="relative w-full md:w-[450px] lg:w-[600px] aspect-[16/9] md:aspect-[1.8/1] overflow-hidden order-1 md:order-2"
@@ -64,7 +64,7 @@ export default function HeroSection() {
                         />
                     </motion.div>
 
-                    <div className="order-2 md:order-1 flex flex-col justify-end">
+                    <div className="order-2 md:order-1 flex flex-col justify-center">
                         <AnimatedText
                             el="p"
                             className="font-circular text-base md:text-lg lg:text-xl leading-relaxed md:max-w-[320px] lg:max-w-[400px]"
