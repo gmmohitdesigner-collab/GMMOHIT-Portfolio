@@ -24,8 +24,8 @@ const ProjectCard = ({ title, description, videoSrc, containerVariants, itemVari
 
     return (
         <motion.div ref={ref} className="w-full flex flex-col gap-8 md:gap-14 items-center" variants={itemVariants}>
-            <div className={`w-full flex flex-col items-start md:items-end justify-between px-4 md:px-12 lg:px-16 gap-4 md:gap-8 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-                <div className="flex flex-col md:w-auto">
+            <div className={`w-full flex flex-col items-start px-4 md:px-12 lg:px-16 gap-4 md:gap-6 ${reverse ? 'md:items-end' : 'md:items-start'}`}>
+                <div className={`flex flex-col md:w-auto ${reverse ? 'items-end' : 'items-start'}`}>
                     <AnimatedText
                         el="h3"
                         className="font-monument text-3xl md:text-5xl lg:text-[61px] uppercase tracking-tight m-0 leading-none"
@@ -33,10 +33,10 @@ const ProjectCard = ({ title, description, videoSrc, containerVariants, itemVari
                     />
                     <div className="w-full h-px bg-brand-text mt-2"></div>
                 </div>
-                <div className="flex flex-col md:mb-[9px]">
+                <div className="flex flex-col">
                     <AnimatedText
                         el="p"
-                        className={`font-circular text-base md:text-xl lg:text-2xl opacity-80 max-w-[280px] ${reverse ? 'md:text-left' : 'md:text-right'}`}
+                        className={`font-circular text-base md:text-xl lg:text-2xl opacity-80 max-w-[280px] ${reverse ? 'md:text-right' : 'md:text-left'}`}
                         text={description}
                         delay={0.1}
                         staggerDuration={0.015}
