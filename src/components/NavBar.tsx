@@ -41,30 +41,30 @@ export default function NavBar() {
                 }}
                 animate={hidden && !menuOpen ? "hidden" : "visible"}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="fixed top-0 left-0 w-full flex justify-between items-start px-4 md:px-12 lg:px-16 py-6 md:py-8 z-50 text-brand-bg mix-blend-difference pointer-events-auto"
+                className="fixed top-0 left-0 w-full flex justify-between items-center px-4 md:px-12 lg:px-16 py-6 md:py-8 z-50 text-brand-bg mix-blend-difference pointer-events-auto"
             >
                 {/* Branding (Left) */}
-                <div className="font-monument text-lg md:text-2xl tracking-[-0.02em] leading-[0.85] z-[61] flex flex-col justify-center my-auto h-full">
+                <div className="font-monument text-lg md:text-2xl tracking-[-0.02em] leading-[0.85] z-[61] flex flex-col">
                     <span>GM</span>
                     <span>MOHIT</span>
                 </div>
 
                 {/* Navigation Links (Center-Left) */}
-                <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase mt-1">
+                <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
                     <MagneticNavLink href="#home" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink>
                     <MagneticNavLink href="#about" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> ABOUT</MagneticNavLink>
                     <MagneticNavLink href="#work" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> WORKS</MagneticNavLink>
                 </div>
 
                 {/* Social Links (Center-Right) */}
-                <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase mt-1">
+                <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
                     <MagneticNavLink href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
                     <MagneticNavLink href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink>
                     <MagneticNavLink href="https://behance.net" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink>
                 </div>
 
                 {/* Availability & Contact (Right) */}
-                <div className="hidden md:flex flex-col items-end gap-1 text-right mt-1 w-[180px] lg:w-[220px]">
+                <div className="hidden md:flex flex-col items-end gap-1 text-right w-[180px] lg:w-[220px]">
                     <span className="font-circular text-[12px] opacity-60 uppercase tracking-[-0.02em] leading-relaxed">
                         AVAILABLE FOR PROJECTS
                     </span>
