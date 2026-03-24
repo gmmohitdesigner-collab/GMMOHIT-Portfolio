@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import MagneticNavLink from "./MagneticNavLink";
 
 export default function NavBar() {
     const { scrollY } = useScroll();
@@ -50,16 +51,16 @@ export default function NavBar() {
 
                 {/* Navigation Links (Center-Left) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-widest uppercase mt-1">
-                    <a href="#home" className="hover:opacity-70 transition-opacity flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</a>
-                    <a href="#about" className="hover:opacity-70 transition-opacity flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> ABOUT</a>
-                    <a href="#work" className="hover:opacity-70 transition-opacity flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> WORKS</a>
+                    <MagneticNavLink href="#home" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink>
+                    <MagneticNavLink href="#about" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> ABOUT</MagneticNavLink>
+                    <MagneticNavLink href="#work" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> WORKS</MagneticNavLink>
                 </div>
 
                 {/* Social Links (Center-Right) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-widest uppercase mt-1">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</a>
-                    <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</a>
+                    <MagneticNavLink href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
+                    <MagneticNavLink href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink>
+                    <MagneticNavLink href="https://behance.net" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink>
                 </div>
 
                 {/* Availability & Contact (Right) */}
@@ -67,12 +68,12 @@ export default function NavBar() {
                     <span className="font-circular text-[12px] opacity-60 uppercase tracking-widest leading-relaxed">
                         AVAILABLE FOR PROJECTS
                     </span>
-                    <a href="mailto:HELLO@GMMOHIT.COM" className="font-circular font-normal text-[12px] uppercase hover:opacity-70 transition-opacity">
+                    <MagneticNavLink href="mailto:HELLO@GMMOHIT.COM" className="font-circular font-normal text-[12px] uppercase">
                         HELLO@GMMOHIT.COM
-                    </a>
-                    <a href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-widest hover:opacity-70 transition-opacity mt-[2px] border-b border-current pb-[2px]">
+                    </MagneticNavLink>
+                    <MagneticNavLink href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-widest mt-[2px] border-b border-current pb-[2px]">
                         SEND PROJECT INQUIRY
-                    </a>
+                    </MagneticNavLink>
                 </div>
 
                 {/* Mobile Hamburger (Visible below md) */}
