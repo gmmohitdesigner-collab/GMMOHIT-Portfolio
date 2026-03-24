@@ -33,7 +33,7 @@ const ProjectCard = ({ title, description, videoSrc, containerVariants, itemVari
                     />
                     <div className="w-full h-px bg-brand-text mt-2"></div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col md:mb-[9px]">
                     <AnimatedText
                         el="p"
                         className={`font-circular text-base md:text-xl lg:text-2xl opacity-80 max-w-[280px] ${reverse ? 'md:text-left' : 'md:text-right'}`}
