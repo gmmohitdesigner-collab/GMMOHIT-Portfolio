@@ -12,6 +12,25 @@ export default function Footer() {
             
             <div className="px-4 md:px-12 lg:px-[172px] flex flex-col w-full relative z-10">
                 
+                {/* Massive CTA */}
+                <div className="w-full flex flex-col mb-24 lg:mb-32 group">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                        className="flex flex-col items-start gap-4"
+                    >
+                        <span className="font-circular italic text-2xl md:text-3xl lg:text-4xl opacity-70">
+                            Got a vision? Let's bring it to life.
+                        </span>
+                        <a href="mailto:HELLO@GMMOHIT.COM" className="font-monument text-[11vw] sm:text-[8vw] lg:text-[6.5vw] uppercase leading-none tracking-tighter hover:opacity-60 transition-opacity duration-500 w-fit break-all xl:break-normal mt-2">
+                            HELLO@GMMOHIT.COM
+                        </a>
+                        <div className="w-full h-[1px] bg-[#3F352C]/20 mt-6 lg:mt-8 group-hover:bg-[#3F352C]/50 transition-colors duration-500"></div>
+                    </motion.div>
+                </div>
+
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-32 lg:mb-40 gap-16">
                     
                     {/* Mission Statement / Sign-off */}
@@ -61,23 +80,7 @@ export default function Footer() {
                             </div>
                         </motion.div>
 
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.12, ease: [0.33, 1, 0.68, 1] }}
-                            className="flex flex-col gap-5"
-                        >
-                            <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Contact</span>
-                            <div className="flex flex-col gap-1">
-                                <a href="mailto:HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity">
-                                    HELLO@GMMOHIT.COM
-                                </a>
-                                <span className="font-mono text-[10px] tracking-widest opacity-60 mt-2 max-w-[180px] leading-relaxed">
-                                    Got a vision? Let's bring it to life.
-                                </span>
-                            </div>
-                        </motion.div>
+
 
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.95 }}
