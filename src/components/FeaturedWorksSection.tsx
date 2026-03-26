@@ -26,10 +26,19 @@ const ProjectCard = ({
     });
 
     // 1. Image Parallax
-    const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+    const yMove = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
     
     // 2. Scale-on-Scroll 
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1.1]);
+    const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1.0]);
+    
+    // Luxury Easing Variants for typography
+    const textRevealVariants: Variants = {
+        hidden: { y: "100%" },
+        show: {
+            y: 0,
+            transition: { duration: 1.2, ease: [0.33, 1, 0.68, 1] }
+        }
+    };
     
     // 3. Grayscale-to-Color 
     const filter = useTransform(scrollYProgress, [0.1, 0.45], ["grayscale(100%)", "grayscale(0%)"]);
@@ -57,17 +66,22 @@ const ProjectCard = ({
     const restOfTitle = title.slice(1);
 
     return (
-        <motion.div ref={ref} className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto" variants={itemVariants}>
+        <motion.div ref={ref} className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto">
             
             {/* Massive Display Title (Left Aligned, Overlapping) */}
             <div className="w-full flex justify-start px-4 md:px-12 lg:px-16 z-10 relative pointer-events-none mb-[-5%] md:mb-[-6%] lg:mb-[-4%]">
-                <motion.h3 
-                    className="flex items-baseline text-[55px] sm:text-[90px] md:text-[120px] lg:text-[150px] uppercase tracking-tighter m-0 leading-[0.8] text-[#E8E3DA]"
-                    variants={itemVariants}
-                >
-                    <span className="font-serif italic font-light lowercase md:mr-1 tracking-normal">{firstLetter}</span>
-                    <span className="font-monument">{restOfTitle}</span>
-                </motion.h3>
+                <div className="overflow-hidden">
+                    <motion.h3 
+                        className="flex items-baseline text-[55px] sm:text-[90px] md:text-[120px] lg:text-[150px] uppercase tracking-tighter m-0 leading-[0.8] text-[#E8E3DA]"
+                        variants={textRevealVariants}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                    >
+                        <span className="font-serif italic font-light lowercase md:mr-1 tracking-normal">{firstLetter}</span>
+                        <span className="font-monument">{restOfTitle}</span>
+                    </motion.h3>
+                </div>
             </div>
 
             {/* Centered Widescreen 16:9 Video Container */}
@@ -114,11 +128,19 @@ const ProjectCard = ({
 
             {/* Metadata & Description (Stacked below natively) */}
             <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-4 md:px-12 lg:px-16 mt-6 md:mt-10 gap-6 md:w-[90%] lg:w-[85%] mx-auto">
-                <motion.div variants={itemVariants} className="flex gap-4 font-mono text-[10px] md:text-[11px] tracking-widest uppercase opacity-60">
-                    <span>{index}</span>
-                    <span>—</span>
-                    <span>{category} / {targetYear}</span>
-                </motion.div>
+                <div className="overflow-hidden">
+                    <motion.div 
+                        variants={textRevealVariants}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                        className="flex gap-4 font-mono text-[10px] md:text-[11px] tracking-widest uppercase opacity-60"
+                    >
+                        <span>{index}</span>
+                        <span>—</span>
+                        <span>{category} / {targetYear}</span>
+                    </motion.div>
+                </div>
 
                 <AnimatedText
                     el="p"
