@@ -54,11 +54,11 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
 
     return (
         <motion.div 
-            className="w-[75vw] sm:w-[320px] md:w-[360px] lg:w-[400px] flex-shrink-0 perspective-[1200px]"
+            className="h-[55vh] min-h-[350px] max-h-[550px] aspect-[4/5] flex-shrink-0 perspective-[1200px]"
             variants={cardVariants}
         >
             <motion.div 
-                className="w-full aspect-[4/5] bg-[#3F352C] text-[#E8E3DA] flex flex-col justify-between p-6 md:p-8 relative group cursor-pointer shadow-2xl transition-shadow hover:shadow-2xl hover:shadow-[#3F352C]/40 border border-[#3F352C]/10"
+                className="w-full h-full bg-[#3F352C] text-[#E8E3DA] flex flex-col justify-between p-6 md:p-8 relative group cursor-pointer shadow-2xl transition-shadow hover:shadow-2xl hover:shadow-[#3F352C]/40 border border-[#3F352C]/10"
                 onMouseMove={handleMouse}
                 onMouseLeave={resetMouse}
                 style={{ rotateX: y, rotateY: x, transformStyle: "preserve-3d" }}
@@ -155,6 +155,7 @@ export default function ServicesSection() {
                         </motion.div>
                     </div>
                 </div>
+            </div>
         </section>
     );
 }
