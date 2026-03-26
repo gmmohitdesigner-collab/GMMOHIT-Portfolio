@@ -65,6 +65,24 @@ export default function Footer() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.12, ease: [0.33, 1, 0.68, 1] }}
+                            className="flex flex-col gap-5"
+                        >
+                            <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Contact</span>
+                            <div className="flex flex-col gap-1">
+                                <a href="mailto:HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity">
+                                    HELLO@GMMOHIT.COM
+                                </a>
+                                <span className="font-mono text-[10px] tracking-widest opacity-60 mt-2 max-w-[180px] leading-relaxed">
+                                    Got a vision? Let's bring it to life.
+                                </span>
+                            </div>
+                        </motion.div>
+
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.15, ease: [0.33, 1, 0.68, 1] }}
                             className="flex flex-col gap-5"
                         >
