@@ -25,6 +25,10 @@ const ProjectCard = ({
         offset: ["start end", "end start"]
     });
 
+    // Velocity-Based Tilt for the entire Card
+    const tiltTransform = useTransform(scrollYProgress, [0, 0.5, 1], [-10, 0, 10]);
+    const scrollRotateX = useSpring(tiltTransform, { stiffness: 100, damping: 30 });
+
     // 1. Image Parallax
     const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
     
@@ -57,7 +61,12 @@ const ProjectCard = ({
     const restOfTitle = title.slice(1);
 
     return (
-        <motion.div ref={ref} className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto" variants={itemVariants}>
+        <motion.div 
+            ref={ref} 
+            className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto" 
+            variants={itemVariants}
+            style={{ rotateX: scrollRotateX, willChange: "transform", transformStyle: "preserve-3d" }}
+        >
             
             {/* Massive Display Title (Left Aligned, Overlapping) */}
             <div className="w-full flex justify-start px-4 md:px-12 lg:px-16 z-10 relative pointer-events-none mb-[-5%] md:mb-[-6%] lg:mb-[-4%]">
@@ -200,15 +209,17 @@ export default function FeaturedWorksSection() {
                 </div>
             </motion.h2>
 
-            {/* Projects Container (Standardized format) */}
-            <motion.div
-                className="w-full flex flex-col gap-24 md:gap-40 lg:gap-56 max-w-[1700px]"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-100px" }}
-            >
-                {/* Project 1: TEAURE */}
+            {/* Projects Container Wrapper for 3D Perspective */}
+            <div style={{ perspective: "1200px" }} className="w-full flex justify-center">
+                <motion.div
+                    className="w-full flex flex-col gap-24 md:gap-40 lg:gap-56 max-w-[1700px]"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-100px" }}
+                    style={{ transformStyle: "preserve-3d" }}
+                >
+                    {/* Project 1: TEAURE */}
                 <ProjectCard
                     index="01"
                     category="E-COMMERCE"
@@ -231,7 +242,8 @@ export default function FeaturedWorksSection() {
                     containerVariants={containerVariants}
                     itemVariants={itemVariants}
                 />
-            </motion.div>
+                </motion.div>
+            </div>
         </section>
     );
 }
