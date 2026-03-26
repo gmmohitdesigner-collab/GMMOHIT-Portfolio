@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import AnimatedText from "./AnimatedText";
 
 interface ProjectCardProps {
     index: string;
@@ -25,10 +26,10 @@ const ProjectCard = ({
     });
 
     // 1. Image Parallax
-    const yMove = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
     
     // 2. Scale-on-Scroll 
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.0]);
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1.1]);
     
     // 3. Grayscale-to-Color 
     const filter = useTransform(scrollYProgress, [0.1, 0.45], ["grayscale(100%)", "grayscale(0%)"]);
@@ -60,18 +61,13 @@ const ProjectCard = ({
             
             {/* Massive Display Title (Left Aligned, Overlapping) */}
             <div className="w-full flex justify-start px-4 md:px-12 lg:px-16 z-10 relative pointer-events-none mb-[-5%] md:mb-[-6%] lg:mb-[-4%]">
-                <div className="overflow-hidden">
-                    <motion.h3 
-                        className="flex items-baseline text-[55px] sm:text-[90px] md:text-[120px] lg:text-[150px] uppercase tracking-tighter m-0 leading-[0.8] text-[#E8E3DA]"
-                        initial={{ y: "100%" }}
-                        whileInView={{ y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                    >
-                        <span className="font-serif italic font-light lowercase md:mr-1 tracking-normal">{firstLetter}</span>
-                        <span className="font-monument">{restOfTitle}</span>
-                    </motion.h3>
-                </div>
+                <motion.h3 
+                    className="flex items-baseline text-[55px] sm:text-[90px] md:text-[120px] lg:text-[150px] uppercase tracking-tighter m-0 leading-[0.8] text-[#E8E3DA]"
+                    variants={itemVariants}
+                >
+                    <span className="font-serif italic font-light lowercase md:mr-1 tracking-normal">{firstLetter}</span>
+                    <span className="font-monument">{restOfTitle}</span>
+                </motion.h3>
             </div>
 
             {/* Centered Widescreen 16:9 Video Container */}
@@ -118,31 +114,19 @@ const ProjectCard = ({
 
             {/* Metadata & Description (Stacked below natively) */}
             <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-4 md:px-12 lg:px-16 mt-6 md:mt-10 gap-6 md:w-[90%] lg:w-[85%] mx-auto">
-                <div className="overflow-hidden">
-                    <motion.div
-                        className="flex gap-4 font-mono text-[10px] md:text-[11px] tracking-widest uppercase opacity-60"
-                        initial={{ y: "100%" }}
-                        whileInView={{ y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-                    >
-                        <span>{index}</span>
-                        <span>—</span>
-                        <span>{category} / {targetYear}</span>
-                    </motion.div>
-                </div>
+                <motion.div variants={itemVariants} className="flex gap-4 font-mono text-[10px] md:text-[11px] tracking-widest uppercase opacity-60">
+                    <span>{index}</span>
+                    <span>—</span>
+                    <span>{category} / {targetYear}</span>
+                </motion.div>
 
-                <div className="overflow-hidden">
-                    <motion.p
-                        className="font-circular text-base md:text-xl lg:text-[22px] leading-relaxed opacity-80 max-w-[400px] md:max-w-[450px]"
-                        initial={{ y: "100%" }}
-                        whileInView={{ y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
-                    >
-                        {description}
-                    </motion.p>
-                </div>
+                <AnimatedText
+                    el="p"
+                    className="font-circular text-base md:text-xl lg:text-[22px] leading-relaxed opacity-80 max-w-[400px] md:max-w-[450px]"
+                    text={description}
+                    delay={0.2}
+                    staggerDuration={0.1}
+                />
             </div>
             
         </motion.div>
