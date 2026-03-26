@@ -30,12 +30,42 @@ export default function Footer() {
                     </div>
 
                     {/* Utilities Block */}
-                    <div className="flex flex-row gap-16 lg:gap-24 w-full lg:w-auto">
+                    <div className="flex flex-row flex-wrap gap-12 lg:gap-20 w-full lg:w-auto mt-8 lg:mt-0">
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.05, ease: [0.33, 1, 0.68, 1] }}
+                            className="flex flex-col gap-5"
+                        >
+                            <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Navigation</span>
+                            <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
+                                <a href="#home" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> HOME</a>
+                                <a href="#about" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> ABOUT</a>
+                                <a href="#work" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> WORKS</a>
+                            </div>
+                        </motion.div>
+
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.1, ease: [0.33, 1, 0.68, 1] }}
+                            className="flex flex-col gap-5"
+                        >
+                            <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Socials</span>
+                            <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> LINKED IN</a>
+                                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> BEHANCE</a>
+                            </div>
+                        </motion.div>
+
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.15, ease: [0.33, 1, 0.68, 1] }}
                             className="flex flex-col gap-5"
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Local Time</span>
