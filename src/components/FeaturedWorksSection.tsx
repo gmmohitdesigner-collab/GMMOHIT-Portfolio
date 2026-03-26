@@ -1,40 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring, Variants } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import AnimatedText from "./AnimatedText";
-
-// Custom Cursor component tracking Mouse coordinates
-function CustomCursor({ isHovering }: { isHovering: boolean }) {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const springX = useSpring(mouseX, { stiffness: 500, damping: 28, mass: 0.5 });
-    const springY = useSpring(mouseY, { stiffness: 500, damping: 28, mass: 0.5 });
-
-    useEffect(() => {
-        const updateMousePosition = (e: MouseEvent) => {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-        };
-        window.addEventListener("mousemove", updateMousePosition);
-        return () => window.removeEventListener("mousemove", updateMousePosition);
-    }, [mouseX, mouseY]);
-
-    return (
-        <motion.div
-            className="fixed top-0 left-0 w-28 h-28 bg-[#E8E3DA] text-[#3F352C] rounded-full pointer-events-none z-[100] flex justify-center items-center shadow-lg"
-            style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: isHovering ? 1 : 0, opacity: isHovering ? 1 : 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        >
-            <span className="font-circular text-[10px] tracking-widest uppercase text-center font-bold px-2 leading-tight">
-                VIEW<br />CASE STUDY
-            </span>
-        </motion.div>
-    );
-}
 
 interface ProjectCardProps {
     index: string;
@@ -45,13 +13,11 @@ interface ProjectCardProps {
     videoSrc: string;
     containerVariants: Variants;
     itemVariants: Variants;
-    onHoverStart: () => void;
-    onHoverEnd: () => void;
 }
 
 const ProjectCard = ({ 
     index, category, targetYear, title, description, videoSrc, 
-    containerVariants, itemVariants, onHoverStart, onHoverEnd 
+    containerVariants, itemVariants 
 }: ProjectCardProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -63,7 +29,7 @@ const ProjectCard = ({
     const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
     
     // 2. Scale-on-Scroll 
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1.15, 1]);
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1.1]);
     
     // 3. Grayscale-to-Color 
     const filter = useTransform(scrollYProgress, [0.1, 0.45], ["grayscale(100%)", "grayscale(0%)"]);
@@ -84,7 +50,6 @@ const ProjectCard = ({
 
     const resetMouse = () => {
         x.set(0);  y.set(0);
-        onHoverEnd();
     };
 
     // Separating the first letter for the curly script font "Drop-Cap" style
@@ -108,8 +73,7 @@ const ProjectCard = ({
             {/* Centered Widescreen 16:9 Video Container */}
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div 
-                    className="w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group cursor-none"
-                    onMouseEnter={onHoverStart}
+                    className="w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group"
                     onMouseMove={handleMouse}
                     onMouseLeave={resetMouse}
                     style={{ rotateX: y, rotateY: x }} 
@@ -124,8 +88,26 @@ const ProjectCard = ({
                     </motion.div>
 
                     {/* Action Arrow Button (Top Right Inside Mask) */}
-                    <div className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-16 md:h-16 bg-[#E8E3DA] rounded-full flex items-center justify-center text-[#3F352C] transform transition-transform duration-500 ease-out group-hover:scale-110 shadow-lg">
-                        <span className="text-lg md:text-2xl font-light scale-x-[-1] rotate-90">↙</span>
+                    <div className="absolute top-4 right-4 md:top-8 md:right-8 w-20 h-20 md:w-28 md:h-28 bg-[#E8E3DA] rounded-full flex items-center justify-center text-[#3F352C] transform transition-transform duration-500 ease-out group-hover:scale-110 shadow-lg cursor-pointer">
+                        <motion.div
+                            className="absolute inset-0 w-full h-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 10, ease: "linear", repeat: Infinity }}
+                        >
+                            <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                                <path
+                                    id={`textPath-${index}`}
+                                    d="M 50, 50 m -32, 0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0"
+                                    fill="none"
+                                />
+                                <text className="font-circular text-[10px] uppercase font-bold tracking-[0.165em]" fill="currentColor">
+                                    <textPath href={`#textPath-${index}`} startOffset="0%">
+                                        VIEW CASE STUDY • VIEW CASE STUDY • 
+                                    </textPath>
+                                </text>
+                            </svg>
+                        </motion.div>
+                        <span className="text-xl md:text-3xl font-light scale-x-[-1] rotate-90 relative z-10 transition-transform duration-300 group-hover:rotate-45">↙</span>
                     </div>
                 </motion.div>
             </div>
@@ -143,7 +125,7 @@ const ProjectCard = ({
                     className="font-circular text-base md:text-xl lg:text-[22px] leading-relaxed opacity-80 max-w-[400px] md:max-w-[450px]"
                     text={description}
                     delay={0.2}
-                    staggerDuration={0.015}
+                    staggerDuration={0.1}
                 />
             </div>
             
@@ -152,7 +134,6 @@ const ProjectCard = ({
 };
 
 export default function FeaturedWorksSection() {
-    const [hoveredProject, setHoveredProject] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     
     // Parallax background map
@@ -175,7 +156,7 @@ export default function FeaturedWorksSection() {
         show: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const }
+            transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as const }
         },
     };
 
@@ -183,14 +164,12 @@ export default function FeaturedWorksSection() {
         hidden: { y: "100%" },
         show: {
             y: 0,
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const }
+            transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as const }
         }
     };
 
     return (
         <section ref={containerRef} className="w-full flex flex-col items-center py-24 md:py-32 gap-16 md:gap-32 relative overflow-hidden bg-[#3F352C] text-[#E8E3DA]" id="work" aria-labelledby="work-heading">
-            <CustomCursor isHovering={hoveredProject} />
-
             {/* Massive Background Parallax Text Layer */}
             <motion.div 
                 className="absolute inset-0 z-[-1] flex justify-center items-center pointer-events-none opacity-[0.04] select-none"
@@ -239,8 +218,6 @@ export default function FeaturedWorksSection() {
                     videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
                     containerVariants={containerVariants}
                     itemVariants={itemVariants}
-                    onHoverStart={() => setHoveredProject(true)}
-                    onHoverEnd={() => setHoveredProject(false)}
                 />
 
                 {/* Project 2: CREATIVE ANTS */}
@@ -253,8 +230,6 @@ export default function FeaturedWorksSection() {
                     videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
                     containerVariants={containerVariants}
                     itemVariants={itemVariants}
-                    onHoverStart={() => setHoveredProject(true)}
-                    onHoverEnd={() => setHoveredProject(false)}
                 />
             </motion.div>
         </section>
