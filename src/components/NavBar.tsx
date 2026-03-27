@@ -77,8 +77,8 @@ export default function NavBar() {
                 </div>
 
                 {/* Mobile Hamburger (Visible below md) */}
-                <button 
-                    onClick={() => setMenuOpen(true)} 
+                <button
+                    onClick={() => setMenuOpen(true)}
                     className="md:hidden flex flex-col gap-[6px] items-end mt-1 z-[61] p-2 -mr-2"
                     aria-label="Open Menu"
                 >
@@ -127,7 +127,7 @@ export default function NavBar() {
                         </div>
 
                         {/* Overlay Footer & Social Links */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
