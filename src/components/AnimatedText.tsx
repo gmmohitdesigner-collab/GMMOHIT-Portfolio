@@ -11,6 +11,8 @@ interface AnimatedTextProps extends Omit<React.HTMLAttributes<HTMLElement>, "chi
     delay?: number; // Delay before animation starts
     staggerDuration?: number; // Delay between each word/line
     once?: boolean; // Whether the animation should only play once
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any; // Allow any other prop, like href
 }
 
 export default function AnimatedText({

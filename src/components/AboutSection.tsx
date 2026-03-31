@@ -75,23 +75,23 @@ export default function AboutSection() {
                         viewport={{ once: true, margin: "-100px" }}
                         variants={containerVariants}
                     >
-                        <div className="overflow-hidden leading-[0.85] pb-4">
-                            <motion.h2 variants={textRevealVariants} id="about-heading" className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] uppercase tracking-tighter m-0 whitespace-nowrap">
-                                <span className="text-transparent" style={{ WebkitTextStroke: "1px #3F352C" }}>DESIGN </span>
-                                <span>THAT</span>
-                            </motion.h2>
-                        </div>
-                        <div className="overflow-hidden leading-[0.85] pb-4">
-                            <motion.h2 variants={textRevealVariants} className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] uppercase tracking-tighter m-0 whitespace-nowrap">
-                                <span className="font-serif italic font-light lowercase tracking-normal pr-2 md:pr-4">demands</span>
-                            </motion.h2>
-                        </div>
-                        <div className="overflow-hidden leading-[0.85] pb-4">
-                            <motion.h2 variants={textRevealVariants} className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] uppercase tracking-tighter m-0 whitespace-nowrap">
-                                <span>ATTENTION</span>
-                                <span className="font-serif italic font-light lowercase tracking-normal pl-2 md:pl-4">.</span>
-                            </motion.h2>
-                        </div>
+                        <motion.h2 variants={textRevealVariants} id="about-heading" className="m-0 uppercase tracking-tighter">
+                            <div className="overflow-hidden leading-[0.85] pb-4">
+                                <span className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">
+                                    <span className="text-transparent" style={{ WebkitTextStroke: "1px #3F352C" }}>DESIGN </span>
+                                    <span>THAT </span>
+                                </span>
+                            </div>
+                            <div className="overflow-hidden leading-[0.85] pb-4">
+                                <span className="font-serif italic font-light lowercase text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">demands </span>
+                            </div>
+                            <div className="overflow-hidden leading-[0.85] pb-4">
+                                <span className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">
+                                    <span>ATTENTION</span>
+                                    <span className="font-serif italic font-light lowercase pl-2 md:pl-4">.</span>
+                                </span>
+                            </div>
+                        </motion.h2>
                     </motion.div>
 
                     {/* Right: Dense Copy & Philosophy */}
@@ -104,7 +104,7 @@ export default function AboutSection() {
                     >
                         {/* Quote or Core thesis */}
                         <div className="relative">
-                            <span className="absolute -left-6 md:-left-8 top-[-8px] text-4xl md:text-6xl font-serif italic text-transparent opacity-20" style={{ WebkitTextStroke: "1px #3F352C" }}>"</span>
+                            <span className="absolute -left-6 md:-left-8 top-[-8px] text-4xl md:text-6xl font-serif italic text-transparent opacity-20" style={{ WebkitTextStroke: "1px #3F352C" }} aria-hidden="true">"</span>
                             <AnimatedText
                                 el="p"
                                 className="font-circular text-2xl md:text-3xl lg:text-4xl leading-tight m-0"

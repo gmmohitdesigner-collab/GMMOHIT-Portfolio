@@ -19,6 +19,7 @@ export default function ContactSection() {
                     <AnimatedText
                         el="a"
                         href="mailto:HELLO@GMMOHIT.COM"
+                        aria-label="Email G M Mohit"
                         className="font-monument text-3xl md:text-5xl lg:text-[61px] uppercase tracking-tight hover:opacity-70 transition-opacity"
                         text="HELLO@GMMOHIT.COM"
                     />
@@ -47,15 +48,15 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex flex-col gap-4 font-circular text-xs md:text-sm uppercase">
-                    <a href="#" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                    <a href="https://instagram.com" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
                         <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">1</span>
                         INSTAGRAM
                     </a>
-                    <a href="#" className="flex items-center gap-3 hover:opacity-70 transition-opacity ml-4 md:ml-6">
+                    <a href="https://linkedin.com" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity ml-4 md:ml-6">
                         <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">2</span>
                         LINKEDIN
                     </a>
-                    <a href="#" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                    <a href="https://behance.net" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
                         <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">3</span>
                         BEHANCE
                     </a>
