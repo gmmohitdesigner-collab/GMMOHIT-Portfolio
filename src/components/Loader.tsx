@@ -51,7 +51,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           
           {/* HUNDREDS */}
           <motion.div 
-            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
+            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
@@ -59,14 +59,14 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             }}
             className="flex flex-col items-center relative will-change-transform w-[0.6em]"
           >
-            {[" ", " ", " ", " ", "1"].map((d, i) => (
+            {["1", " ", " ", " ", " "].map((d, i) => (
               <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
             ))}
           </motion.div>
 
           {/* TENS (Dynamic Speed - Drags slightly behind the Units!) */}
           <motion.div 
-            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
+            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.05, 0.22, 0.31, 0.46, 0.55, 0.68, 0.79, 1.0], // Delayed staggered times
@@ -74,14 +74,14 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             }}
             className="flex flex-col items-center relative will-change-transform w-[0.6em]"
           >
-            {["0", "0", "3", "6", "0"].map((d, i) => (
+            {["0", "6", "3", "0", "0"].map((d, i) => (
               <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
             ))}
           </motion.div>
 
           {/* UNITS */}
           <motion.div 
-            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
+            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
@@ -89,7 +89,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             }}
             className="flex flex-col items-center relative will-change-transform w-[0.6em]"
           >
-            {["0", "2", "4", "8", "0"].map((d, i) => (
+            {["0", "8", "4", "2", "0"].map((d, i) => (
               <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
             ))}
           </motion.div>
