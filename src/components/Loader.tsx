@@ -51,6 +51,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           
           {/* HUNDREDS */}
           <motion.div 
+            initial={{ y: "-5em" }}
             animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
@@ -66,6 +67,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
           {/* TENS (Dynamic Speed - Drags slightly behind the Units!) */}
           <motion.div 
+            initial={{ y: "-5em" }}
             animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
@@ -81,6 +83,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
           {/* UNITS */}
           <motion.div 
+            initial={{ y: "-5em" }}
             animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
