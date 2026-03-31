@@ -30,7 +30,7 @@ export default function MagneticMenuButton({
             onClick={onClick}
             initial={false}
             animate={{ 
-                backgroundColor: isOpen ? "#1A1818" : "rgba(255, 255, 255, 0)",
+                backgroundColor: isOpen ? "#3F352C" : "rgba(255, 255, 255, 0)",
                 color: isOpen ? "#E8E3DA" : "currentColor" 
             }}
             transition={{ duration: 0.4 }}

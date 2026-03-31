@@ -24,7 +24,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       initial={{ y: "0%" }}
       exit={{ y: "-100%" }}
       transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }} 
-      className="fixed inset-0 z-[9999] pointer-events-auto bg-[#000000] font-sans text-white overflow-hidden"
+      className="fixed inset-0 z-[9999] pointer-events-auto bg-[#3F352C] font-sans text-white overflow-hidden"
     >
       {/* Top Left Branding */}
       <div className="absolute top-0 left-0 p-6 sm:p-8 md:p-12 flex flex-col text-[10px] sm:text-xs md:text-sm tracking-widest font-medium leading-relaxed uppercase">
