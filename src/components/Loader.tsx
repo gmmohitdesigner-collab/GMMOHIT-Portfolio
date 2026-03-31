@@ -46,9 +46,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(8px)", scale: 0.95 }}
-               animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-               transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                // Y shift: +50% vertically pushes half the text out the bottom cut line
                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
@@ -71,9 +71,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(8px)", scale: 0.95 }}
-               animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-               transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
                // Y shift: -50% pulls half the text out of the top cut line mirroring perfectly
                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
@@ -89,8 +89,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       <AnimatePresence>
         {phase === 'counting' && (
           <motion.div 
-            exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
           >
             {/* The TrueKind Odometer Engine: Uses raw Y-axis transformations of pre-rendered digits rather than React state tracking. Guarantees 0 frame drops and physics-perfect sliding. */}
