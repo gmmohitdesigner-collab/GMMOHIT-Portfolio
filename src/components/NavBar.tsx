@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import MagneticNavLink from "./MagneticNavLink";
+import MagneticMenuButton from "./MagneticMenuButton";
 
 export default function NavBar() {
     const { scrollY } = useScroll();
@@ -77,14 +78,12 @@ export default function NavBar() {
                 </div>
 
                 {/* Mobile Hamburger (Visible below md) */}
-                <button
-                    onClick={() => setMenuOpen(true)}
-                    className="md:hidden flex flex-col gap-[6px] items-end mt-1 z-[61] p-2 -mr-2"
-                    aria-label="Open Mobile Menu"
-                >
-                    <div className="w-8 h-[2px] bg-current"></div>
-                    <div className="w-6 h-[2px] bg-current"></div>
-                </button>
+                <div className="md:hidden z-[71]">
+                    <MagneticMenuButton 
+                        isOpen={menuOpen} 
+                        onClick={() => setMenuOpen(!menuOpen)} 
+                    />
+                </div>
             </motion.nav>
 
             {/* Fullscreen Mobile Menu Overlay */}
@@ -100,10 +99,8 @@ export default function NavBar() {
                         {/* Overlay Header */}
                         <div className="flex justify-between items-center w-full pb-12">
                             <div className="font-monument text-lg tracking-tight invisible">GM MOHIT</div>
-                            <button onClick={() => setMenuOpen(false)} className="w-10 h-10 flex flex-col justify-center items-center relative z-50" aria-label="Close Menu">
-                                <motion.div className="w-8 h-[2px] bg-current absolute" animate={{ rotate: 45 }} />
-                                <motion.div className="w-8 h-[2px] bg-current absolute" animate={{ rotate: -45 }} />
-                            </button>
+                            {/* The close button is now unified in the main NavBar and stays on top via Z-index */}
+                            <div className="w-10 h-10 md:hidden" />
                         </div>
 
                         {/* Staggered Menu Items */}
