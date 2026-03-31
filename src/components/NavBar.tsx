@@ -77,14 +77,15 @@ export default function NavBar() {
                     </MagneticNavLink>
                 </div>
 
-                {/* Mobile Hamburger (Visible below md) */}
-                <div className="md:hidden z-[71]">
-                    <MagneticMenuButton 
-                        isOpen={menuOpen} 
-                        onClick={() => setMenuOpen(!menuOpen)} 
-                    />
-                </div>
             </motion.nav>
+            {/* Mobile Hamburger (Visible below md, persistent on top) */}
+            <div className="md:hidden fixed top-6 right-4 sm:right-6 z-[71]">
+                <MagneticMenuButton 
+                    isOpen={menuOpen} 
+                    onClick={() => setMenuOpen(!menuOpen)} 
+                />
+            </div>
+
 
             {/* Fullscreen Mobile Menu Overlay */}
             <AnimatePresence>

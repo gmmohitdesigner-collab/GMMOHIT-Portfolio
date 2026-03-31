@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function MagneticMenuButton({ 
@@ -20,7 +20,7 @@ export default function MagneticMenuButton({
     const springX = useSpring(x, springProps);
     const springY = useSpring(y, springProps);
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = useCallback((e: MouseEvent) => {
         if (!buttonRef.current) return;
         
         const rect = buttonRef.current.getBoundingClientRect();
@@ -40,12 +40,12 @@ export default function MagneticMenuButton({
             x.set(0);
             y.set(0);
         }
-    };
+    }, [x, y]);
 
     useEffect(() => {
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, []);
+    }, [handleMouseMove]);
 
     // SVG Path Variants
     const pathVariants = {
