@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "./Loader";
+import { LoadingProvider, useLoading } from "@/context/LoadingContext";
 
-export default function PreloaderWrapper({ children }: { children: React.ReactNode }) {
+function PreloaderContent({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [isExitComplete, setIsExitComplete] = useState(false);
+  const { isExitComplete, setIsExitComplete } = useLoading();
 
   useEffect(() => {
     // Before the exit is entirely complete, we keep scrolling disabled
@@ -35,5 +36,13 @@ export default function PreloaderWrapper({ children }: { children: React.ReactNo
         {children}
       </div>
     </>
+  );
+}
+
+export default function PreloaderWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <LoadingProvider>
+      <PreloaderContent>{children}</PreloaderContent>
+    </LoadingProvider>
   );
 }
