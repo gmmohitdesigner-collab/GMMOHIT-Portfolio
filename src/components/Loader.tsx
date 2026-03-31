@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   // No need for useMotionValue anymore, we fall back to hardware-accelerated static CSS strips

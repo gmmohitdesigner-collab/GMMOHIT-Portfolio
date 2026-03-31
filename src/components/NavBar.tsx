@@ -80,7 +80,7 @@ export default function NavBar() {
                 <button
                     onClick={() => setMenuOpen(true)}
                     className="md:hidden flex flex-col gap-[6px] items-end mt-1 z-[61] p-2 -mr-2"
-                    aria-label="Open Menu"
+                    aria-label="Open Mobile Menu"
                 >
                     <div className="w-8 h-[2px] bg-current"></div>
                     <div className="w-6 h-[2px] bg-current"></div>
@@ -134,9 +134,9 @@ export default function NavBar() {
                             className="flex flex-col gap-6 sm:gap-8 pt-12 pb-4 mt-auto"
                         >
                             <div className="flex justify-between gap-4 w-full px-2" aria-label="Social Links">
-                                <a href="https://instagram.com" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">IN</a>
-                                <a href="https://linkedin.com" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">LI</a>
-                                <a href="https://behance.net" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">BE</a>
+                                <a href="https://instagram.com" aria-label="Visit Instagram profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">IN</a>
+                                <a href="https://linkedin.com" aria-label="Visit LinkedIn profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">LI</a>
+                                <a href="https://behance.net" aria-label="Visit Behance profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#1A1818] hover:text-[#E8E3DA] transition-colors">BE</a>
                             </div>
 
                             <div className="flex items-center gap-4 text-[10px] sm:text-xs font-circular opacity-60 uppercase tracking-widest w-full justify-between mt-4">
@@ -144,7 +144,7 @@ export default function NavBar() {
                                 <span>FOR WORK — CONTACT BELOW</span>
                                 <span>✦</span>
                             </div>
-                            <a href="mailto:HELLO@GMMOHIT.COM" className="w-full py-5 sm:py-6 rounded-full bg-[#1A1818] text-[#E8E3DA] flex justify-center items-center hover:opacity-90 transition-opacity">
+                            <a href="mailto:HELLO@GMMOHIT.COM" aria-label="Email G M Mohit" className="w-full py-5 sm:py-6 rounded-full bg-[#1A1818] text-[#E8E3DA] flex justify-center items-center hover:opacity-90 transition-opacity">
                                 <span className="font-serif italic text-2xl sm:text-3xl lowercase">hello@gmmohit.com</span>
                             </a>
                         </motion.div>
