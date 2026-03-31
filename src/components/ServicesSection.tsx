@@ -104,7 +104,7 @@ export default function ServicesSection() {
                         className="w-full h-[1px] bg-[#E8E3DA] opacity-20 origin-left"
                     />
 
-                    {services.map((service, index) => (
+                    {services.map((service) => (
                         <motion.li
                             key={service.id}
                             className="w-full group cursor-pointer relative"

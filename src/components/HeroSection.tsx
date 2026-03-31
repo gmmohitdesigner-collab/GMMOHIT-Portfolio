@@ -57,7 +57,7 @@ export default function HeroSection() {
                         {/* The user provided Image - Home.jpeg */}
                         <Image
                             src="/assets/Image - Home.jpeg"
-                            alt="GM Mohit Hero Image"
+                            alt="GM Mohit Portrait"
                             fill
                             className="object-cover relative"
                             priority
