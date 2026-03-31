@@ -51,8 +51,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           
           {/* HUNDREDS */}
           <motion.div 
-            initial={{ y: "-5em" }}
-            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
+            initial={{ y: "-4em" }}
+            style={{ transform: "translateY(-4em)" }}
+            animate={{ y: ["-4em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
@@ -67,8 +68,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
           {/* TENS (Dynamic Speed - Drags slightly behind the Units!) */}
           <motion.div 
-            initial={{ y: "-5em" }}
-            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
+            initial={{ y: "-4em" }}
+            style={{ transform: "translateY(-4em)" }}
+            animate={{ y: ["-4em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.05, 0.22, 0.31, 0.46, 0.55, 0.68, 0.79, 1.0], // Delayed staggered times
@@ -83,8 +85,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
           {/* UNITS */}
           <motion.div 
-            initial={{ y: "-5em" }}
-            animate={{ y: ["-5em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
+            initial={{ y: "-4em" }}
+            style={{ transform: "translateY(-4em)" }}
+            animate={{ y: ["-4em", "-4em", "-3em", "-3em", "-2em", "-2em", "-1em", "-1em", "0em"] }}
             transition={{
               duration: 5.0,
               times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
