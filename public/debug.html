@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { margin: 0; padding: 20px; background: #000; color: white; font-family: sans-serif; }
+        #grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        canvas { width: 100%; border: 1px solid #444; }
+        .frame-label { text-align: center; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Extracted Frames (2.0s to 3.5s)</h2>
+    <video id="vid" src="/recording.mp4" playsinline muted style="display:none;"></video>
+    <div id="grid"></div>
+
+    <script>
+        const vid = document.getElementById('vid');
+        const grid = document.getElementById('grid');
+
+        // Extract a frame at a specific time
+        function captureFrame(time) {
+            return new Promise(resolve => {
+                const handler = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = vid.videoWidth;
+                    canvas.height = vid.videoHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+                    
+                    const div = document.createElement('div');
+                    const label = document.createElement('div');
+                    label.className = 'frame-label';
+                    label.innerText = `t = ${time.toFixed(2)}s`;
+                    
+                    div.appendChild(label);
+                    div.appendChild(canvas);
+                    grid.appendChild(div);
+
+                    vid.removeEventListener('seeked', handler);
+                    resolve();
+                };
+                vid.addEventListener('seeked', handler);
+                vid.currentTime = time;
+            });
+        }
+
+        vid.addEventListener('loadeddata', async () => {
+            // We want to capture 12 frames spanning the critical transition.
+            // Let's assume the transition happens around 2.0s to 3.5s.
+            let startTime = 0.5;
+            let step = 0.25;
+            // Let's capture 16 frames: 0.5s to 4.25s
+            for (let i = 0; i < 16; i++) {
+                let t = startTime + (i * step);
+                if (t > vid.duration) break;
+                await captureFrame(t);
+            }
+            // Add a giant done tag so subagent knows it's ready
+            const done = document.createElement('h1');
+            done.id = "done-tag";
+            done.innerText = "ALL FRAMES CAPTURED";
+            document.body.appendChild(done);
+        });
+    </script>
+</body>
+</html>
