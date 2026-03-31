@@ -32,42 +32,39 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <div className="text-white/60">PORTFOLIO &copy;2026</div>
       </div>
 
-      {/* Animated Counter (Moving Bottom to Top mechanically with precise sliding strip) */}
+      {/* Animated Counter (Smooth Slider without Scrambling) */}
       <motion.div 
         initial={{ top: "100%", y: "-100%" }} 
         animate={{ 
-          top: ["100%", "100%", "98%", "98%", "66%", "66%", "32%", "32%", "0%", "0%"],
-          y: ["-100%", "-100%", "-98%", "-98%", "-66%", "-66%", "-32%", "-32%", "0%", "0%"]
+          top: ["100%", "100%", "98%", "98%", "66%", "66%", "32%", "32%", "0%"],
+          y:   ["-100%", "-100%", "-98%", "-98%", "-66%", "-66%", "-32%", "-32%", "0%"]
         }}
         transition={{ 
           duration: 5.0,
-          times: [0.0, 0.05, 0.09, 0.15, 0.35, 0.45, 0.65, 0.75, 0.95, 1.0],
+          times: [0.0, 0.05, 0.20, 0.35, 0.50, 0.65, 0.80, 0.85, 1.0],
           ease: "easeInOut"
         }}
         className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform"
       >
-        {/* The 1em mask for the scrolling odometer tape */}
+        {/* The 1em mask for the specifically curated odometer tape */}
         <div className="relative overflow-hidden" style={{ height: '1em', lineHeight: '1em' }}>
           <motion.div 
             animate={{ 
-              y: ["1em", "0em", "-2em", "-2em", "-34em", "-34em", "-68em", "-68em", "-100em", "-100em"] 
+              y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] 
             }}
             transition={{
               duration: 5.0,
-              times: [0.0, 0.05, 0.09, 0.15, 0.35, 0.45, 0.65, 0.75, 0.95, 1.0],
+              times: [0.0, 0.05, 0.20, 0.35, 0.50, 0.65, 0.80, 0.85, 1.0],
               ease: "easeInOut"
             }}
             className="flex flex-col items-center relative will-change-transform"
           >
-            {/* The single monolithic tape containing all 101 digits */}
-            {Array.from({ length: 101 }, (_, i) => {
-              const formatted = i < 10 ? ` 0${i}` : i < 100 ? ` ${i}` : `${i}`;
-              return (
-                <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">
-                  {formatted}
-                </span>
-              );
-            })}
+            {/* Direct transition strip mapping: no intermediate scrambling noise */}
+            {[" 00", " 02", " 34", " 68", "100"].map((digit, i) => (
+              <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">
+                {digit}
+              </span>
+            ))}
           </motion.div>
         </div>
       </motion.div>
