@@ -3,120 +3,54 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function OdometerDigit({ value }: { value: number }) {
-  return (
-    <div 
-      className="relative overflow-hidden h-[1em] w-[0.6em] inline-flex justify-center items-center align-middle"
-    >
-      <AnimatePresence>
-        <motion.span
-          key={value}
-          initial={{ y: "80%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-80%", opacity: 0 }}
-          transition={{ duration: 0.25, ease: [0.33, 1, 0.68, 1] }}
-          className="absolute inset-0 flex justify-center items-center pointer-events-none"
-        >
-          {value}
-        </motion.span>
-      </AnimatePresence>
-    </div>
-  );
-}
-
-// Fast odometer for units, removes opacity to prevent rendering artifacts/ghosting
-function FastOdometerDigit({ value }: { value: number }) {
-  return (
-    <div 
-      className="relative overflow-hidden h-[1em] w-[0.6em] inline-flex justify-center items-center align-middle"
-    >
-      <AnimatePresence>
-        <motion.span
-          key={value}
-          initial={{ y: "80%" }}
-          animate={{ y: "0%" }}
-          exit={{ y: "-80%" }}
-          transition={{ duration: 0.08, ease: "linear" }}
-          className="absolute inset-0 flex justify-center items-center pointer-events-none"
-        >
-          {value}
-        </motion.span>
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export default function Loader({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<'counting' | 'narrative'>('counting');
 
+  // Time exactly the hardware-accelerated CSS odometer and ring finish (2500ms).
+  // Leave a 500ms pause after they hit 100% (total 3000ms), then switch to narrative.
   useEffect(() => {
-    let startTime: number;
-    const duration = 2500; // Counter sequence duration
+    const timer = setTimeout(() => {
+      setPhase('narrative');
+    }, 3000); 
+    return () => clearTimeout(timer);
+  }, []);
 
-    const updateProgress = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      
-      const t = Math.min(elapsed / duration, 1);
-      // Custom ease to slow down near the end
-      const easedT = t === 1 ? 1 : 1 - Math.pow(2, -8 * t);
-      
-      setProgress(Math.floor(easedT * 100));
-
-      if (t < 1) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        // Tightened pause to "melt" transition into Phase 2
-        setTimeout(() => setPhase('narrative'), 100); 
-      }
-    };
-
-    if (phase === 'counting') {
-      requestAnimationFrame(updateProgress);
-    }
-  }, [phase]);
-
+  // Hold the branding text in view for 1.2s before unshuttering natively
   useEffect(() => {
     if (phase === 'narrative') {
-      // Hold narrative briefly then split!
       const timer = setTimeout(() => {
         onComplete();
-      }, 1000);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [phase, onComplete]);
 
-  const hundreds = Math.floor(progress / 100);
-  const tens = Math.floor((progress % 100) / 10);
-  const units = progress % 10;
-
-  const isCounting = phase === 'counting';
   const showNarrative = phase === 'narrative';
 
   return (
     <motion.div
       key="preloader"
-      className="fixed inset-0 z-[9999] pointer-events-auto"
+      className="fixed inset-0 z-[9999] pointer-events-auto font-serif"
     >
       {/* 
         TOP PANEL 
-        Starts top-0, bounds top 50% + 1px to eliminate render seam bugs.
+        Starts top-0, bounds top 50%.
+        `calc(50% + 1px)` actively fixes the sub-pixel "gap seam" bug exactly.
       */}
       <motion.div
         initial={{ y: "0%" }}
         exit={{ y: "-100%" }}
-        transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute top-0 w-full h-[calc(50%+1px)] bg-[#3F352C] z-10 origin-top overflow-hidden will-change-transform"
+        transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }} 
+        className="absolute top-0 w-full h-[calc(50%+1px)] bg-[#212121] z-10 origin-top overflow-hidden will-change-transform"
       >
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(4px)", scale: 0.95 }}
+               initial={{ opacity: 0, filter: "blur(8px)", scale: 0.95 }}
                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-               // Offset to exact pixel-split
-               className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               // Y shift: +50% vertically pushes half the text out the bottom cut line
+               className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
                GM MOHIT
              </motion.div>
@@ -126,22 +60,22 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
       {/* 
         BOTTOM PANEL 
-        Starts bottom-0, bounds bottom 50% of the screen.
+        Starts bottom-0, bounds bottom 50%.
       */}
       <motion.div
         initial={{ y: "0%" }}
         exit={{ y: "100%" }}
         transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute bottom-0 w-full h-1/2 bg-[#3F352C] z-10 origin-bottom overflow-hidden will-change-transform"
+        className="absolute bottom-0 w-full h-1/2 bg-[#212121] z-10 origin-bottom overflow-hidden will-change-transform"
       >
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(4px)", scale: 0.95 }}
+               initial={{ opacity: 0, filter: "blur(8px)", scale: 0.95 }}
                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-               // Mirror Offset
-               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               // Y shift: -50% pulls half the text out of the top cut line mirroring perfectly
+               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
                 GM MOHIT
              </motion.div>
@@ -150,48 +84,86 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       </motion.div>
 
       {/* 
-        COUNTER & PROGRESS RING (floating above everything, z-20)
+        PURE CSS ODOMETER & RING OVERLAY 
       */}
       <AnimatePresence>
-        {isCounting && (
+        {phase === 'counting' && (
           <motion.div 
-            exit={{ opacity: 0, scale: 0.85, filter: "blur(10px)" }}
-            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+            exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
             className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
           >
-            {/* Massive Editorial Odometer Counter */}
+            {/* The TrueKind Odometer Engine: Uses raw Y-axis transformations of pre-rendered digits rather than React state tracking. Guarantees 0 frame drops and physics-perfect sliding. */}
             <div 
-              className="font-serif italic text-white text-[30vw] md:text-[25vw] flex tracking-tighter" 
-              style={{ fontWeight: 300, lineHeight: 1 }}
+              className="flex items-center text-white text-[35vw] sm:text-[30vw] md:text-[25vw] italic font-light tracking-tighter"
+              style={{ lineHeight: '1em', height: '1em' }}
             >
-              {progress >= 100 && (
-                <OdometerDigit value={hundreds} />
-              )}
-              {(progress >= 10) && (
-                <OdometerDigit value={tens} />
-              )}
-              <FastOdometerDigit value={units} />
+              {/* Hundreds (0-1) */}
+              {/* Invisible leading zero ensures the 3-digit box maintains exact stable width across all frames. */}
+              <div className="relative overflow-hidden w-[0.6em] h-[1em]">
+                <motion.div
+                  initial={{ y: "0em" }}
+                  animate={{ y: "-1em" }}
+                  transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
+                  className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
+                >
+                  <span className="h-[1em] w-full flex justify-center items-center text-transparent">0</span> 
+                  <span className="h-[1em] w-full flex justify-center items-center">1</span>
+                </motion.div>
+              </div>
+
+              {/* Tens (0-10) */}
+              <div className="relative overflow-hidden w-[0.6em] h-[1em]">
+                <motion.div
+                  initial={{ y: "0em" }}
+                  animate={{ y: "-10em" }}
+                  transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
+                  className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
+                >
+                  {Array.from({ length: 11 }, (_, i) => (
+                    <span key={i} className={`h-[1em] w-full flex justify-center items-center ${i === 0 ? "text-transparent" : "text-white"}`}>
+                      {i % 10}
+                    </span>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Units (0-100) */}
+              <div className="relative overflow-hidden w-[0.6em] h-[1em]">
+                <motion.div
+                  initial={{ y: "0em" }}
+                  animate={{ y: "-100em" }}
+                  transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
+                  className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
+                >
+                  {Array.from({ length: 101 }, (_, i) => (
+                    <span key={i} className="h-[1em] w-full flex justify-center items-center">
+                      {i % 10}
+                    </span>
+                  ))}
+                </motion.div>
+              </div>
             </div>
 
-            {/* Circular Progress Ring at Bottom Center */}
+            {/* Perfect SVG Progress Ring synchronization */}
             <div className="absolute bottom-12 md:bottom-20">
                <svg width="40" height="40" viewBox="0 0 100 100" className="transform -rotate-90">
-                 {/* Background Track */}
                  <circle
                    cx="50" cy="50" r="45"
                    stroke="rgba(255,255,255,0.15)"
-                   strokeWidth="2"
+                   strokeWidth="3"
                    fill="transparent"
                  />
-                 {/* Progress Fill */}
-                 <circle
+                 <motion.circle
                    cx="50" cy="50" r="45"
                    stroke="#ffffff"
-                   strokeWidth="2"
+                   strokeWidth="3"
                    fill="transparent"
                    strokeDasharray="283"
-                   strokeDashoffset={283 - (283 * progress) / 100}
-                   className="transition-all duration-75 ease-linear will-change-transform"
+                   initial={{ strokeDashoffset: 283 }}
+                   animate={{ strokeDashoffset: 0 }}
+                   transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
+                   className="will-change-transform"
                  />
                </svg>
             </div>
