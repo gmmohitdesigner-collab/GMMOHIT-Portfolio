@@ -104,7 +104,7 @@ export default function AboutSection() {
                     >
                         {/* Quote or Core thesis */}
                         <div className="relative">
-                            <span className="absolute -left-6 md:-left-8 top-[-8px] text-4xl md:text-6xl font-serif italic text-transparent opacity-20" style={{ WebkitTextStroke: "1px #3F352C" }} aria-hidden="true">"</span>
+                            <span className="absolute -left-6 md:-left-8 top-[-8px] text-4xl md:text-6xl font-serif italic text-transparent opacity-20" style={{ WebkitTextStroke: "1px #3F352C" }} aria-hidden="true">&quot;</span>
                             <AnimatedText
                                 el="p"
                                 className="font-circular text-2xl md:text-3xl lg:text-4xl leading-tight m-0"
