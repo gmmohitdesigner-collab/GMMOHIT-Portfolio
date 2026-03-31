@@ -131,6 +131,7 @@ const ProjectCard = ({
                 </motion.div>
 
                 <AnimatedText
+                    key={`desc-${index}`}
                     el="p"
                     className="font-circular text-base md:text-xl lg:text-[22px] leading-relaxed opacity-80 max-w-[400px] md:max-w-[450px]"
                     text={description}
@@ -212,9 +213,9 @@ export default function FeaturedWorksSection() {
             </motion.h2>
 
             {/* Projects Container Wrapper for 3D Perspective */}
-            <div style={{ perspective: "1200px" }} className="w-full flex justify-center">
+            <div style={{ perspective: "1500px" }} className="w-full flex justify-center mt-12 md:mt-24">
                 <motion.div
-                    className="w-full flex flex-col gap-24 md:gap-40 lg:gap-56 max-w-[1700px]"
+                    className="w-full flex flex-col gap-32 md:gap-64 lg:gap-80 max-w-[1700px]"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView={isExitComplete ? "show" : "hidden"}
