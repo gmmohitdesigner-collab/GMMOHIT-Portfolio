@@ -61,11 +61,22 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           ease: "easeInOut"
         }}
         className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform"
-        style={{ lineHeight: '1em' }}
       >
-        <motion.span className="whitespace-pre">
-          {formatted}
-        </motion.span>
+        <div className="relative overflow-hidden" style={{ height: '1em', lineHeight: '1em' }}>
+          <motion.div 
+            animate={{ 
+              y: ["100%", "0%", "0%", "-100%", "100%", "0%", "0%", "-100%", "100%", "0%", "0%", "-100%", "100%", "0%", "0%", "-100%", "100%", "0%", "0%"] 
+            }}
+            transition={{
+              duration: 5.0,
+              times: [0, 0.05, 0.15, 0.18, 0.21, 0.25, 0.40, 0.43, 0.46, 0.50, 0.65, 0.68, 0.71, 0.75, 0.90, 0.92, 0.93, 0.95, 1],
+              ease: "easeInOut"
+            }}
+            className="flex items-center whitespace-pre relative will-change-transform"
+          >
+            {formatted}
+          </motion.div>
+        </div>
       </motion.div>
     </motion.div>
   );
