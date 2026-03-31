@@ -55,9 +55,9 @@ export default function Footer() {
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Socials</span>
                             <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> LINKED IN</a>
-                                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> BEHANCE</a>
+                                <a href="https://instagram.com" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
+                                <a href="https://linkedin.com" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> LINKED IN</a>
+                                <a href="https://behance.net" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> BEHANCE</a>
                             </div>
                         </motion.div>
 
@@ -70,7 +70,7 @@ export default function Footer() {
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Contact</span>
                             <div className="flex flex-col gap-1">
-                                <a href="mailto:HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity">
+                                <a href="mailto:HELLO@GMMOHIT.COM" aria-label="Email Address: HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity">
                                     HELLO@GMMOHIT.COM
                                 </a>
                                 <span className="font-mono text-[10px] tracking-widest opacity-60 mt-2 max-w-[180px] leading-relaxed">
@@ -103,6 +103,7 @@ export default function Footer() {
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Return</span>
                             <button 
                                 onClick={scrollToTop} 
+                                aria-label="Scroll to top of page"
                                 className="group flex items-center gap-3 font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity"
                             >
                                 Top 
@@ -127,13 +128,13 @@ export default function Footer() {
             </div>
 
             {/* Massive Background Anchor Text */}
-            <div className="absolute bottom-0 left-0 w-full flex justify-center items-end pointer-events-none select-none overflow-hidden h-full z-0">
-                <h1 
+            <div className="absolute bottom-0 left-0 w-full flex justify-center items-end pointer-events-none select-none overflow-hidden h-full z-0" aria-hidden="true">
+                <div 
                     className="font-monument text-[25vw] sm:text-[23vw] uppercase leading-[0.7] tracking-tighter m-0 text-transparent transform translate-y-[20%] md:translate-y-[22%]" 
                     style={{ WebkitTextStroke: "max(1px, 0.15vw) rgba(63,53,44,0.12)" }}
                 >
                     GM MOHIT
-                </h1>
+                </div>
             </div>
 
         </footer>
