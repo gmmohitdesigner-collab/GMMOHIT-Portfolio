@@ -1,135 +1,178 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+function OdometerDigit({ value }: { value: number }) {
+  return (
+    <div 
+      className="relative overflow-hidden h-[1.2em] w-[0.65em] inline-flex justify-center items-center align-middle"
+      style={{ lineHeight: 1.2 }}
+    >
+      <AnimatePresence>
+        <motion.span
+          key={value}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          className="absolute inset-0 flex justify-center items-center pointer-events-none"
+        >
+          {value}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState<'counting' | 'narrative'>('counting');
 
   useEffect(() => {
     let startTime: number;
-    const duration = 2500; // Total loading duration
+    const duration = 2500; // Counter sequence duration
 
     const updateProgress = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       
-      // Calculate linear time progress 0 to 1
       const t = Math.min(elapsed / duration, 1);
-      
-      // Apply easeOutExpo for premium counting feel (fast start, slow end)
-      const easedT = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      // Custom ease to slow down near the end
+      const easedT = t === 1 ? 1 : 1 - Math.pow(2, -8 * t);
       
       setProgress(Math.floor(easedT * 100));
 
       if (t < 1) {
         requestAnimationFrame(updateProgress);
       } else {
-        // Hold at 100% for a brief moment before triggering exit
-        setTimeout(onComplete, 300);
+        setTimeout(() => setPhase('narrative'), 400); // Brief pause on 100
       }
     };
 
-    requestAnimationFrame(updateProgress);
-  }, [onComplete]);
+    if (phase === 'counting') {
+      requestAnimationFrame(updateProgress);
+    }
+  }, [phase]);
 
-  // Framer motion variants for the text stagger reveal
-  const text = "GM MOHIT";
-  const words = text.split(" ");
+  useEffect(() => {
+    if (phase === 'narrative') {
+      // Hold narrative on screen for 1.2 seconds, then trigger the un-shutter exit
+      const timer = setTimeout(() => {
+        onComplete();
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, [phase, onComplete]);
 
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2, // Small pause before text starts sliding up
-      },
-    },
-  };
+  const hundreds = Math.floor(progress / 100);
+  const tens = Math.floor((progress % 100) / 10);
+  const units = progress % 10;
 
-  const itemVariants = {
-    hidden: { y: "110%" },
-    show: {
-      y: "0%",
-      transition: {
-        duration: 1.2,
-        ease: [0.33, 1, 0.68, 1] as const, // Heavy and intentional easing per user request
-      },
-    },
-  };
+  const isCounting = phase === 'counting';
+  const showNarrative = phase === 'narrative';
 
   return (
     <motion.div
       key="preloader"
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center pointer-events-auto"
-      // Wait for exit to be triggered by AnimatePresence
+      className="fixed inset-0 z-[9999] pointer-events-auto"
     >
       {/* 
-        The "Un-shutter" Split Background 
-        Top panel moves up, Bottom panel moves down upon exit.
+        TOP PANEL 
+        Starts top-0, bounds top 50% of the screen.
       */}
       <motion.div
         initial={{ y: "0%" }}
         exit={{ y: "-100%" }}
-        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute top-0 w-full h-1/2 bg-brand-bg z-0 origin-top will-change-transform"
-      />
+        transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
+        className="absolute top-0 w-full h-1/2 bg-[#3F352C] z-10 origin-top overflow-hidden will-change-transform"
+      >
+        <AnimatePresence>
+          {showNarrative && (
+             <motion.div 
+               initial={{ opacity: 0, filter: "blur(4px)" }}
+               animate={{ opacity: 1, filter: "blur(0px)" }}
+               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+               // Translate Y by 50% so the exact horizontal middle of word aligns with the panel split cut line
+               className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+             >
+               GM MOHIT
+             </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* 
+        BOTTOM PANEL 
+        Starts bottom-0, bounds bottom 50% of the screen.
+      */}
       <motion.div
         initial={{ y: "0%" }}
         exit={{ y: "100%" }}
-        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute bottom-0 w-full h-1/2 bg-brand-bg z-0 origin-bottom will-change-transform"
-      />
-
-      {/* Counter */}
-      <motion.div
-        exit={{ opacity: 0, scale: 0.9, y: -20 }}
-        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute top-8 right-8 z-10 font-circular text-3xl md:text-5xl text-brand-text font-medium"
+        transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
+        className="absolute bottom-0 w-full h-1/2 bg-[#3F352C] z-10 origin-bottom overflow-hidden will-change-transform"
       >
-        {progress}%
+        <AnimatePresence>
+          {showNarrative && (
+             <motion.div 
+               initial={{ opacity: 0, filter: "blur(4px)" }}
+               animate={{ opacity: 1, filter: "blur(0px)" }}
+               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+               // Translate Y by -50% to mirror the top panel entirely
+               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+             >
+                GM MOHIT
+             </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
-      {/* Main Text Content */}
-      <motion.div
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        className="relative z-10 flex gap-[2vw] md:gap-4 overflow-hidden"
-      >
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="flex gap-4 md:gap-8 text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] font-monument text-brand-text uppercase leading-none tracking-wider"
-        >
-          {words.map((word, wordIndex) => (
-            <div key={wordIndex} className="flex overflow-hidden pb-2 md:pb-4">
-              {word.split("").map((char, charIndex) => (
-                <motion.div
-                  key={charIndex}
-                  variants={itemVariants}
-                  className="inline-block relative will-change-transform"
-                >
-                  {char}
-                </motion.div>
-              ))}
+      {/* 
+        COUNTER & PROGRESS RING (floating above everything, z-20)
+      */}
+      <AnimatePresence>
+        {isCounting && (
+          <motion.div 
+            exit={{ opacity: 0, scale: 0.9, filter: "blur(5px)" }}
+            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
+          >
+            {/* Odometer Counter */}
+            <div className="font-circular text-white text-7xl md:text-9xl tracking-tighter" style={{ fontWeight: 450 }}>
+              {progress >= 100 && (
+                <OdometerDigit value={hundreds} />
+              )}
+              {(progress >= 10) && (
+                <OdometerDigit value={tens} />
+              )}
+              <OdometerDigit value={units} />
             </div>
-          ))}
-        </motion.div>
 
-        {/* Shimmer Effect overlay: passes over the text after completely revealed */}
-        <motion.div
-          initial={{ x: "-100%" }}
-          animate={{ x: "200%" }}
-          transition={{ 
-            delay: 1.5, // starts right after text finishes dropping in
-            duration: 1.5, 
-            ease: "easeInOut" 
-          }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-[#fcf5ee]/70 to-transparent pointer-events-none mix-blend-screen w-[50%] will-change-transform"
-        />
-      </motion.div>
+            {/* Circular Progress Ring at Bottom Center */}
+            <div className="absolute bottom-8 md:bottom-16">
+               <svg width="40" height="40" viewBox="0 0 100 100" className="transform -rotate-90">
+                 {/* Background Track */}
+                 <circle
+                   cx="50" cy="50" r="45"
+                   stroke="rgba(255,255,255,0.15)"
+                   strokeWidth="2"
+                   fill="transparent"
+                 />
+                 {/* Progress Fill */}
+                 <circle
+                   cx="50" cy="50" r="45"
+                   stroke="#ffffff"
+                   strokeWidth="2"
+                   fill="transparent"
+                   strokeDasharray="283"
+                   strokeDashoffset={283 - (283 * progress) / 100}
+                   className="transition-all duration-75 ease-linear will-change-transform"
+                 />
+               </svg>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
