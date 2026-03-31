@@ -3,8 +3,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import AnimatedText from "./AnimatedText";
+import { useLoading } from "@/context/LoadingContext";
 
 export default function AboutSection() {
+    const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -55,7 +57,7 @@ export default function AboutSection() {
                 {/* Overhead Label */}
                 <motion.div 
                     initial="hidden"
-                    whileInView="show"
+                    whileInView={isExitComplete ? "show" : "hidden"}
                     viewport={{ once: true, margin: "-100px" }}
                     variants={containerVariants}
                     className="overflow-hidden mb-8 md:mb-12"
@@ -71,7 +73,7 @@ export default function AboutSection() {
                         className="w-full lg:w-[60%] flex flex-col"
                         style={{ y: headingY }}
                         initial="hidden"
-                        whileInView="show"
+                        whileInView={isExitComplete ? "show" : "hidden"}
                         viewport={{ once: true, margin: "-100px" }}
                         variants={containerVariants}
                     >
@@ -98,7 +100,7 @@ export default function AboutSection() {
                     <motion.div 
                         className="w-full lg:w-[35%] flex flex-col gap-12 md:gap-16 pt-0 lg:pt-16"
                         initial="hidden"
-                        whileInView="show"
+                        whileInView={isExitComplete ? "show" : "hidden"}
                         viewport={{ once: true, margin: "-100px" }}
                         variants={containerVariants}
                     >

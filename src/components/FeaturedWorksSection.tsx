@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import AnimatedText from "./AnimatedText";
+import { useLoading } from "@/context/LoadingContext";
 
 interface ProjectCardProps {
     index: string;
@@ -142,6 +143,7 @@ const ProjectCard = ({
 };
 
 export default function FeaturedWorksSection() {
+    const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLDivElement>(null);
     
     // Parallax background map
@@ -193,7 +195,7 @@ export default function FeaturedWorksSection() {
                 id="work-heading"
                 className="flex items-center gap-2 md:gap-4 lg:gap-8 font-monument text-[18px] sm:text-2xl md:text-4xl lg:text-[49px] uppercase tracking-tight px-4 md:px-12 lg:px-16 w-full max-w-[1400px]"
                 initial="hidden"
-                whileInView="show"
+                whileInView={isExitComplete ? "show" : "hidden"}
                 viewport={{ once: true, margin: "-100px" }}
             >
                 <div className="relative overflow-hidden w-full flex justify-between items-center border-b border-current pb-4 md:pb-8">
@@ -214,7 +216,7 @@ export default function FeaturedWorksSection() {
                     className="w-full flex flex-col gap-24 md:gap-40 lg:gap-56 max-w-[1700px]"
                     variants={containerVariants}
                     initial="hidden"
-                    whileInView="show"
+                    whileInView={isExitComplete ? "show" : "hidden"}
                     viewport={{ once: true, margin: "-100px" }}
                     style={{ transformStyle: "preserve-3d" }}
                 >

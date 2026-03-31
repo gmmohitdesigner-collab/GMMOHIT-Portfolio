@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { useLoading } from "@/context/LoadingContext";
 
 const services = [
     { 
@@ -25,6 +26,7 @@ const services = [
 ];
 
 export default function ServicesSection() {
+    const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLElement>(null);
     
     // Parallax background map
@@ -74,7 +76,7 @@ export default function ServicesSection() {
                 {/* Section Title Header */}
                 <motion.div 
                     initial="hidden"
-                    whileInView="show"
+                    whileInView={isExitComplete ? "show" : "hidden"}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ staggerChildren: 0.2 }}
                     className="w-full flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-32 gap-8"
@@ -98,7 +100,7 @@ export default function ServicesSection() {
                     {/* Top Top Border */}
                     <motion.div 
                         initial="hidden"
-                        whileInView="show"
+                        whileInView={isExitComplete ? "show" : "hidden"}
                         viewport={{ once: true, margin: "-100px" }}
                         variants={lineVariants}
                         className="w-full h-[1px] bg-[#E8E3DA] opacity-20 origin-left"
@@ -109,7 +111,7 @@ export default function ServicesSection() {
                             key={service.id}
                             className="w-full group cursor-pointer relative"
                             initial="hidden"
-                            whileInView="show"
+                            whileInView={isExitComplete ? "show" : "hidden"}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
                         >

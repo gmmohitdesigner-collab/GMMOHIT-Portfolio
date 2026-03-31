@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import { useLoading } from "@/context/LoadingContext";
 
 interface AnimatedTextProps extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
     text: string | string[];
@@ -25,6 +26,7 @@ export default function AnimatedText({
     once = true,
     ...props
 }: AnimatedTextProps) {
+    const { isExitComplete } = useLoading();
     const isArray = Array.isArray(text);
     // If text is a string, split by words. If array, each element is a line.
     const items = isArray ? text : text.split(" ");
@@ -54,7 +56,7 @@ export default function AnimatedText({
                 className="inline-block w-full"
                 variants={containerVariants}
                 initial="hidden"
-                whileInView="show"
+                whileInView={isExitComplete ? "show" : "hidden"}
                 viewport={{ once, margin: "-50px" }}
             >
                 {items.map((item, index) => (

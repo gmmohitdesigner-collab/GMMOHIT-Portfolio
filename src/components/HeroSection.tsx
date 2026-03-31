@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import AnimatedText from "./AnimatedText";
+import { useLoading } from "@/context/LoadingContext";
 
 export default function HeroSection() {
+    const { isExitComplete } = useLoading();
     const imageVariants = {
         hidden: { clipPath: "inset(0 0 0 100%)" },
         show: {
@@ -32,7 +34,7 @@ export default function HeroSection() {
                         className="relative w-full md:w-[450px] lg:w-[600px] aspect-[16/9] md:aspect-[1.8/1] overflow-hidden order-1 md:order-2"
                         variants={imageVariants}
                         initial="hidden"
-                        animate="show"
+                        animate={isExitComplete ? "show" : "hidden"}
                     >
                         {/* The user provided Image - Home.jpeg */}
                         <Image
