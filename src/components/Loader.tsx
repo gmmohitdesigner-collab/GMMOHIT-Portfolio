@@ -41,8 +41,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         }}
         transition={{ 
           duration: 5.0,
-          times: [0.0, 0.06, 0.30, 0.38, 0.43, 0.61, 0.73, 0.78, 1.0],
-          ease: "easeInOut"
+          times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0],
+          ease: Array(8).fill([0.65, 0, 0.35, 1])
         }}
         className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform"
       >
@@ -54,8 +54,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
             }}
             transition={{
               duration: 5.0,
-              times: [0.0, 0.06, 0.30, 0.38, 0.43, 0.61, 0.73, 0.78, 1.0],
-              ease: "easeInOut"
+              times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0],
+              ease: Array(8).fill([0.65, 0, 0.35, 1])
             }}
             className="flex flex-col items-center relative will-change-transform"
           >
