@@ -33,51 +33,49 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       className="fixed inset-0 z-[9999] pointer-events-auto font-serif"
     >
       {/* 
-        TOP PANEL 
-        Starts top-0, bounds top 50%.
-        `calc(50% + 1px)` actively fixes the sub-pixel "gap seam" bug exactly.
+        LEFT PANEL 
+        Starts left-0, bounds left 50%.
+        `calc(50vw + 1px)` actively fixes the sub-pixel "gap seam" bug exactly.
       */}
       <motion.div
-        initial={{ y: "0%" }}
-        exit={{ y: "-100%" }}
+        initial={{ x: "0%" }}
+        exit={{ x: "-100%" }}
         transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }} 
-        className="absolute top-0 w-full h-[calc(50%+1px)] bg-[#212121] z-10 origin-top overflow-hidden will-change-transform"
+        className="absolute left-0 top-0 w-[calc(50vw+1px)] h-full bg-[#212121] z-10 origin-left overflow-hidden will-change-transform"
       >
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ y: "150%", x: "-50%", opacity: 0 }}
-               animate={{ y: "50%", x: "-50%", opacity: 1 }}
+               initial={{ y: "150%", opacity: 0 }}
+               animate={{ y: "-50%", opacity: 1 }}
                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-               // We handle translate natively in Framer Motion instead of Tailwind
-               className="absolute bottom-0 left-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               className="absolute top-1/2 right-0 pr-[3vw] lg:pr-[2vw] text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
-               GM MOHIT
+               GM
              </motion.div>
           )}
         </AnimatePresence>
       </motion.div>
 
       {/* 
-        BOTTOM PANEL 
-        Starts bottom-0, bounds bottom 50%.
+        RIGHT PANEL 
+        Starts right-0, bounds right 50%.
       */}
       <motion.div
-        initial={{ y: "0%" }}
-        exit={{ y: "100%" }}
+        initial={{ x: "0%" }}
+        exit={{ x: "100%" }}
         transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute bottom-0 w-full h-1/2 bg-[#212121] z-10 origin-bottom overflow-hidden will-change-transform"
+        className="absolute right-0 top-0 w-[50vw] h-full bg-[#212121] z-10 origin-right overflow-hidden will-change-transform"
       >
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ y: "50%", x: "-50%", opacity: 0 }}
-               animate={{ y: "-50%", x: "-50%", opacity: 1 }}
+               initial={{ y: "150%", opacity: 0 }}
+               animate={{ y: "-50%", opacity: 1 }}
                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-               // We handle translate natively in Framer Motion instead of Tailwind
-               className="absolute top-0 left-1/2 w-full flex justify-center items-center text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               className="absolute top-1/2 left-0 pl-[3vw] lg:pl-[2vw] text-white font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
-                GM MOHIT
+                MOHIT
              </motion.div>
           )}
         </AnimatePresence>
