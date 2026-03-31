@@ -239,7 +239,7 @@ export default function FeaturedWorksSection() {
                         targetYear="2025"
                         title="CREATIVE ANTS"
                         description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                        videoSrc="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+                        videoSrc="https://media.w3.org/2010/05/sintel/trailer.mp4"
                         itemVariants={itemVariants}
                     />
                 </motion.div>
