@@ -98,29 +98,16 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               className="flex items-center text-white text-[35vw] sm:text-[30vw] md:text-[25vw] italic font-light tracking-tighter"
               style={{ lineHeight: '1em', height: '1em' }}
             >
-              {/* Hundreds (0-1) */}
-              {/* Invisible leading zero ensures the 3-digit box maintains exact stable width across all frames. */}
+              {/* Tens (0-9) */}
+              {/* Invisible leading zero ensures the 2-digit box maintains exact stable width before 10. */}
               <div className="relative overflow-hidden w-[0.6em] h-[1em]">
                 <motion.div
                   initial={{ y: "0em" }}
-                  animate={{ y: "-1em" }}
+                  animate={{ y: "-9em" }}
                   transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
                   className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
                 >
-                  <span className="h-[1em] w-full flex justify-center items-center text-transparent">0</span> 
-                  <span className="h-[1em] w-full flex justify-center items-center">1</span>
-                </motion.div>
-              </div>
-
-              {/* Tens (0-10) */}
-              <div className="relative overflow-hidden w-[0.6em] h-[1em]">
-                <motion.div
-                  initial={{ y: "0em" }}
-                  animate={{ y: "-10em" }}
-                  transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
-                  className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
-                >
-                  {Array.from({ length: 11 }, (_, i) => (
+                  {Array.from({ length: 10 }, (_, i) => (
                     <span key={i} className={`h-[1em] w-full flex justify-center items-center ${i === 0 ? "text-transparent" : "text-white"}`}>
                       {i % 10}
                     </span>
@@ -128,15 +115,15 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
                 </motion.div>
               </div>
 
-              {/* Units (0-100) */}
+              {/* Units (0-99) */}
               <div className="relative overflow-hidden w-[0.6em] h-[1em]">
                 <motion.div
                   initial={{ y: "0em" }}
-                  animate={{ y: "-100em" }}
+                  animate={{ y: "-99em" }}
                   transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
                   className="absolute top-0 left-0 w-full flex flex-col will-change-transform"
                 >
-                  {Array.from({ length: 101 }, (_, i) => (
+                  {Array.from({ length: 100 }, (_, i) => (
                     <span key={i} className="h-[1em] w-full flex justify-center items-center">
                       {i % 10}
                     </span>
