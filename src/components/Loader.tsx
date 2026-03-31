@@ -18,7 +18,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     // 4 "soft hesitation" points replacing hard pauses for fluid, subtle movement
     const controls = animate(count, [0, 18, 22, 42, 46, 66, 70, 90, 94, 100], { 
-      duration: 3.5, 
+      duration: 5.0, 
       times: [0, 0.15, 0.25, 0.40, 0.50, 0.65, 0.75, 0.90, 0.95, 1],
       ease: "easeInOut" 
     });
@@ -26,7 +26,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     // Hold at 100 for a crisp 300ms, then trigger the upward shutter exit natively
     const timer = setTimeout(() => {
       onComplete(); 
-    }, 3800); 
+    }, 5300); 
     
     return () => {
       controls.stop();
@@ -56,7 +56,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           y: ["-100%", "-82%", "-78%", "-58%", "-54%", "-34%", "-30%", "-10%", "-6%", "0%"]
         }}
         transition={{ 
-          duration: 3.5,
+          duration: 5.0,
           times: [0, 0.15, 0.25, 0.40, 0.50, 0.65, 0.75, 0.90, 0.95, 1],
           ease: "easeInOut"
         }}
