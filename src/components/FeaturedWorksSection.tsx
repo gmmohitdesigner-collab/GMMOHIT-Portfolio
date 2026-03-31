@@ -227,7 +227,7 @@ export default function FeaturedWorksSection() {
                     targetYear="2026"
                     title="TEAURE"
                     description="Organic blends crafted for calm, presence, and unmatched holistic purity."
-                    videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                    videoSrc="https://vjs.zencdn.net/v/oceans.mp4"
                     itemVariants={itemVariants}
                 />
 
@@ -238,7 +238,7 @@ export default function FeaturedWorksSection() {
                     targetYear="2025"
                     title="CREATIVE ANTS"
                     description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                    videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+                    videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
                     itemVariants={itemVariants}
                 />
                 </motion.div>
