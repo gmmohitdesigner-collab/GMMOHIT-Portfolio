@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function MagneticMenuButton({ 
     isOpen, 
@@ -11,41 +11,6 @@ export default function MagneticMenuButton({
     onClick: () => void 
 }) {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    
-    // Magnetic values
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    
-    const springProps = { stiffness: 150, damping: 15, mass: 0.1 };
-    const springX = useSpring(x, springProps);
-    const springY = useSpring(y, springProps);
-
-    const handleMouseMove = useCallback((e: MouseEvent) => {
-        if (!buttonRef.current) return;
-        
-        const rect = buttonRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
-        
-        const radius = 80; // magnetic field radius
-        const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-        
-        if (distance < radius) {
-            x.set(distanceX * 0.4);
-            y.set(distanceY * 0.4);
-        } else {
-            x.set(0);
-            y.set(0);
-        }
-    }, [x, y]);
-
-    useEffect(() => {
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [handleMouseMove]);
 
     // SVG Path Variants
     const pathVariants = {
@@ -63,7 +28,6 @@ export default function MagneticMenuButton({
         <motion.button
             ref={buttonRef}
             onClick={onClick}
-            style={{ x: springX, y: springY }}
             initial={false}
             animate={{ 
                 backgroundColor: isOpen ? "#1A1818" : "rgba(255, 255, 255, 0)",
