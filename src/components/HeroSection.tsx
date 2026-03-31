@@ -5,26 +5,6 @@ import Image from "next/image";
 import AnimatedText from "./AnimatedText";
 
 export default function HeroSection() {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2, // Stagger effect for entrance animations
-                delayChildren: 0.3,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 50 },
-        show: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.8, ease: "easeOut" as const }
-        },
-    };
-
     const imageVariants = {
         hidden: { clipPath: "inset(0 0 0 100%)" },
         show: {
