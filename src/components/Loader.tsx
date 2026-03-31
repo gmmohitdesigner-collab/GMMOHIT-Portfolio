@@ -16,15 +16,17 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
   // Start the pure numerical counter on mount
   useEffect(() => {
-    const controls = animate(count, 100, { 
-      duration: 2.5, 
-      ease: [0.33, 1, 0.68, 1] 
+    // 4 pause points synchronized exactly by times array
+    const controls = animate(count, [0, 14, 14, 38, 38, 65, 65, 89, 89, 100], { 
+      duration: 3.0, 
+      times: [0, 0.12, 0.20, 0.32, 0.40, 0.58, 0.66, 0.82, 0.88, 1],
+      ease: "easeInOut" 
     });
     
-    // Hold at 100 for a crisp 500ms, then trigger the upward shutter exit natively
+    // Hold at 100 for a crisp 300ms, then trigger the upward shutter exit natively
     const timer = setTimeout(() => {
       onComplete(); 
-    }, 3000); 
+    }, 3300); 
     
     return () => {
       controls.stop();
@@ -46,11 +48,18 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <div className="text-white/60">PORTFOLIO &copy;2026</div>
       </div>
 
-      {/* Animated Counter (Moving Bottom to Top dynamically) */}
+      {/* Animated Counter (Moving Bottom to Top dynamically with pauses) */}
       <motion.div 
         initial={{ top: "100%", y: "-100%" }} 
-        animate={{ top: "0%", y: "0%" }}
-        transition={{ duration: 2.5, ease: [0.33, 1, 0.68, 1] }}
+        animate={{ 
+          top: ["100%", "86%", "86%", "62%", "62%", "35%", "35%", "11%", "11%", "0%"],
+          y: ["-100%", "-86%", "-86%", "-62%", "-62%", "-35%", "-35%", "-11%", "-11%", "0%"]
+        }}
+        transition={{ 
+          duration: 3.0,
+          times: [0, 0.12, 0.20, 0.32, 0.40, 0.58, 0.66, 0.82, 0.88, 1],
+          ease: "easeInOut"
+        }}
         className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform"
         style={{ lineHeight: '1em' }}
       >
