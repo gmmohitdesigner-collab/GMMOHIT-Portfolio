@@ -74,7 +74,7 @@ export default function Footer() {
                                     HELLO@GMMOHIT.COM
                                 </a>
                                 <span className="font-mono text-[10px] tracking-widest opacity-60 mt-2 max-w-[180px] leading-relaxed">
-                                    Got a vision? Let's bring it to life.
+                                    Got a vision? Let&apos;s bring it to life.
                                 </span>
                             </div>
                         </motion.div>
