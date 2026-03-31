@@ -11,13 +11,12 @@ interface ProjectCardProps {
     title: string;
     description: string;
     videoSrc: string;
-    containerVariants: Variants;
     itemVariants: Variants;
 }
 
 const ProjectCard = ({ 
     index, category, targetYear, title, description, videoSrc, 
-    containerVariants, itemVariants 
+    itemVariants 
 }: ProjectCardProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -227,7 +226,6 @@ export default function FeaturedWorksSection() {
                     title="TEAURE"
                     description="Organic blends crafted for calm, presence, and unmatched holistic purity."
                     videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-                    containerVariants={containerVariants}
                     itemVariants={itemVariants}
                 />
 
@@ -239,7 +237,6 @@ export default function FeaturedWorksSection() {
                     title="CREATIVE ANTS"
                     description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
                     videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-                    containerVariants={containerVariants}
                     itemVariants={itemVariants}
                 />
                 </motion.div>
