@@ -32,7 +32,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <div className="text-white/60">PORTFOLIO &copy;2026</div>
       </div>
 
-      {/* Animated Counter (Smooth Slider without Scrambling) */}
+      {/* Animated Counter (Independent Mechanical Columns) */}
       <motion.div 
         initial={{ top: "100%", y: "-100%" }} 
         animate={{ 
@@ -44,28 +44,56 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0],
           ease: Array(8).fill([0.65, 0, 0.35, 1])
         }}
-        className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform"
+        className="absolute right-0 px-6 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 flex items-start text-white text-5xl sm:text-7xl md:text-[8vw] font-medium tracking-tighter will-change-transform tabular-nums"
       >
-        {/* The 1em mask for the specifically curated odometer tape */}
-        <div className="relative overflow-hidden" style={{ height: '1em', lineHeight: '1em' }}>
+        {/* The 1em mask for the scrolling odometer tapes */}
+        <div className="relative overflow-hidden flex" style={{ height: '1em', lineHeight: '1em' }}>
+          
+          {/* HUNDREDS */}
           <motion.div 
-            animate={{ 
-              y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] 
-            }}
+            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
             transition={{
               duration: 5.0,
-              times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0],
+              times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
               ease: Array(8).fill([0.65, 0, 0.35, 1])
             }}
-            className="flex flex-col items-center relative will-change-transform"
+            className="flex flex-col items-center relative will-change-transform w-[0.6em]"
           >
-            {/* Direct transition strip mapping: no intermediate scrambling noise */}
-            {[" 00", " 02", " 34", " 68", "100"].map((digit, i) => (
-              <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">
-                {digit}
-              </span>
+            {[" ", " ", " ", " ", "1"].map((d, i) => (
+              <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
             ))}
           </motion.div>
+
+          {/* TENS (Dynamic Speed - Drags slightly behind the Units!) */}
+          <motion.div 
+            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
+            transition={{
+              duration: 5.0,
+              times: [0.0, 0.05, 0.22, 0.31, 0.46, 0.55, 0.68, 0.79, 1.0], // Delayed staggered times
+              ease: Array(8).fill([0.65, 0, 0.35, 1])
+            }}
+            className="flex flex-col items-center relative will-change-transform w-[0.6em]"
+          >
+            {["0", "0", "3", "6", "0"].map((d, i) => (
+              <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
+            ))}
+          </motion.div>
+
+          {/* UNITS */}
+          <motion.div 
+            animate={{ y: ["1em", "0em", "-1em", "-1em", "-2em", "-2em", "-3em", "-3em", "-4em"] }}
+            transition={{
+              duration: 5.0,
+              times: [0.0, 0.04, 0.20, 0.30, 0.44, 0.54, 0.66, 0.78, 1.0], // Base Times
+              ease: Array(8).fill([0.65, 0, 0.35, 1])
+            }}
+            className="flex flex-col items-center relative will-change-transform w-[0.6em]"
+          >
+            {["0", "2", "4", "8", "0"].map((d, i) => (
+              <span key={i} className="whitespace-pre flex justify-center items-center h-[1em]">{d}</span>
+            ))}
+          </motion.div>
+
         </div>
       </motion.div>
     </motion.div>
