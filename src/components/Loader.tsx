@@ -6,16 +6,37 @@ import { motion, AnimatePresence } from "framer-motion";
 function OdometerDigit({ value }: { value: number }) {
   return (
     <div 
-      className="relative overflow-hidden h-[1.2em] w-[0.65em] inline-flex justify-center items-center align-middle"
-      style={{ lineHeight: 1.2 }}
+      className="relative overflow-hidden h-[1em] w-[0.6em] inline-flex justify-center items-center align-middle"
     >
       <AnimatePresence>
         <motion.span
           key={value}
-          initial={{ y: "100%", opacity: 0 }}
+          initial={{ y: "80%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
+          exit={{ y: "-80%", opacity: 0 }}
+          transition={{ duration: 0.25, ease: [0.33, 1, 0.68, 1] }}
+          className="absolute inset-0 flex justify-center items-center pointer-events-none"
+        >
+          {value}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Fast odometer for units, removes opacity to prevent rendering artifacts/ghosting
+function FastOdometerDigit({ value }: { value: number }) {
+  return (
+    <div 
+      className="relative overflow-hidden h-[1em] w-[0.6em] inline-flex justify-center items-center align-middle"
+    >
+      <AnimatePresence>
+        <motion.span
+          key={value}
+          initial={{ y: "80%" }}
+          animate={{ y: "0%" }}
+          exit={{ y: "-80%" }}
+          transition={{ duration: 0.08, ease: "linear" }}
           className="absolute inset-0 flex justify-center items-center pointer-events-none"
         >
           {value}
@@ -46,7 +67,8 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       if (t < 1) {
         requestAnimationFrame(updateProgress);
       } else {
-        setTimeout(() => setPhase('narrative'), 400); // Brief pause on 100
+        // Tightened pause to "melt" transition into Phase 2
+        setTimeout(() => setPhase('narrative'), 100); 
       }
     };
 
@@ -57,10 +79,10 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     if (phase === 'narrative') {
-      // Hold narrative on screen for 1.2 seconds, then trigger the un-shutter exit
+      // Hold narrative briefly then split!
       const timer = setTimeout(() => {
         onComplete();
-      }, 1200);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [phase, onComplete]);
@@ -79,22 +101,22 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     >
       {/* 
         TOP PANEL 
-        Starts top-0, bounds top 50% of the screen.
+        Starts top-0, bounds top 50% + 1px to eliminate render seam bugs.
       */}
       <motion.div
         initial={{ y: "0%" }}
         exit={{ y: "-100%" }}
         transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute top-0 w-full h-1/2 bg-[#3F352C] z-10 origin-top overflow-hidden will-change-transform"
+        className="absolute top-0 w-full h-[calc(50%+1px)] bg-[#3F352C] z-10 origin-top overflow-hidden will-change-transform"
       >
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(4px)" }}
-               animate={{ opacity: 1, filter: "blur(0px)" }}
-               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-               // Translate Y by 50% so the exact horizontal middle of word aligns with the panel split cut line
-               className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               initial={{ opacity: 0, filter: "blur(4px)", scale: 0.95 }}
+               animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+               transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+               // Offset to exact pixel-split
+               className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
                GM MOHIT
              </motion.div>
@@ -115,11 +137,11 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         <AnimatePresence>
           {showNarrative && (
              <motion.div 
-               initial={{ opacity: 0, filter: "blur(4px)" }}
-               animate={{ opacity: 1, filter: "blur(0px)" }}
-               transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-               // Translate Y by -50% to mirror the top panel entirely
-               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-4xl sm:text-6xl md:text-8xl lg:text-[10vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
+               initial={{ opacity: 0, filter: "blur(4px)", scale: 0.95 }}
+               animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+               transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+               // Mirror Offset
+               className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center text-[#fcf5ee] font-monument text-3xl sm:text-5xl md:text-7xl lg:text-[8vw] uppercase leading-none tracking-wider pointer-events-none whitespace-nowrap"
              >
                 GM MOHIT
              </motion.div>
@@ -133,23 +155,26 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       <AnimatePresence>
         {isCounting && (
           <motion.div 
-            exit={{ opacity: 0, scale: 0.9, filter: "blur(5px)" }}
-            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+            exit={{ opacity: 0, scale: 0.85, filter: "blur(10px)" }}
+            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
             className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
           >
-            {/* Odometer Counter */}
-            <div className="font-circular text-white text-7xl md:text-9xl tracking-tighter" style={{ fontWeight: 450 }}>
+            {/* Massive Editorial Odometer Counter */}
+            <div 
+              className="font-serif italic text-white text-[30vw] md:text-[25vw] flex tracking-tighter" 
+              style={{ fontWeight: 300, lineHeight: 1 }}
+            >
               {progress >= 100 && (
                 <OdometerDigit value={hundreds} />
               )}
               {(progress >= 10) && (
                 <OdometerDigit value={tens} />
               )}
-              <OdometerDigit value={units} />
+              <FastOdometerDigit value={units} />
             </div>
 
             {/* Circular Progress Ring at Bottom Center */}
-            <div className="absolute bottom-8 md:bottom-16">
+            <div className="absolute bottom-12 md:bottom-20">
                <svg width="40" height="40" viewBox="0 0 100 100" className="transform -rotate-90">
                  {/* Background Track */}
                  <circle
