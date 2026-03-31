@@ -90,8 +90,9 @@ const ProjectCard = ({
                     <motion.div 
                         style={{ y: yMove, scale, filter }} 
                         className="w-full h-[120%] absolute top-[-10%]"
+                        key={videoSrc} // Force re-render of frame on source change
                     >
-                        <video autoPlay muted loop playsInline className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]">
+                        <video autoPlay muted loop playsInline className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]" key={videoSrc}>
                             <source src={videoSrc} type="video/mp4" />
                         </video>
                     </motion.div>
@@ -220,27 +221,27 @@ export default function FeaturedWorksSection() {
                     viewport={{ once: true, margin: "-100px" }}
                     style={{ transformStyle: "preserve-3d" }}
                 >
-                    {/* Project 1: TEAURE */}
-                <ProjectCard
-                    index="01"
-                    category="E-COMMERCE"
-                    targetYear="2026"
-                    title="TEAURE"
-                    description="Organic blends crafted for calm, presence, and unmatched holistic purity."
-                    videoSrc="https://vjs.zencdn.net/v/oceans.mp4"
-                    itemVariants={itemVariants}
-                />
+                    <ProjectCard
+                        key="project-01"
+                        index="01"
+                        category="E-COMMERCE"
+                        targetYear="2026"
+                        title="TEAURE"
+                        description="Organic blends crafted for calm, presence, and unmatched holistic purity."
+                        videoSrc="https://vjs.zencdn.net/v/oceans.mp4"
+                        itemVariants={itemVariants}
+                    />
 
-                {/* Project 2: CREATIVE ANTS */}
-                <ProjectCard
-                    index="02"
-                    category="AGENCY SITE"
-                    targetYear="2025"
-                    title="CREATIVE ANTS"
-                    description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                    videoSrc="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
-                    itemVariants={itemVariants}
-                />
+                    <ProjectCard
+                        key="project-02"
+                        index="02"
+                        category="AGENCY SITE"
+                        targetYear="2025"
+                        title="CREATIVE ANTS"
+                        description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
+                        videoSrc="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+                        itemVariants={itemVariants}
+                    />
                 </motion.div>
             </div>
         </section>
