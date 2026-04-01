@@ -105,9 +105,8 @@ export default function NavBar() {
                 {/* Social Links (Center-Right) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
                     <MagneticNavLink href="https://www.instagram.com/noblessedesigns/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
-                    <MagneticNavLink href="https://x.com/G_M_Mohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> X</MagneticNavLink>
-                    <MagneticNavLink href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> LINKED IN</MagneticNavLink>
-                    <MagneticNavLink href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[60px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">④</span> BEHANCE</MagneticNavLink>
+                    <MagneticNavLink href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink>
+                    <MagneticNavLink href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink>
                 </div>
 
                 {/* Availability & Contact (Right) */}
