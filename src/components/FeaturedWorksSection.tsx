@@ -15,9 +15,9 @@ interface ProjectCardProps {
     itemVariants: Variants;
 }
 
-const ProjectCard = ({ 
-    index, category, targetYear, title, description, videoSrc, 
-    itemVariants 
+const ProjectCard = ({
+    index, category, targetYear, title, description, videoSrc,
+    itemVariants
 }: ProjectCardProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -31,10 +31,10 @@ const ProjectCard = ({
 
     // 1. Image Parallax
     const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
-    
+
     // 2. Scale-on-Scroll 
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1.1]);
-    
+
     // 3. Grayscale-to-Color 
     const filter = useTransform(scrollYProgress, [0.1, 0.45], ["grayscale(100%)", "grayscale(0%)"]);
 
@@ -46,14 +46,14 @@ const ProjectCard = ({
         const rect = e.currentTarget.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        const tiltX = (e.clientX - centerX) / 40; 
-        const tiltY = -(e.clientY - centerY) / 40; 
+        const tiltX = (e.clientX - centerX) / 40;
+        const tiltY = -(e.clientY - centerY) / 40;
         x.set(tiltX);
         y.set(tiltY);
     };
 
     const resetMouse = () => {
-        x.set(0);  y.set(0);
+        x.set(0); y.set(0);
     };
 
     // Separating the first letter for the curly script font "Drop-Cap" style
@@ -61,16 +61,16 @@ const ProjectCard = ({
     const restOfTitle = title.slice(1);
 
     return (
-        <motion.div 
-            ref={ref} 
-            className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto" 
+        <motion.div
+            ref={ref}
+            className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto"
             variants={itemVariants}
             style={{ rotateX: scrollRotateX, willChange: "transform", transformStyle: "preserve-3d" }}
         >
-            
+
             {/* Massive Display Title (Left Aligned, Overlapping) */}
             <div className="w-full flex justify-start px-4 md:px-12 lg:px-16 z-10 relative pointer-events-none mb-[-5%] md:mb-[-6%] lg:mb-[-4%]">
-                <motion.h3 
+                <motion.h3
                     className="flex items-baseline text-[55px] sm:text-[90px] md:text-[120px] lg:text-[150px] uppercase tracking-tighter m-0 leading-[0.8] text-[#E8E3DA]"
                     variants={itemVariants}
                 >
@@ -81,14 +81,14 @@ const ProjectCard = ({
 
             {/* Centered Widescreen 16:9 Video Container */}
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
-                <motion.div 
+                <motion.div
                     className="w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group"
                     onMouseMove={handleMouse}
                     onMouseLeave={resetMouse}
-                    style={{ rotateX: y, rotateY: x }} 
+                    style={{ rotateX: y, rotateY: x }}
                 >
-                    <motion.div 
-                        style={{ y: yMove, scale, filter }} 
+                    <motion.div
+                        style={{ y: yMove, scale, filter }}
                         className="w-full h-[120%] absolute top-[-10%]"
                         key={videoSrc} // Force re-render of frame on source change
                     >
@@ -112,7 +112,7 @@ const ProjectCard = ({
                                 />
                                 <text className="font-circular text-[10px] uppercase font-bold tracking-[0.165em]" fill="currentColor">
                                     <textPath href={`#textPath-${index}`} startOffset="0%">
-                                        VIEW CASE STUDY • VIEW CASE STUDY • 
+                                        VIEW CASE STUDY • VIEW CASE STUDY •
                                     </textPath>
                                 </text>
                             </svg>
@@ -139,7 +139,7 @@ const ProjectCard = ({
                     staggerDuration={0.1}
                 />
             </div>
-            
+
         </motion.div>
     );
 };
@@ -147,7 +147,7 @@ const ProjectCard = ({
 export default function FeaturedWorksSection() {
     const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLDivElement>(null);
-    
+
     // Parallax background map
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -183,7 +183,7 @@ export default function FeaturedWorksSection() {
     return (
         <section ref={containerRef} className="w-full flex flex-col items-center py-24 md:py-32 gap-16 md:gap-32 relative overflow-hidden bg-[#3F352C] text-[#E8E3DA]" id="work" aria-labelledby="work-heading">
             {/* Massive Background Parallax Text Layer */}
-            <motion.div 
+            <motion.div
                 className="absolute inset-0 z-[-1] flex justify-center items-center pointer-events-none opacity-[0.04] select-none"
                 style={{ y: backgroundY }}
             >
