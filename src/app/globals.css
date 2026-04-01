@@ -25,6 +25,10 @@
   --color-brand-black: #3F352C;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   --background: var(--color-brand-bg);
   --foreground: var(--color-brand-text);

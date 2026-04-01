@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import MagneticNavLink from "./MagneticNavLink";
 import MagneticMenuButton from "./MagneticMenuButton";
 
@@ -9,6 +10,7 @@ export default function NavBar() {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const lenis = useLenis();
 
     // Headroom (hide on scroll down) effect
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -22,10 +24,18 @@ export default function NavBar() {
 
     // Lock body scroll when overlay is open
     useEffect(() => {
-        if (menuOpen) document.body.style.overflow = "hidden";
-        else document.body.style.overflow = "unset";
-        return () => { document.body.style.overflow = "unset"; };
-    }, [menuOpen]);
+        if (menuOpen) {
+            lenis?.stop();
+            document.body.style.overflow = "hidden";
+        } else {
+            lenis?.start();
+            document.body.style.overflow = "";
+        }
+        return () => { 
+            lenis?.start();
+            document.body.style.overflow = ""; 
+        };
+    }, [menuOpen, lenis]);
 
     // Animation variants for the mobile menu
     const menuVariants = {
