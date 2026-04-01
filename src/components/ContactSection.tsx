@@ -48,16 +48,20 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex flex-col gap-4 font-circular text-xs md:text-sm uppercase">
-                    <a href="https://instagram.com" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                    <a href="https://www.instagram.com/noblessedesigns/" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
                         <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">1</span>
                         INSTAGRAM
                     </a>
-                    <a href="https://linkedin.com" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity ml-4 md:ml-6">
+                    <a href="https://x.com/G_M_Mohit" aria-label="Visit X Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity ml-4 md:ml-6">
                         <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">2</span>
+                        X (TWITTER)
+                    </a>
+                    <a href="https://www.linkedin.com/in/gmmohit/" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
+                        <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">3</span>
                         LINKEDIN
                     </a>
-                    <a href="https://behance.net" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity">
-                        <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">3</span>
+                    <a href="https://www.behance.net/gmmohit" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:opacity-70 transition-opacity ml-4 md:ml-6">
+                        <span className="w-5 h-5 rounded-full border border-brand-text flex items-center justify-center text-[10px]">4</span>
                         BEHANCE
                     </a>
                 </div>

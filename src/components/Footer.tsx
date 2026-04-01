@@ -55,9 +55,10 @@ export default function Footer() {
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Socials</span>
                             <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
-                                <a href="https://instagram.com" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
-                                <a href="https://linkedin.com" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> LINKED IN</a>
-                                <a href="https://behance.net" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> BEHANCE</a>
+                                <a href="https://www.instagram.com/noblessedesigns/" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
+                                <a href="https://x.com/G_M_Mohit" aria-label="Visit X Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> X / TWITTER</a>
+                                <a href="https://www.linkedin.com/in/gmmohit/" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> LINKED IN</a>
+                                <a href="https://www.behance.net/gmmohit" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">④</span> BEHANCE</a>
                             </div>
                         </motion.div>
 

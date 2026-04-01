@@ -104,9 +104,10 @@ export default function NavBar() {
 
                 {/* Social Links (Center-Right) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
-                    <MagneticNavLink href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
-                    <MagneticNavLink href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink>
-                    <MagneticNavLink href="https://behance.net" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink>
+                    <MagneticNavLink href="https://www.instagram.com/noblessedesigns/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
+                    <MagneticNavLink href="https://x.com/G_M_Mohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> X</MagneticNavLink>
+                    <MagneticNavLink href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> LINKED IN</MagneticNavLink>
+                    <MagneticNavLink href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[60px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">④</span> BEHANCE</MagneticNavLink>
                 </div>
 
                 {/* Availability & Contact (Right) */}
@@ -176,16 +177,16 @@ export default function NavBar() {
                             className="flex flex-col gap-6 sm:gap-8 pt-12 pb-4 mt-auto"
                         >
                             <div className="flex justify-center gap-8 sm:gap-12 w-full px-2" aria-label="Social Links">
-                                <a href="https://instagram.com" aria-label="Visit Instagram profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                <a href="https://www.instagram.com/noblessedesigns/" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                                 </a>
-                                <a href="https://linkedin.com" aria-label="Visit LinkedIn profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                <a href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" aria-label="Visit LinkedIn profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
                                     <span className="font-circular font-bold text-sm tracking-tighter">in</span>
                                 </a>
-                                <a href="https://behance.net" aria-label="Visit Behance profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                <a href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" aria-label="Visit Behance profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
                                     <span className="font-circular font-bold text-sm tracking-tighter">Bē</span>
                                 </a>
-                                <a href="https://x.com" aria-label="Visit X profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                <a href="https://x.com/G_M_Mohit" target="_blank" rel="noopener noreferrer" aria-label="Visit X profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
                                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
                                 </a>
                             </div>
