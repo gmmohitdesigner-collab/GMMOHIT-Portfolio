@@ -27,6 +27,41 @@ export default function NavBar() {
         return () => { document.body.style.overflow = "unset"; };
     }, [menuOpen]);
 
+    // Animation variants for the mobile menu
+    const menuVariants = {
+        initial: { y: "-100%" },
+        animate: { 
+            y: 0,
+            transition: { 
+                duration: 0.8, 
+                ease: [0.76, 0, 0.24, 1],
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        },
+        exit: { 
+            y: "-100%",
+            transition: { 
+                duration: 0.8, 
+                ease: [0.76, 0, 0.24, 1],
+                staggerChildren: 0.05,
+                staggerDirection: -1 
+            }
+        }
+    };
+
+    const itemVariants = {
+        initial: { y: "100%" },
+        animate: { 
+            y: 0, 
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+        },
+        exit: { 
+            y: "100%", 
+            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] } 
+        }
+    };
+
     const mobileLinks = [
         { title: "HOME", num: "①", href: "#home" },
         { title: "ABOUT", num: "②", href: "#about" },
@@ -91,10 +126,10 @@ export default function NavBar() {
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        initial={{ y: "-100%" }}
-                        animate={{ y: 0 }}
-                        exit={{ y: "-100%" }}
-                        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+                        variants={menuVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
                         className="fixed inset-0 bg-[#E8E3DA] text-[#3F352C] z-[60] flex flex-col p-6 sm:p-12 md:hidden overflow-y-auto"
                     >
                         {/* Overlay Header */}
@@ -106,15 +141,12 @@ export default function NavBar() {
 
                         {/* Staggered Menu Items */}
                         <div className="flex-1 flex flex-col justify-center gap-6 sm:gap-8 my-auto">
-                            {mobileLinks.map((item, i) => (
+                            {mobileLinks.map((item) => (
                                 <div key={item.title} className="overflow-hidden">
                                     <motion.a
                                         href={item.href}
                                         onClick={() => setMenuOpen(false)}
-                                        initial={{ y: "100%" }}
-                                        animate={{ y: 0 }}
-                                        exit={{ y: "100%" }}
-                                        transition={{ duration: 0.8, delay: 0.1 * i, ease: [0.76, 0, 0.24, 1] }}
+                                        variants={itemVariants}
                                         className="font-monument text-5xl sm:text-[64px] uppercase flex items-start w-fit hover:opacity-70 transition-opacity"
                                     >
                                         {item.title}
@@ -126,9 +158,11 @@ export default function NavBar() {
 
                         {/* Overlay Footer & Social Links */}
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5, duration: 0.5 }}
+                            variants={{
+                                initial: { opacity: 0, y: 20 },
+                                animate: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.5 } },
+                                exit: { opacity: 0, y: 20 }
+                            }}
                             className="flex flex-col gap-6 sm:gap-8 pt-12 pb-4 mt-auto"
                         >
                             <div className="flex justify-between gap-4 w-full px-2" aria-label="Social Links">
