@@ -2,27 +2,32 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import Loader from "./Loader";
 import { LoadingProvider, useLoading } from "@/context/LoadingContext";
 
 function PreloaderContent({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const { isExitComplete, setIsExitComplete } = useLoading();
+  const lenis = useLenis();
 
   useEffect(() => {
     // Before the exit is entirely complete, we keep scrolling disabled
     if (!isExitComplete) {
+      lenis?.stop();
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0); // clamp position at top
     } else {
+      lenis?.start();
       document.body.style.overflow = "";
     }
     
     // Clean up if component unmounts unpredictably
     return () => {
+      lenis?.start();
       document.body.style.overflow = "";
     };
-  }, [isExitComplete]);
+  }, [isExitComplete, lenis]);
 
   return (
     <>
