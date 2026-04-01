@@ -34,7 +34,7 @@ export default function NavBar() {
             y: 0,
             transition: { 
                 duration: 0.8, 
-                ease: [0.76, 0, 0.24, 1],
+                ease: [0.76, 0, 0.24, 1] as const,
                 staggerChildren: 0.1,
                 delayChildren: 0.3
             }
@@ -43,7 +43,7 @@ export default function NavBar() {
             y: "-100%",
             transition: { 
                 duration: 0.8, 
-                ease: [0.76, 0, 0.24, 1],
+                ease: [0.76, 0, 0.24, 1] as const,
                 staggerChildren: 0.05,
                 staggerDirection: -1 
             }
@@ -54,11 +54,11 @@ export default function NavBar() {
         initial: { y: "100%" },
         animate: { 
             y: 0, 
-            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+            transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const } 
         },
         exit: { 
             y: "100%", 
-            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] } 
+            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] as const } 
         }
     };
 
