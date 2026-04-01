@@ -175,10 +175,19 @@ export default function NavBar() {
                             }}
                             className="flex flex-col gap-6 sm:gap-8 pt-12 pb-4 mt-auto"
                         >
-                            <div className="flex justify-between gap-4 w-full px-2" aria-label="Social Links">
-                                <a href="https://instagram.com" aria-label="Visit Instagram profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors">IN</a>
-                                <a href="https://linkedin.com" aria-label="Visit LinkedIn profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors">LI</a>
-                                <a href="https://behance.net" aria-label="Visit Behance profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center text-xs font-circular hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors">BE</a>
+                            <div className="flex justify-center gap-8 sm:gap-12 w-full px-2" aria-label="Social Links">
+                                <a href="https://instagram.com" aria-label="Visit Instagram profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                                </a>
+                                <a href="https://linkedin.com" aria-label="Visit LinkedIn profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                                <a href="https://behance.net" aria-label="Visit Behance profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M22.244 0H1.756C.787 0 0 .787 0 1.756v20.488C0 23.213.787 24 1.756 24h20.488C23.213 24 24 23.213 24 22.244V1.756C24 .787 23.213 0 22.244 0zm-10.05 15.688c-.125.688-.413 1.25-.863 1.688-.45.438-1.025.763-1.725.975-.712.213-1.538.313-2.488.313H4.401v-9.35h3.012c.988 0 1.838.1 2.538.3s1.262.538 1.675 1.013c.413.475.612 1.1.612 1.875 0 1.1-.387 1.9-1.163 2.4-.775.5-1.788.663-3.038.488.938.2 1.713.563 2.3 1.088.588.525.875 1.225.862 2.1zm5.212-3.15h4.163c-.025 1.162-.35 2.1-.975 2.8-.625.7-1.475 1.05-2.55 1.05-1.125 0-2.025-.387-2.7-1.162-.675-.775-1.013-1.875-1.013-3.3 0-1.425.338-2.525 1.013-3.3.675-.775 1.575-1.163 2.7-1.163 1.075 0 1.925.35 2.55 1.05.625.7.95 1.637.975 2.8h-4.163v1.225zM15.432 9.038h4.163v1.125h-4.163V9.038zM7.113 11.238H9.35c.425 0 .763-.125 1.025-.375.263-.25.4-.588.4-.988 0-.413-.138-.75-.413-.988C10.088 8.638 9.75 8.513 9.35 8.513H7.113v2.725zm2.238 6.012H7.113V13.15h2.238c.463 0 .825.138 1.1.413.275.275.413.637.413 1.075 0 .438-.138.8-.413 1.075-.275.263-.637.388-1.1.388l.006.124z"/></svg>
+                                </a>
+                                <a href="https://x.com" aria-label="Visit X profile" className="w-10 h-10 rounded-full border border-current flex items-center justify-center hover:bg-[#3F352C] hover:text-[#E8E3DA] transition-colors group">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                                </a>
                             </div>
 
                             <div className="flex items-center gap-4 text-[10px] sm:text-xs font-circular opacity-60 uppercase tracking-widest w-full justify-between mt-4">
