@@ -29,8 +29,8 @@ const ProjectCard = ({
     const tiltTransform = useTransform(scrollYProgress, [0, 0.5, 1], [-10, 0, 10]);
     const scrollRotateX = useSpring(tiltTransform, { stiffness: 100, damping: 30 });
 
-    // 1. Image Parallax
-    const yMove = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+    // 1. Image Parallax (Increased for better visibility on mobile)
+    const yMove = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
 
     // 2. Scale-on-Scroll 
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1.1]);
@@ -153,7 +153,7 @@ export default function FeaturedWorksSection() {
         target: containerRef,
         offset: ["start end", "end start"]
     });
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -213,9 +213,9 @@ export default function FeaturedWorksSection() {
             </motion.h2>
 
             {/* Projects Container Wrapper for 3D Perspective */}
-            <div style={{ perspective: "1500px" }} className="w-full flex justify-center mt-12 md:mt-24">
+            <div style={{ perspective: "1500px" }} className="w-full flex justify-center mt-12 md:mt-24 relative">
                 <motion.div
-                    className="w-full flex flex-col gap-32 md:gap-64 lg:gap-80 max-w-[1700px]"
+                    className="w-full flex flex-col gap-32 md:gap-64 lg:gap-80 max-w-[1700px] relative"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView={isExitComplete ? "show" : "hidden"}

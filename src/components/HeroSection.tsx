@@ -1,12 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
 
 export default function HeroSection() {
     const { isExitComplete } = useLoading();
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start start", "end start"]
+    });
+    
+    // Parallax movement for the image
+    const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
+
     const imageVariants = {
         hidden: { clipPath: "inset(0 0 0 100%)" },
         show: {
@@ -16,7 +26,7 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="w-full flex flex-col pt-24 md:pt-32 pb-12 overflow-hidden relative" id="home" aria-labelledby="hero-heading">
+        <section ref={sectionRef} className="w-full flex flex-col pt-24 md:pt-32 pb-12 overflow-hidden relative" id="home" aria-labelledby="hero-heading">
 
             {/* Hero Content */}
             <div className="w-full flex flex-col z-10 px-4 md:px-12 lg:px-16">
@@ -35,6 +45,7 @@ export default function HeroSection() {
                         variants={imageVariants}
                         initial="hidden"
                         animate={isExitComplete ? "show" : "hidden"}
+                        style={{ y: yParallax }}
                     >
                         {/* The user provided Image - Home.jpeg */}
                         <Image
