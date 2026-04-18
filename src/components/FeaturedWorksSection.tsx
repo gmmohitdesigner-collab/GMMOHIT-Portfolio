@@ -12,11 +12,12 @@ interface ProjectCardProps {
     title: string;
     description: string;
     videoSrc: string;
+    link?: string;
     itemVariants: Variants;
 }
 
 const ProjectCard = ({
-    index, category, targetYear, title, description, videoSrc,
+    index, category, targetYear, title, description, videoSrc, link,
     itemVariants
 }: ProjectCardProps) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -82,10 +83,11 @@ const ProjectCard = ({
             {/* Centered Widescreen 16:9 Video Container */}
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div
-                    className="w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group"
+                    className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${link ? "cursor-pointer" : ""}`}
                     onMouseMove={handleMouse}
                     onMouseLeave={resetMouse}
                     style={{ rotateX: y, rotateY: x }}
+                    onClick={() => link && window.open(link, "_blank")}
                 >
                     <motion.div
                         style={{ y: yMove, scale, filter }}
@@ -226,10 +228,11 @@ export default function FeaturedWorksSection() {
                         key="project-01"
                         index="01"
                         category="E-COMMERCE"
-                        targetYear="2026"
+                        targetYear="2025"
                         title="TEAURE"
                         description="Organic blends crafted for calm, presence, and unmatched holistic purity."
-                        videoSrc="https://vjs.zencdn.net/v/oceans.mp4"
+                        videoSrc="/assets/Teaure.mp4"
+                        link="https://www.behance.net/gallery/235972563/Teaure?platform=direct"
                         itemVariants={itemVariants}
                     />
 
