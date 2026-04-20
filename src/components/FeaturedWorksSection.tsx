@@ -243,7 +243,8 @@ export default function FeaturedWorksSection() {
                         targetYear="2025"
                         title="CREATIVE ANTS"
                         description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                        videoSrc="https://media.w3.org/2010/05/sintel/trailer.mp4"
+                        videoSrc="/assets/CreativeAnts.mp4"
+                        link="https://www.behance.net/gallery/241309879/Creative-Ants-Redesign-Prints-and-Ads-Service?platform=direct"
                         itemVariants={itemVariants}
                     />
                 </motion.div>
