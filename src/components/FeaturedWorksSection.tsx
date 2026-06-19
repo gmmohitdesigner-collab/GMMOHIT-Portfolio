@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
 
@@ -21,15 +22,12 @@ const ProjectCard = ({
     index, category, targetYear, title, description, videoSrc, link, onCustomClick,
     itemVariants
 }: ProjectCardProps) => {
+    const router = useRouter();
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start end", "end start"]
     });
-
-    // Velocity-Based Tilt for the entire Card
-    const tiltTransform = useTransform(scrollYProgress, [0, 0.5, 1], [-10, 0, 10]);
-    const scrollRotateX = useSpring(tiltTransform, { stiffness: 100, damping: 30 });
 
     // 1. Image Parallax (Increased for better visibility on mobile)
     const yMove = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
@@ -40,24 +38,6 @@ const ProjectCard = ({
     // 3. Grayscale-to-Color 
     const filter = useTransform(scrollYProgress, [0.1, 0.45], ["grayscale(100%)", "grayscale(0%)"]);
 
-    // 4. Subtle 3D Tilt Physics
-    const x = useSpring(0, { stiffness: 100, damping: 20 });
-    const y = useSpring(0, { stiffness: 100, damping: 20 });
-
-    const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const tiltX = (e.clientX - centerX) / 40;
-        const tiltY = -(e.clientY - centerY) / 40;
-        x.set(tiltX);
-        y.set(tiltY);
-    };
-
-    const resetMouse = () => {
-        x.set(0); y.set(0);
-    };
-
     // Separating the first letter for the curly script font "Drop-Cap" style
     const firstLetter = title.charAt(0);
     const restOfTitle = title.slice(1);
@@ -67,7 +47,7 @@ const ProjectCard = ({
             ref={ref}
             className="w-full flex flex-col items-center relative my-16 max-w-[1400px] mx-auto"
             variants={itemVariants}
-            style={{ rotateX: scrollRotateX, willChange: "transform", transformStyle: "preserve-3d" }}
+            style={{ willChange: "transform" }}
         >
 
             {/* Massive Display Title (Left Aligned, Overlapping) */}
@@ -85,12 +65,9 @@ const ProjectCard = ({
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div
                     className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${(link || onCustomClick) ? "cursor-pointer" : ""}`}
-                    onMouseMove={handleMouse}
-                    onMouseLeave={resetMouse}
-                    style={{ rotateX: y, rotateY: x }}
                     onClick={() => {
                         if (onCustomClick) onCustomClick();
-                        else if (link) window.open(link, "_self");
+                        else if (link) router.push(link);
                     }}
                 >
                     <motion.div
