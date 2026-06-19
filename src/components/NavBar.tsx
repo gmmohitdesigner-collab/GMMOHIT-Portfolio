@@ -74,9 +74,55 @@ export default function NavBar() {
 
     const mobileLinks = [
         { title: "HOME", num: "①", href: "#home" },
-        { title: "ABOUT", num: "②", href: "#about" },
-        { title: "WORK", num: "③", href: "#work" },
+        { title: "WORK", num: "②", href: "#work" },
+        { title: "ABOUT", num: "③", href: "#about" },
     ];
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+        if (targetId.startsWith("#")) {
+            e.preventDefault();
+            const element = document.querySelector(targetId);
+            if (element) {
+                if (lenis) {
+                    // Ordered sections in layout
+                    const sections = ["#home", "#work", "#about"];
+                    
+                    // Determine current active section based on closest top distance
+                    let currentIndex = 0;
+                    let minDistance = Infinity;
+                    
+                    sections.forEach((id, index) => {
+                        const sec = document.querySelector(id);
+                        if (sec) {
+                            const rect = sec.getBoundingClientRect();
+                            // Adding a slight offset because sections might trigger slightly below the top
+                            const distance = Math.abs(rect.top);
+                            if (distance < minDistance) {
+                                minDistance = distance;
+                                currentIndex = index;
+                            }
+                        }
+                    });
+                    
+                    const targetIndex = sections.indexOf(targetId);
+                    
+                    // Check if jumping one section or staying on the same (adjacent)
+                    const isAdjacent = targetIndex !== -1 && Math.abs(targetIndex - currentIndex) <= 1;
+                    
+                    // Slower for adjacent (3s), current speed for distant (2s)
+                    const scrollDuration = isAdjacent ? 3.0 : 2.0;
+
+                    lenis.scrollTo(element, {
+                        duration: scrollDuration,
+                        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                    });
+                } else {
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+                if (menuOpen) setMenuOpen(false);
+            }
+        }
+    };
 
     return (
         <>
@@ -97,9 +143,9 @@ export default function NavBar() {
 
                 {/* Navigation Links (Center-Left) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
-                    <MagneticNavLink href="#home" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink>
-                    <MagneticNavLink href="#about" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> ABOUT</MagneticNavLink>
-                    <MagneticNavLink href="#work" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> WORKS</MagneticNavLink>
+                    <MagneticNavLink href="#home" onClick={(e) => handleScroll(e, "#home")} className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink>
+                    <MagneticNavLink href="#work" onClick={(e) => handleScroll(e, "#work")} className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> WORKS</MagneticNavLink>
+                    <MagneticNavLink href="#about" onClick={(e) => handleScroll(e, "#about")} className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> ABOUT</MagneticNavLink>
                 </div>
 
                 {/* Social Links (Center-Right) */}
@@ -155,7 +201,7 @@ export default function NavBar() {
                                 <div key={item.title} className="overflow-hidden">
                                     <motion.a
                                         href={item.href}
-                                        onClick={() => setMenuOpen(false)}
+                                        onClick={(e) => handleScroll(e, item.href)}
                                         variants={itemVariants}
                                         className="font-monument text-5xl sm:text-[64px] uppercase flex items-start w-fit hover:opacity-70 transition-opacity"
                                     >

@@ -34,7 +34,7 @@ export default function HeroSection() {
                     el="h1"
                     id="hero-heading"
                     className="font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
-                    text={["Designer.", "Strategist.", "Creator."]}
+                    text={["Creative.", "Designer.", "Developer."]}
                     staggerDuration={0.2}
                 />
 
@@ -61,7 +61,7 @@ export default function HeroSection() {
                         <AnimatedText
                             el="p"
                             className="font-circular text-base md:text-lg lg:text-xl leading-relaxed md:max-w-[320px] lg:max-w-[400px]"
-                            text="I craft digital experiences where elegance meets intention — helping ambitious brands stand apart with design that feels as good as it looks."
+                            text="I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that doesn't just look stunning—it performs."
                             staggerDuration={0.01}
                         />
                     </div>
@@ -74,13 +74,13 @@ export default function HeroSection() {
                         <AnimatedText
                             el="p"
                             className="font-circular text-xs md:text-sm lg:text-base opacity-60"
-                            text={["Things I Can Help you", "with."]}
+                            text={["CORE", "EXPERTISE"]}
                             staggerDuration={0.05}
                         />
                         <AnimatedText
                             el="p"
                             className="font-circular text-base md:text-lg lg:text-xl"
-                            text="WEB & MOBILE / UI&UX"
+                            text="WEB & MOBILE / UI&UX / AI-DRIVEN ENGINEERING"
                             staggerDuration={0.02}
                         />
                     </div>

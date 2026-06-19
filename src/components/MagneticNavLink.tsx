@@ -9,7 +9,7 @@ interface MagneticNavLinkProps {
   className?: string;
   target?: string;
   rel?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function MagneticNavLink({

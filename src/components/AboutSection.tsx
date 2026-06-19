@@ -120,22 +120,29 @@ export default function AboutSection() {
                             <AnimatedText
                                 el="p"
                                 className="m-0"
-                                text="I’m a designer who believes digital spaces should feel as visceral and intentional as physical ones."
+                                text="I’m a designer and developer who believes digital spaces should feel as visceral and intentional as physical ones."
                                 delay={0.3}
                                 staggerDuration={0.01}
                             />
                             <AnimatedText
                                 el="p"
                                 className="m-0"
-                                text="With every project, I craft identities that radiate trust, beauty, and precision — design that elevates brands while staying obsessively true to the people behind them."
+                                text="With every project, I craft experiences that radiate trust, beauty, and precision. I elevate brands by creating digital flagships that captivate users and command industry authority."
                                 delay={0.4}
                                 staggerDuration={0.01}
                             />
                             <AnimatedText
                                 el="p"
                                 className="m-0"
-                                text="It’s a ritual of detail, a practice of brutal refinement, and a pursuit of work that outlasts the noise."
+                                text="While others use AI to generate generic, vulnerable templates, I wield it as a precision engineering tool—accelerating complex development to build secure, high-performance web experiences without compromising a single pixel of the user journey."
                                 delay={0.5}
+                                staggerDuration={0.01}
+                            />
+                            <AnimatedText
+                                el="p"
+                                className="m-0"
+                                text="It’s a ritual of detail and a practice of brutal refinement. Because a premium website isn’t just art—it’s your most powerful business asset."
+                                delay={0.6}
                                 staggerDuration={0.01}
                             />
                         </div>
@@ -144,7 +151,8 @@ export default function AboutSection() {
                         <div className="flex flex-col gap-4 pt-8 border-t border-[#3F352C]/20">
                             {[
                                 { num: "01", label: "BRUTAL REFINEMENT", desc: "Stripping away the unnecessary to reveal raw intent." },
-                                { num: "02", label: "CINEMATIC MOTION", label2: "& INTERACTION", desc: "Physics-driven experiences that feel heavy, fluid, and alive." }
+                                { num: "02", label: "CINEMATIC MOTION", label2: "& INTERACTION", desc: "Physics-driven experiences that feel heavy, fluid, and alive." },
+                                { num: "03", label: "AI-POWERED ENGINEERING", desc: "Wielding AI not for shortcuts, but for flawless, secure, and rapid execution." }
                             ].map((item, idx) => (
                                 <motion.div key={idx} variants={textRevealVariants} className="flex gap-4 md:gap-8 items-start group cursor-default">
                                     <span className="font-mono text-xs opacity-50 mt-1">{item.num}</span>

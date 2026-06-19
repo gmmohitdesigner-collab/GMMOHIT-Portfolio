@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
@@ -13,11 +13,12 @@ interface ProjectCardProps {
     description: string;
     videoSrc: string;
     link?: string;
+    onCustomClick?: () => void;
     itemVariants: Variants;
 }
 
 const ProjectCard = ({
-    index, category, targetYear, title, description, videoSrc, link,
+    index, category, targetYear, title, description, videoSrc, link, onCustomClick,
     itemVariants
 }: ProjectCardProps) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -83,11 +84,14 @@ const ProjectCard = ({
             {/* Centered Widescreen 16:9 Video Container */}
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div
-                    className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${link ? "cursor-pointer" : ""}`}
+                    className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${(link || onCustomClick) ? "cursor-pointer" : ""}`}
                     onMouseMove={handleMouse}
                     onMouseLeave={resetMouse}
                     style={{ rotateX: y, rotateY: x }}
-                    onClick={() => link && window.open(link, "_blank")}
+                    onClick={() => {
+                        if (onCustomClick) onCustomClick();
+                        else if (link) window.open(link, "_self");
+                    }}
                 >
                     <motion.div
                         style={{ y: yMove, scale, filter }}
@@ -149,6 +153,7 @@ const ProjectCard = ({
 export default function FeaturedWorksSection() {
     const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLDivElement>(null);
+    const [showWIP, setShowWIP] = useState(false);
 
     // Parallax background map
     const { scrollYProgress } = useScroll({
@@ -230,9 +235,9 @@ export default function FeaturedWorksSection() {
                         category="E-COMMERCE"
                         targetYear="2025"
                         title="TEAURE"
-                        description="Organic blends crafted for calm, presence, and unmatched holistic purity."
-                        videoSrc="/assets/Teaure.mp4"
-                        link="https://www.behance.net/gallery/235972563/Teaure?platform=direct"
+                        description="A serene, high-end e-commerce flagship crafted to communicate holistic purity through minimal grid architecture and immersive motion."
+                        videoSrc="/works/teaure/Teaure.mp4"
+                        link="/works/teaure"
                         itemVariants={itemVariants}
                     />
 
@@ -243,12 +248,46 @@ export default function FeaturedWorksSection() {
                         targetYear="2025"
                         title="CREATIVE ANTS"
                         description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                        videoSrc="/assets/CreativeAnts.mp4"
-                        link="https://www.behance.net/gallery/241309879/Creative-Ants-Redesign-Prints-and-Ads-Service?platform=direct"
+                        videoSrc="/works/creative-ants/CreativeAnts.mp4"
+                        onCustomClick={() => setShowWIP(true)}
                         itemVariants={itemVariants}
                     />
                 </motion.div>
             </div>
+
+            {/* WIP Popup Overlay */}
+            {showWIP && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1C1C1C]/60 backdrop-blur-md px-6">
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="bg-[#EAE8E3] text-[#1C1C1C] p-10 md:p-16 max-w-2xl rounded-[6px] shadow-2xl relative flex flex-col items-center text-center"
+                    >
+                        <button 
+                            onClick={() => setShowWIP(false)}
+                            className="absolute top-6 right-6 font-sans text-[10px] uppercase tracking-[0.2em] opacity-50 hover:opacity-100 transition-opacity"
+                        >
+                            [ Close ]
+                        </button>
+                        <span className="font-sans text-[10px] uppercase tracking-[0.2em] opacity-50 mb-8 block">
+                            Work In Progress
+                        </span>
+                        <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl mb-6 tracking-tight">
+                            You caught me.
+                        </h3>
+                        <p className="font-sans text-base md:text-lg leading-relaxed opacity-70 mb-10 max-w-lg">
+                            This case-study is currently under construction. But I am more than willing to walk you through the design and development process personally.
+                        </p>
+                        <a 
+                            href="mailto:hello@gmmohit.com" 
+                            className="bg-[#1C1C1C] text-[#EAE8E3] font-sans text-[10px] uppercase tracking-widest px-10 py-4 rounded-full hover:bg-[#3F352C] transition-colors"
+                        >
+                            Please Reach Out
+                        </a>
+                    </motion.div>
+                </div>
+            )}
         </section>
     );
 }
