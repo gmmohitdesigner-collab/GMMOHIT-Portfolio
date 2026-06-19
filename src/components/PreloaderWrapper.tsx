@@ -6,12 +6,20 @@ import { useLenis } from "lenis/react";
 import Loader from "./Loader";
 import { LoadingProvider, useLoading } from "@/context/LoadingContext";
 
+let hasPlayedThisSession = false;
+
 function PreloaderContent({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const { isExitComplete, setIsExitComplete } = useLoading();
   const lenis = useLenis();
 
   useEffect(() => {
+    if (hasPlayedThisSession) {
+      setIsLoading(false);
+      setIsExitComplete(true);
+      return;
+    }
+
     // Before the exit is entirely complete, we keep scrolling disabled
     if (!isExitComplete) {
       lenis?.stop();
@@ -31,7 +39,14 @@ function PreloaderContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       <AnimatePresence mode="wait" onExitComplete={() => setIsExitComplete(true)}>
-        {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+        {isLoading && !hasPlayedThisSession && (
+          <Loader 
+            onComplete={() => {
+              setIsLoading(false);
+              hasPlayedThisSession = true;
+            }} 
+          />
+        )}
       </AnimatePresence>
 
       <div 
