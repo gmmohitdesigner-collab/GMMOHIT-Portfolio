@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
+import { useTransition } from "@/context/TransitionContext";
 
 export default function CreativeAntsCaseStudy() {
+    const { startTransition } = useTransition();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -22,9 +23,12 @@ export default function CreativeAntsCaseStudy() {
 
             {/* Sticky Nav */}
             <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 mix-blend-difference">
-                <Link href="/#work" className="font-mono text-xs uppercase tracking-widest hover:opacity-70 transition-opacity">
+                <button 
+                    onClick={() => startTransition("/#work")} 
+                    className="font-mono text-xs uppercase tracking-widest hover:opacity-70 transition-opacity"
+                >
                     [ Back to Index ]
-                </Link>
+                </button>
                 <div className="font-mono text-xs uppercase tracking-widest opacity-50">
                     2026 / Case Study
                 </div>

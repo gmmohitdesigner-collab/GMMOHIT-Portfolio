@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import PreloaderWrapper from "@/components/PreloaderWrapper";
+import { TransitionProvider } from "@/context/TransitionContext";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "GM MOHIT | Designer. Strategist. Creator.",
@@ -16,11 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <SmoothScroll>
-          <PreloaderWrapper>
-            <main>{children}</main>
-          </PreloaderWrapper>
-        </SmoothScroll>
+        <TransitionProvider>
+          <PageTransition />
+          <SmoothScroll>
+            <PreloaderWrapper>
+              <main>{children}</main>
+            </PreloaderWrapper>
+          </SmoothScroll>
+        </TransitionProvider>
       </body>
     </html>
   );

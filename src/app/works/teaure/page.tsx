@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
+import { useTransition } from "@/context/TransitionContext";
 
 export default function TeaureCaseStudy() {
+    const { startTransition } = useTransition();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -29,9 +30,12 @@ export default function TeaureCaseStudy() {
                 <div className="font-sans text-[10px] uppercase tracking-[0.2em]">
                     GM MOHIT © 2026
                 </div>
-                <Link href="/#work" className="font-sans text-[10px] uppercase tracking-[0.2em] hover:opacity-50 transition-opacity">
+                <button 
+                    onClick={() => startTransition("/#work")} 
+                    className="font-sans text-[10px] uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
+                >
                     [ CLOSE ]
-                </Link>
+                </button>
             </nav>
 
             <div className="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-8 mix-blend-difference text-white pointer-events-none">

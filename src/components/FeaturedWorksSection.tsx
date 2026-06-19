@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useSpring, Variants } from "framer-mot
 import { useRouter } from "next/navigation";
 import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
+import { useTransition } from "@/context/TransitionContext";
 
 interface ProjectCardProps {
     index: string;
@@ -23,6 +24,7 @@ const ProjectCard = ({
     itemVariants
 }: ProjectCardProps) => {
     const router = useRouter();
+    const { startTransition } = useTransition();
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -67,7 +69,7 @@ const ProjectCard = ({
                     className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${(link || onCustomClick) ? "cursor-pointer" : ""}`}
                     onClick={() => {
                         if (onCustomClick) onCustomClick();
-                        else if (link) router.push(link);
+                        else if (link) startTransition(link);
                     }}
                 >
                     <motion.div
