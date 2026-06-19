@@ -16,7 +16,6 @@ function PreloaderContent({ children }: { children: React.ReactNode }) {
     if (!isExitComplete) {
       lenis?.stop();
       document.body.style.overflow = "hidden";
-      window.scrollTo(0, 0); // clamp position at top
     } else {
       lenis?.start();
       document.body.style.overflow = "";

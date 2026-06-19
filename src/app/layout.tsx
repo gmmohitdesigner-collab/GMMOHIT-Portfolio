@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import PreloaderWrapper from "@/components/PreloaderWrapper";
 
 export const metadata: Metadata = {
   title: "GM MOHIT | Designer. Strategist. Creator.",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <SmoothScroll>
-          <main>{children}</main>
+          <PreloaderWrapper>
+            <main>{children}</main>
+          </PreloaderWrapper>
         </SmoothScroll>
       </body>
     </html>
