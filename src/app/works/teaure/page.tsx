@@ -29,7 +29,7 @@ export default function TeaureCaseStudy() {
                 <div className="font-sans text-[10px] uppercase tracking-[0.2em]">
                     GM MOHIT © 2026
                 </div>
-                <Link href="/" className="font-sans text-[10px] uppercase tracking-[0.2em] hover:opacity-50 transition-opacity">
+                <Link href="/#work" className="font-sans text-[10px] uppercase tracking-[0.2em] hover:opacity-50 transition-opacity">
                     [ CLOSE ]
                 </Link>
             </nav>

@@ -22,7 +22,7 @@ export default function CreativeAntsCaseStudy() {
 
             {/* Sticky Nav */}
             <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 mix-blend-difference">
-                <Link href="/" className="font-mono text-xs uppercase tracking-widest hover:opacity-70 transition-opacity">
+                <Link href="/#work" className="font-mono text-xs uppercase tracking-widest hover:opacity-70 transition-opacity">
                     [ Back to Index ]
                 </Link>
                 <div className="font-mono text-xs uppercase tracking-widest opacity-50">
