@@ -81,7 +81,7 @@ export default function NavBar() {
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
         if (targetId.startsWith("#")) {
             e.preventDefault();
-            const element = document.querySelector(targetId);
+            const element = document.querySelector(targetId) as HTMLElement | null;
             if (element) {
                 if (lenis) {
                     // Ordered sections in layout
