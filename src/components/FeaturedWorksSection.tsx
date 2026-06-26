@@ -51,6 +51,8 @@ const ProjectCard = ({
             variants={itemVariants}
             style={{ willChange: "transform" }}
         >
+            {/* SEO Link for Crawlers */}
+            {link && <a href={link} className="sr-only">View {title} Case Study</a>}
 
             {/* Massive Display Title (Left Aligned, Overlapping) */}
             <div className="w-full flex justify-start px-4 md:px-12 lg:px-16 z-10 relative pointer-events-none mb-[-5%] md:mb-[-6%] lg:mb-[-4%]">

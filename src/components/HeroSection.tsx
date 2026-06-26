@@ -30,13 +30,16 @@ export default function HeroSection() {
 
             {/* Hero Content */}
             <div className="w-full flex flex-col z-10 px-4 md:px-12 lg:px-16">
-                <AnimatedText
-                    el="h1"
-                    id="hero-heading"
-                    className="font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
-                    text={["Creative.", "Designer.", "Developer."]}
-                    staggerDuration={0.2}
-                />
+                <div className="relative">
+                    <h1 id="hero-heading" className="sr-only">GM Mohit - Creative Designer and Developer Portfolio</h1>
+                    <AnimatedText
+                        el="div"
+                        aria-hidden="true"
+                        className="font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
+                        text={["Creative.", "Designer.", "Developer."]}
+                        staggerDuration={0.2}
+                    />
+                </div>
 
                 <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-center md:justify-end gap-10 md:gap-16 lg:gap-32">
 
