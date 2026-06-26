@@ -8,6 +8,37 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
   // The transition logic is entirely mapped geometrically.
   
   useEffect(() => {
+    // Array of critical high-quality images
+    const imagesToPreload = [
+      "/assets/Image - Home.jpeg",
+      "/works/teaure/Background Element.png",
+      "/works/teaure/Mobilemockup1.png",
+      "/works/teaure/teaure_webshowcase.png",
+    ];
+
+    // Array of critical heavy videos
+    const videosToPreload = [
+      "/assets/Showreel.mp4",
+      "/works/teaure/Teaure.mp4",
+      "/works/creative-ants/CreativeAnts.mp4",
+      "/works/teaure/teaure-scroll v2.mp4"
+    ];
+
+    // Preload Images by instantiating them in browser memory
+    imagesToPreload.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Preload Videos by injecting <link rel="preload" as="video"> tags into the head
+    videosToPreload.forEach((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "video";
+      link.href = src;
+      document.head.appendChild(link);
+    });
+
     // Hold at 100 for a crisp 300ms (over 5s total animation), then trigger the upward shutter exit natively
     const timer = setTimeout(() => {
       onComplete(); 
