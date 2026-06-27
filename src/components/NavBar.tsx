@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
+import { useRouter, usePathname } from "next/navigation";
 import MagneticNavLink from "./MagneticNavLink";
 import MagneticMenuButton from "./MagneticMenuButton";
 
@@ -11,6 +12,8 @@ export default function NavBar() {
     const [hidden, setHidden] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const lenis = useLenis();
+    const router = useRouter();
+    const pathname = usePathname();
 
     // Headroom (hide on scroll down) effect
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -81,6 +84,13 @@ export default function NavBar() {
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
         if (targetId.startsWith("#")) {
             e.preventDefault();
+            
+            if (pathname !== "/") {
+                router.push(`/${targetId}`);
+                if (menuOpen) setMenuOpen(false);
+                return;
+            }
+
             const element = document.querySelector(targetId) as HTMLElement | null;
             if (element) {
                 if (lenis) {
