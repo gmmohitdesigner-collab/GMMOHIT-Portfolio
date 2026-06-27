@@ -185,7 +185,7 @@ export default function NavBar() {
 
             </motion.nav>
             {/* Mobile Hamburger (Visible below md, persistent on top) */}
-            <div className="md:hidden fixed top-6 right-4 sm:right-6 z-[71]">
+            <div className={`md:hidden fixed top-6 right-4 sm:right-6 z-[71] text-white ${!menuOpen ? 'mix-blend-difference' : ''}`}>
                 <MagneticMenuButton 
                     isOpen={menuOpen} 
                     onClick={() => setMenuOpen(!menuOpen)} 

@@ -36,7 +36,6 @@ export default function MagneticMenuButton({
             transition={{ duration: 0.4 }}
             className={`
                 relative h-12 w-12 md:h-14 md:w-14 flex items-center justify-center rounded-full z-[70] cursor-pointer
-                ${!isOpen && 'mix-blend-difference'}
             `}
             aria-label={isOpen ? "Close Mobile Menu" : "Open Mobile Menu"}
         >
