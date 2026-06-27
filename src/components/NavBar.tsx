@@ -93,7 +93,13 @@ export default function NavBar() {
 
             const element = document.querySelector(targetId) as HTMLElement | null;
             if (element) {
+                // Close menu first so body overflow is restored
+                if (menuOpen) setMenuOpen(false);
+
                 if (lenis) {
+                    // Force Lenis to start in case the menu overlay had it stopped
+                    lenis.start();
+                    
                     // Ordered sections in layout
                     const sections = ["#home", "#work", "#about"];
                     
@@ -129,7 +135,6 @@ export default function NavBar() {
                 } else {
                     element.scrollIntoView({ behavior: "smooth" });
                 }
-                if (menuOpen) setMenuOpen(false);
             }
         }
     };
