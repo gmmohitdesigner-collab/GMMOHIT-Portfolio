@@ -1,10 +1,25 @@
 import "./index.css";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import { Showreel } from "./Showreel";
+import { OpenGraphCard } from "./OpenGraphCard";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Still
+        id="OpenGraphCard"
+        component={OpenGraphCard}
+        width={1200}
+        height={630}
+      />
+      <Composition
+        id="OpenGraphCard-Animated"
+        component={OpenGraphCard}
+        durationInFrames={30}
+        fps={30}
+        width={1200}
+        height={630}
+      />
       <Composition
         id="Showreel"
         component={Showreel}

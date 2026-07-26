@@ -89,7 +89,7 @@ export default function Footer() {
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Local Time</span>
                             <div className="flex flex-col gap-0.5">
-                                <span className="font-circular text-sm md:text-base font-medium">New Delhi, IN</span>
+                                <span className="font-circular text-sm md:text-base font-medium">Bengaluru, IN</span>
                                 <span className="font-mono text-[11px] opacity-70">GMT +5:30</span>
                             </div>
                         </motion.div>
