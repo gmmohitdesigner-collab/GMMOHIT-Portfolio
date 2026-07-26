@@ -6,10 +6,10 @@ import { TransitionProvider } from "@/context/TransitionContext";
 import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
-  title: "GM MOHIT | Designer. Strategist. Creator.",
+  title: "GM MOHIT | Creative. Designer. Developer.",
   description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
   openGraph: {
-    title: "GM MOHIT | Designer. Strategist. Creator.",
+    title: "GM MOHIT | Creative. Designer. Developer.",
     description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
     url: "https://www.gmmohit.com",
     siteName: "GM Mohit Portfolio",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GM MOHIT | Designer. Strategist. Creator.",
+    title: "GM MOHIT | Creative. Designer. Developer.",
     description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
     images: ["/opengraph-image.png"],
   },
