@@ -1,11 +1,11 @@
 import React from "react";
 
-export const BehanceHeaderCard: React.FC = () => {
+export const BehanceHeaderCardTall: React.FC = () => {
   return (
     <div
       style={{
         width: 3200,
-        height: 410,
+        height: 800,
         backgroundColor: "#E8E3DA",
         color: "#3F352C",
         position: "relative",
@@ -13,7 +13,7 @@ export const BehanceHeaderCard: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: "40px 120px",
+        padding: "60px 140px",
         fontFamily: "'Circular Std', sans-serif",
         boxSizing: "border-box",
       }}
@@ -29,18 +29,18 @@ export const BehanceHeaderCard: React.FC = () => {
         }}
       />
 
-      {/* TOP-LEFT URL LINK LABEL (Centered inward from left) */}
+      {/* TOP-LEFT URL LINK LABEL */}
       <div
         style={{
           position: "absolute",
-          top: "45px",
-          left: "550px",
+          top: "70px",
+          left: "140px",
           zIndex: 10,
           display: "flex",
           alignItems: "center",
-          gap: "16px",
+          gap: "20px",
           fontFamily: "'Circular Std', sans-serif",
-          fontSize: "31px",
+          fontSize: "42px",
           fontWeight: 450,
           letterSpacing: "-0.01em",
           color: "#3F352C",
@@ -49,18 +49,18 @@ export const BehanceHeaderCard: React.FC = () => {
         <span>gmmohit.com</span>
         <div
           style={{
-            width: "48px",
-            height: "48px",
+            width: "64px",
+            height: "64px",
             borderRadius: "50%",
-            border: "2px solid rgba(63, 53, 44, 0.35)",
+            border: "2.5px solid rgba(63, 53, 44, 0.35)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
           <svg
-            width="22"
-            height="22"
+            width="28"
+            height="28"
             viewBox="0 0 12 12"
             fill="none"
             stroke="#3F352C"
@@ -77,12 +77,12 @@ export const BehanceHeaderCard: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "24px",
-          right: "120px",
+          top: "40px",
+          right: "140px",
           display: "flex",
           alignItems: "center",
           fontFamily: "'Space Mono', monospace",
-          fontSize: "16px",
+          fontSize: "22px",
           letterSpacing: "0.15em",
           color: "rgba(63, 53, 44, 0.45)",
           textTransform: "uppercase",
@@ -92,12 +92,12 @@ export const BehanceHeaderCard: React.FC = () => {
         <span>12.9716° N   77.5946° E</span>
       </div>
 
-      {/* BACKDROP WATERMARK LAYER: "GM" stacked above "MOHIT", shifted inward from left */}
+      {/* BACKDROP WATERMARK LAYER: "GM" stacked above "MOHIT", matching website footer opacity (12%) */}
       <div
         style={{
           position: "absolute",
-          bottom: "10px",
-          left: "480px",
+          bottom: "20px",
+          left: "80px",
           pointerEvents: "none",
           userSelect: "none",
           zIndex: 0,
@@ -110,13 +110,13 @@ export const BehanceHeaderCard: React.FC = () => {
         <span
           style={{
             fontFamily: "'Monument Extended', sans-serif",
-            fontSize: "200px",
+            fontSize: "400px",
             fontWeight: 400,
             textTransform: "uppercase",
             lineHeight: 0.74,
             letterSpacing: "-0.03em",
             color: "transparent",
-            WebkitTextStroke: "2.8px #3F352C",
+            WebkitTextStroke: "4px #3F352C",
             whiteSpace: "nowrap",
           }}
         >
@@ -125,15 +125,15 @@ export const BehanceHeaderCard: React.FC = () => {
         <span
           style={{
             fontFamily: "'Monument Extended', sans-serif",
-            fontSize: "200px",
+            fontSize: "400px",
             fontWeight: 400,
             textTransform: "uppercase",
             lineHeight: 0.74,
             letterSpacing: "-0.03em",
             color: "transparent",
-            WebkitTextStroke: "2.8px #3F352C",
+            WebkitTextStroke: "4px #3F352C",
             whiteSpace: "nowrap",
-            marginTop: "-20px",
+            marginTop: "-40px",
           }}
         >
           MOHIT
@@ -144,19 +144,19 @@ export const BehanceHeaderCard: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "55px",
-          right: "120px",
+          top: "100px",
+          right: "140px",
           zIndex: 10,
           textAlign: "right",
           display: "flex",
           flexDirection: "column",
-          gap: "4px",
+          gap: "8px",
         }}
       >
         <span
           style={{
             fontFamily: "'Monument Extended', sans-serif",
-            fontSize: "88px",
+            fontSize: "155px",
             fontWeight: 400,
             lineHeight: "1.02",
             letterSpacing: "-0.03em",
@@ -169,7 +169,7 @@ export const BehanceHeaderCard: React.FC = () => {
         <span
           style={{
             fontFamily: "'Monument Extended', sans-serif",
-            fontSize: "88px",
+            fontSize: "155px",
             fontWeight: 400,
             lineHeight: "1.02",
             letterSpacing: "-0.03em",
@@ -182,7 +182,7 @@ export const BehanceHeaderCard: React.FC = () => {
         <span
           style={{
             fontFamily: "'Monument Extended', sans-serif",
-            fontSize: "88px",
+            fontSize: "155px",
             fontWeight: 400,
             lineHeight: "1.02",
             letterSpacing: "-0.03em",
@@ -198,20 +198,20 @@ export const BehanceHeaderCard: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: "25px",
-          right: "120px",
+          bottom: "45px",
+          right: "140px",
           zIndex: 10,
           display: "flex",
           alignItems: "center",
-          gap: "20px",
+          gap: "24px",
           fontFamily: "'Space Mono', monospace",
-          fontSize: "16px",
+          fontSize: "22px",
           letterSpacing: "0.12em",
           color: "rgba(63, 53, 44, 0.60)",
           textTransform: "uppercase",
         }}
       >
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3F352C" strokeWidth="1.5" style={{ opacity: 0.6 }}>
+        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#3F352C" strokeWidth="1.5" style={{ opacity: 0.6 }}>
           <circle cx="12" cy="12" r="9" />
           <path d="M3.6 9h16.8M3.6 15h16.8" />
           <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" />

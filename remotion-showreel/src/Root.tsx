@@ -3,12 +3,25 @@ import { Composition, Still } from "remotion";
 import { Showreel } from "./Showreel";
 import { OpenGraphCard } from "./OpenGraphCard";
 import { BehanceHeaderCard } from "./BehanceHeaderCard";
+import { BehanceHeaderCardTall } from "./BehanceHeaderCardTall";
 import { LinkedInHeaderCard } from "./LinkedInHeaderCard";
 import { XHeaderCard } from "./XHeaderCard";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Still
+        id="BehanceHeaderCardTall"
+        component={BehanceHeaderCardTall}
+        width={3200}
+        height={800}
+      />
+      <Still
+        id="BehanceHeaderCard"
+        component={BehanceHeaderCard}
+        width={3200}
+        height={410}
+      />
       <Still
         id="XHeaderCard"
         component={XHeaderCard}
@@ -20,12 +33,6 @@ export const RemotionRoot: React.FC = () => {
         component={LinkedInHeaderCard}
         width={1584}
         height={396}
-      />
-      <Still
-        id="BehanceHeaderCard"
-        component={BehanceHeaderCard}
-        width={3200}
-        height={410}
       />
       <Still
         id="OpenGraphCard"
