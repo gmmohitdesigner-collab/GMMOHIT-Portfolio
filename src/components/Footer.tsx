@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -123,6 +124,10 @@ export default function Footer() {
                     <a href="mailto:HELLO@GMMOHIT.COM" className="opacity-60 hover:opacity-100 transition-all duration-300 decoration-[#3F352C]/40 underline-offset-4 hover:underline">
                         say hello
                     </a>
+                    
+                    <Link href="/privacy-policy" className="opacity-60 hover:opacity-100 transition-all duration-300 decoration-[#3F352C]/40 underline-offset-4 hover:underline">
+                        privacy
+                    </Link>
 
                     <span className="opacity-60">Designed & Hand-Coded</span>
                 </div>
