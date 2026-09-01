@@ -23,7 +23,7 @@ export default function TeaureCaseStudy() {
         <main className="bg-[#EAE8E3] text-[#1C1C1C] min-h-screen selection:bg-[#1C1C1C] selection:text-[#EAE8E3] overflow-hidden" ref={containerRef}>
             
             {/* Grain Overlay */}
-            <div className="fixed inset-0 pointer-events-none opacity-[0.2] z-50 mix-blend-multiply" style={{ backgroundImage: "url('/noise.png')" }}></div>
+            <div className="fixed inset-0 pointer-events-none opacity-[0.2] z-50 mix-blend-multiply"></div>
 
             {/* Persistent Editorial Header */}
             <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-8 mix-blend-difference text-white">

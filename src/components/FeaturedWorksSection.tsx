@@ -69,9 +69,9 @@ const ProjectCard = ({
             <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div
                     className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${(link || onCustomClick) ? "cursor-pointer" : ""}`}
-                    onClick={() => {
+                    onClick={(e) => {
                         if (onCustomClick) onCustomClick();
-                        else if (link) startTransition(link);
+                        else if (link) startTransition(link, title);
                     }}
                 >
                     <motion.div

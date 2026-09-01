@@ -53,9 +53,10 @@ export default function HeroSection() {
                         {/* The user provided Image - Home.jpeg */}
                         <Image
                             src="/assets/Image - Home.jpeg"
-                            alt="GM Mohit Portrait"
+                            alt="Teauré Website Concept"
                             fill
-                            className="object-cover relative"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
                             priority
                         />
                     </motion.div>

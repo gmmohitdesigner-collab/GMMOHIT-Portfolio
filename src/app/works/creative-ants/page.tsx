@@ -19,7 +19,7 @@ export default function CreativeAntsCaseStudy() {
     return (
         <main className="bg-[#050505] text-white min-h-screen selection:bg-white/20" ref={containerRef}>
             {/* Global Grain Overlay for Premium Feel */}
-            <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-overlay" style={{ backgroundImage: "url('/noise.png')" }}></div>
+            <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-overlay"></div>
 
             {/* Sticky Nav */}
             <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 mix-blend-difference">
