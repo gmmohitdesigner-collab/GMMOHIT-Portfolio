@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import AnimatedText from "./AnimatedText";
+import ScrollSkew from "./ScrollSkew";
 import { useLoading } from "@/context/LoadingContext";
 
 export default function HeroSection() {
@@ -37,29 +38,32 @@ export default function HeroSection() {
                         aria-hidden="true"
                         className="font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
                         text={["Creative.", "Designer.", "Developer."]}
-                        staggerDuration={0.2}
+                        staggerDuration={0.02}
+                        splitLevel="char"
                     />
                 </div>
 
                 <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-center md:justify-end gap-10 md:gap-16 lg:gap-32">
 
-                    <motion.div
-                        className="relative w-full md:w-[450px] lg:w-[600px] aspect-[16/9] md:aspect-[1.8/1] overflow-hidden order-1 md:order-2"
-                        variants={imageVariants}
-                        initial="hidden"
-                        animate={isExitComplete ? "show" : "hidden"}
-                        style={{ y: yParallax }}
-                    >
-                        {/* The user provided Image - Home.jpeg */}
-                        <Image
-                            src="/assets/Image - Home.jpeg"
-                            alt="Teauré Website Concept"
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover"
-                            priority
-                        />
-                    </motion.div>
+                    <ScrollSkew className="relative w-full md:w-[450px] lg:w-[600px] aspect-[16/9] md:aspect-[1.8/1] order-1 md:order-2 z-10">
+                        <motion.div
+                            className="w-full h-full overflow-hidden"
+                            variants={imageVariants}
+                            initial="hidden"
+                            animate={isExitComplete ? "show" : "hidden"}
+                            style={{ y: yParallax }}
+                        >
+                            {/* The user provided Image - Home.jpeg */}
+                            <Image
+                                src="/assets/Image - Home.jpeg"
+                                alt="Teauré Website Concept"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-cover"
+                                priority
+                            />
+                        </motion.div>
+                    </ScrollSkew>
 
                     <div className="order-2 md:order-1 flex flex-col justify-center">
                         <AnimatedText

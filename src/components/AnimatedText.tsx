@@ -10,8 +10,9 @@ interface AnimatedTextProps extends Omit<React.HTMLAttributes<HTMLElement>, "chi
     textClassName?: string; // Applied to the inner motion span elements
     el?: React.ElementType; // e.g. "h1", "p", "span", "div"
     delay?: number; // Delay before animation starts
-    staggerDuration?: number; // Delay between each word/line
+    staggerDuration?: number; // Delay between each word/line/char
     once?: boolean; // Whether the animation should only play once
+    splitLevel?: "word" | "char"; // How to split the text
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any; // Allow any other prop, like href
 }
@@ -24,12 +25,11 @@ export default function AnimatedText({
     delay = 0,
     staggerDuration = 0.02,
     once = true,
+    splitLevel = "word",
     ...props
 }: AnimatedTextProps) {
     const { isExitComplete } = useLoading();
     const isArray = Array.isArray(text);
-    // If text is a string, split by words. If array, each element is a line.
-    const items = isArray ? text : text.split(" ");
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -50,6 +50,49 @@ export default function AnimatedText({
         },
     };
 
+    const renderContent = () => {
+        if (splitLevel === "char") {
+            const lines = isArray ? text : [text as string];
+            return lines.map((line, lineIndex) => (
+                <span key={lineIndex} className={isArray ? "block w-full" : "inline-block"}>
+                    {line.split("").map((char, charIndex) => (
+                        <span 
+                            key={`${lineIndex}-${charIndex}`} 
+                            className="overflow-hidden inline-block align-bottom" 
+                            style={{ paddingBottom: '0.1em', marginBottom: '-0.1em' }}
+                        >
+                            <motion.span 
+                                variants={itemVariants} 
+                                className={`inline-block ${textClassName}`}
+                            >
+                                {char === " " ? "\u00A0" : char}
+                            </motion.span>
+                        </span>
+                    ))}
+                    {/* Add a space between array elements if they aren't blocks, though array is usually used for block lines */}
+                    {!isArray && lineIndex < lines.length - 1 && "\u00A0"}
+                </span>
+            ));
+        }
+
+        // Default word/line splitting
+        const items = isArray ? text : (text as string).split(" ");
+        return items.map((item, index) => (
+            <span
+                key={index}
+                className={`overflow-hidden align-bottom ${isArray ? "block w-full" : "inline-block"}`}
+                style={{ paddingBottom: '0.1em', marginBottom: '-0.1em' }}
+            >
+                <motion.span
+                    variants={itemVariants}
+                    className={`inline-block ${textClassName}`}
+                >
+                    {item}{!isArray && index < items.length - 1 && "\u00A0"}
+                </motion.span>
+            </span>
+        ));
+    };
+
     return (
         <Wrapper className={className} {...props}>
             <motion.span
@@ -59,20 +102,7 @@ export default function AnimatedText({
                 whileInView={isExitComplete ? "show" : "hidden"}
                 viewport={{ once, margin: "-50px" }}
             >
-                {items.map((item, index) => (
-                    <span
-                        key={index}
-                        className={`overflow-hidden align-bottom ${isArray ? "block w-full" : "inline-block"}`}
-                        style={{ paddingBottom: '0.1em', marginBottom: '-0.1em' }}
-                    >
-                        <motion.span
-                            variants={itemVariants}
-                            className={`inline-block ${textClassName}`}
-                        >
-                            {item}{!isArray && index < items.length - 1 && "\u00A0"}
-                        </motion.span>
-                    </span>
-                ))}
+                {renderContent()}
             </motion.span>
         </Wrapper>
     );

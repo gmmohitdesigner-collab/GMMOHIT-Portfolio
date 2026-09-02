@@ -4,6 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import PreloaderWrapper from "@/components/PreloaderWrapper";
 import { TransitionProvider } from "@/context/TransitionContext";
 import PageTransition from "@/components/PageTransition";
+import CursorTrail from "@/components/CursorTrail";
 
 export const metadata: Metadata = {
   title: "GM MOHIT | Creative. Designer. Developer.",
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <TransitionProvider>
+          <CursorTrail />
           <PageTransition />
           <SmoothScroll>
             <PreloaderWrapper>

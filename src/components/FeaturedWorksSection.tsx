@@ -7,6 +7,8 @@ import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
 import { useTransition } from "@/context/TransitionContext";
 
+import ScrollSkew from "./ScrollSkew";
+
 interface ProjectCardProps {
     index: string;
     category: string;
@@ -65,8 +67,8 @@ const ProjectCard = ({
                 </motion.h3>
             </div>
 
-            {/* Centered Widescreen 16:9 Video Container */}
-            <div className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
+            {/* Centered Widescreen 16:9 Video Container wrapped in ScrollSkew */}
+            <ScrollSkew className="w-full flex justify-center px-4 md:px-12 lg:px-16 z-0 perspective-[1000px]">
                 <motion.div
                     className={`w-full md:w-[90%] lg:w-[85%] aspect-[16/9] bg-[#3F352C] relative overflow-hidden group ${(link || onCustomClick) ? "cursor-pointer" : ""}`}
                     onClick={(e) => {
@@ -107,7 +109,8 @@ const ProjectCard = ({
                         <span className="text-xl md:text-3xl font-light scale-x-[-1] rotate-90 relative z-10 transition-transform duration-300 group-hover:rotate-45">↙</span>
                     </div>
                 </motion.div>
-            </div>
+            </ScrollSkew>
+
 
             {/* Metadata & Description (Stacked below natively) */}
             <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-4 md:px-12 lg:px-16 mt-6 md:mt-10 gap-6 md:w-[90%] lg:w-[85%] mx-auto">
