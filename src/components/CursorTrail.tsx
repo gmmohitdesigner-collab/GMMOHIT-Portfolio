@@ -10,9 +10,12 @@ type Point = {
 export default function CursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     setIsReady(true);
+    // Detect if the device primarily uses touch
+    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
   }, []);
 
   useEffect(() => {
@@ -142,7 +145,7 @@ export default function CursorTrail() {
     };
   }, [isReady]);
 
-  if (!isReady) return null;
+  if (!isReady || isTouchDevice) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none mix-blend-difference">

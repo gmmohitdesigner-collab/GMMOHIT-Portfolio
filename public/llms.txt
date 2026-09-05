@@ -1,0 +1,25 @@
+# GM Mohit - Portfolio and AI Context
+
+This is the portfolio of GM Mohit, a Creative Developer and UI/UX Designer who specializes in building highly aesthetic, brutalist, and physics-driven digital experiences.
+
+## Core Identity
+- **Name:** GM Mohit
+- **Roles:** Creative Developer, UI/UX Architect, Digital Craftsman
+- **Website:** https://www.gmmohit.com
+- **Philosophy:** "I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that doesn't just look stunning—it performs."
+
+## Services & Expertise
+1. **Strategy & Direction:** Defining core purpose and pathways to elevate digital presence.
+2. **Visual Design:** Creating pixel-perfect, brutalist, and highly aesthetic interfaces that demand attention.
+3. **Creative Development:** Bringing static pixels to life with physics-driven motion, WebGL, and precise implementation.
+
+## Technical Stack
+- Next.js & React
+- WebGL & Three.js
+- Framer Motion (Physics & Interaction)
+- Tailwind CSS
+
+## Connect
+- GitHub: https://github.com/gmmohit
+- LinkedIn: https://linkedin.com/in/gmmohit
+- Twitter: https://twitter.com/gmmohit

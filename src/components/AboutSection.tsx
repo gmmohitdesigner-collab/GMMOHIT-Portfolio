@@ -2,29 +2,54 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
+
+const skillCategories = [
+    {
+        title: "UI design",
+        total: "(06)",
+        skills: [
+            "Visual direction",
+            "Design concept",
+            "Typography",
+            "Color",
+            "Composition",
+            "UI style guide"
+        ]
+    },
+    {
+        title: "UX design",
+        total: "(05)",
+        skills: [
+            "UX research",
+            "Usability testing",
+            "User flow",
+            "Wireframing",
+            "Prototyping"
+        ]
+    },
+    {
+        title: "Creative dev",
+        total: "(04)",
+        skills: [
+            "React & Next.js",
+            "WebGL & Three.js",
+            "Framer Motion",
+            "Physics & Interaction"
+        ]
+    }
+];
 
 export default function AboutSection() {
     const { isExitComplete } = useLoading();
     const containerRef = useRef<HTMLElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
-
-    // Parallax for the huge watermark
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-    
-    // Parallax for main heading
-    const headingY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
 
     const textRevealVariants: Variants = {
-        hidden: { y: "120%", opacity: 0 },
+        hidden: { y: "100%", opacity: 0 },
         show: {
             y: 0,
             opacity: 1,
-            transition: { duration: 1, ease: [0.33, 1, 0.68, 1] }
+            transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] }
         }
     };
 
@@ -32,140 +57,126 @@ export default function AboutSection() {
         hidden: { opacity: 0 },
         show: {
             opacity: 1,
-            transition: { staggerChildren: 0.15 }
+            transition: { staggerChildren: 0.1 }
         }
     };
 
     return (
         <section 
             ref={containerRef} 
-            className="w-full relative flex flex-col items-center py-32 md:py-48 lg:py-64 bg-[#E8E3DA] text-[#3F352C] overflow-hidden" 
+            className="w-full relative flex flex-col items-center py-24 md:py-32 lg:py-48 bg-[#E8E3DA] text-[#3F352C]" 
             id="about" 
             aria-labelledby="about-heading"
         >
-            {/* Massive Background Parallax Text Layer */}
-            <motion.div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center pointer-events-none opacity-[0.03] select-none z-0"
-                style={{ y: backgroundY }}
-            >
-                <div className="font-monument text-[25vw] leading-none whitespace-nowrap tracking-widest text-[#3F352C]">
-                    CORE
-                </div>
-            </motion.div>
-
-            <div className="w-full max-w-[1700px] px-4 md:px-12 lg:px-16 flex flex-col z-10">
-                {/* Overhead Label */}
-                <motion.div 
-                    initial="hidden"
-                    whileInView={isExitComplete ? "show" : "hidden"}
-                    viewport={{ once: true, margin: "-100px" }}
-                    variants={containerVariants}
-                    className="overflow-hidden mb-8 md:mb-12"
-                >
-                    <motion.p variants={textRevealVariants} className="font-mono text-xs md:text-sm tracking-widest uppercase opacity-60">
-                        ( The Mindset )
-                    </motion.p>
-                </motion.div>
-
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-32">
-                    {/* Left: Massive Main Heading */}
+            <div className="w-full max-w-[1700px] px-4 md:px-12 lg:px-16 flex flex-col lg:flex-row justify-between z-10 relative gap-16 lg:gap-8">
+                
+                {/* Left Column: Sticky Anchor */}
+                <div className="w-full lg:w-[35%] relative">
                     <motion.div 
-                        className="w-full lg:w-[60%] flex flex-col"
-                        style={{ y: headingY }}
+                        className="lg:sticky lg:top-[120px] flex flex-col w-full"
                         initial="hidden"
                         whileInView={isExitComplete ? "show" : "hidden"}
                         viewport={{ once: true, margin: "-100px" }}
                         variants={containerVariants}
                     >
-                        <motion.h2 variants={textRevealVariants} id="about-heading" className="m-0 uppercase tracking-tighter">
-                            <div className="overflow-hidden leading-[0.85] pb-4">
-                                <span className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">
-                                    <span className="text-transparent" style={{ WebkitTextStroke: "1px #3F352C" }}>DESIGN </span>
-                                    <span>THAT </span>
+                        {/* Title */}
+                        <div className="overflow-hidden pb-4">
+                            <motion.h2 
+                                id="about-heading" 
+                                variants={textRevealVariants}
+                                className="font-monument text-[15vw] sm:text-[12vw] lg:text-[5.5vw] uppercase tracking-tighter leading-[0.85] flex flex-col m-0"
+                            >
+                                <span className="flex items-center">
+                                    Design
+                                    {/* Accent Dot */}
+                                    <span className="w-2 h-2 lg:w-3 lg:h-3 bg-[#3F352C] rounded-full ml-1 md:ml-2 mb-2 lg:mb-4" />
                                 </span>
-                            </div>
-                            <div className="overflow-hidden leading-[0.85] pb-4">
-                                <span className="font-serif italic font-light lowercase text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">demands </span>
-                            </div>
-                            <div className="overflow-hidden leading-[0.85] pb-4">
-                                <span className="font-monument text-[10vw] sm:text-[8vw] lg:text-[6.5vw] block">
-                                    <span>ATTENTION</span>
-                                    <span className="font-serif italic font-light lowercase pl-2 md:pl-4">.</span>
-                                </span>
-                            </div>
-                        </motion.h2>
-                    </motion.div>
-
-                    {/* Right: Dense Copy & Philosophy */}
-                    <motion.div 
-                        className="w-full lg:w-[35%] flex flex-col gap-12 md:gap-16 pt-0 lg:pt-16"
-                        initial="hidden"
-                        whileInView={isExitComplete ? "show" : "hidden"}
-                        viewport={{ once: true, margin: "-100px" }}
-                        variants={containerVariants}
-                    >
-                        {/* Quote or Core thesis */}
-                        <div className="relative">
-                            <span className="absolute -left-6 md:-left-8 top-[-8px] text-4xl md:text-6xl font-serif italic text-transparent opacity-20" style={{ WebkitTextStroke: "1px #3F352C" }} aria-hidden="true">&quot;</span>
-                            <AnimatedText
-                                el="p"
-                                className="font-circular text-2xl md:text-3xl lg:text-4xl leading-tight m-0"
-                                text="Curiosity that shapes absolute clarity."
-                                delay={0.2}
-                            />
+                                <span>skill sets</span>
+                            </motion.h2>
                         </div>
 
-                        {/* Detailed Description */}
-                        <div className="flex flex-col gap-6 font-circular text-base md:text-lg lg:text-xl leading-relaxed opacity-80">
-                            <AnimatedText
-                                el="p"
-                                className="m-0"
-                                text="I’m a designer and developer who believes digital spaces should feel as visceral and intentional as physical ones."
-                                delay={0.3}
-                                staggerDuration={0.01}
-                            />
-                            <AnimatedText
-                                el="p"
-                                className="m-0"
-                                text="With every project, I craft experiences that radiate trust, beauty, and precision. I elevate brands by creating digital flagships that captivate users and command industry authority."
-                                delay={0.4}
-                                staggerDuration={0.01}
-                            />
-                            <AnimatedText
-                                el="p"
-                                className="m-0"
-                                text="While others use AI to generate generic, vulnerable templates, I wield it as a precision engineering tool—accelerating complex development to build secure, high-performance web experiences without compromising a single pixel of the user journey."
-                                delay={0.5}
-                                staggerDuration={0.01}
-                            />
-                            <AnimatedText
-                                el="p"
-                                className="m-0"
-                                text="It’s a ritual of detail and a practice of brutal refinement. Because a premium website isn’t just art—it’s your most powerful business asset."
-                                delay={0.6}
-                                staggerDuration={0.01}
-                            />
+                        {/* Thick divider */}
+                        <motion.div 
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
+                            className="w-full max-w-[280px] lg:max-w-[340px] h-1.5 md:h-2 bg-[#3F352C] mt-8 mb-12 origin-left" 
+                        />
+                        
+                        {/* Meta tag */}
+                        <div className="overflow-hidden">
+                            <motion.span variants={textRevealVariants} className="block font-mono text-xs opacity-60 mb-8">
+                                (GPT® — 579)
+                            </motion.span>
                         </div>
 
-                        {/* Metrics or Attributes (optional but adds to vibe) */}
-                        <div className="flex flex-col gap-4 pt-8 border-t border-[#3F352C]/20">
-                            {[
-                                { num: "01", label: "BRUTAL REFINEMENT", desc: "Stripping away the unnecessary to reveal raw intent." },
-                                { num: "02", label: "CINEMATIC MOTION", label2: "& INTERACTION", desc: "Physics-driven experiences that feel heavy, fluid, and alive." },
-                                { num: "03", label: "AI-POWERED ENGINEERING", desc: "Wielding AI not for shortcuts, but for flawless, secure, and rapid execution." }
-                            ].map((item, idx) => (
-                                <motion.div key={idx} variants={textRevealVariants} className="flex gap-4 md:gap-8 items-start group cursor-default">
-                                    <span className="font-mono text-xs opacity-50 mt-1">{item.num}</span>
-                                    <div className="flex flex-col">
-                                        <h4 className="font-monument text-sm md:text-base tracking-widest">{item.label}</h4>
-                                        {item.label2 && <h4 className="font-monument text-sm md:text-base tracking-widest">{item.label2}</h4>}
-                                        <p className="font-circular text-xs md:text-sm opacity-60 mt-2 max-w-[280px] transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">{item.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
+                        {/* Philosophy */}
+                        <div className="overflow-hidden">
+                            <motion.p variants={textRevealVariants} className="font-circular text-sm md:text-base lg:text-lg opacity-80 leading-relaxed mb-16 max-w-[320px] m-0">
+                                I propose an end-to-end design process that spans my skills in Digital Product Design for websites and mobile applications, with a high-standard UI/Visual and UX prudence.
+                            </motion.p>
                         </div>
+
+                        {/* Arrow Icon */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: -20, y: 20 }}
+                            whileInView={{ opacity: 0.15, x: 0, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                        >
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#3F352C]">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </motion.div>
                     </motion.div>
                 </div>
+
+                {/* Right Column: Scrolling Lists */}
+                <div className="w-full lg:w-[50%] flex flex-col gap-24 mt-8 lg:mt-0 pb-32">
+                    {skillCategories.map((category, catIndex) => (
+                        <motion.div 
+                            key={category.title}
+                            className="flex flex-col w-full"
+                            initial="hidden"
+                            whileInView={isExitComplete ? "show" : "hidden"}
+                            viewport={{ once: true, margin: "-100px" }}
+                            variants={containerVariants}
+                        >
+                            {/* Category Heading */}
+                            <div className="overflow-hidden mb-10">
+                                <motion.h3 variants={textRevealVariants} className="font-monument tracking-tighter text-3xl md:text-4xl lg:text-5xl m-0">
+                                    {category.title}
+                                </motion.h3>
+                            </div>
+
+                            <div className="flex flex-col w-full">
+                                {category.skills.map((skill, skillIndex) => (
+                                    <motion.div 
+                                        key={skill}
+                                        variants={{
+                                            hidden: { opacity: 0, x: -20 },
+                                            show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                                        }}
+                                        className="flex w-full items-center py-5 md:py-6 border-b border-[#3F352C]/20 group hover:bg-[#3F352C]/[0.02] transition-colors"
+                                    >
+                                        <span className="font-mono text-xs md:text-sm opacity-50 w-16 md:w-20">
+                                            {skillIndex === 0 ? category.total : ""}
+                                        </span>
+                                        <span className="font-circular text-base md:text-lg lg:text-xl flex-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                                            {skill}
+                                        </span>
+                                        <span className="font-mono text-xs md:text-sm opacity-60 group-hover:text-[#3F352C] group-hover:opacity-100 transition-all">
+                                            {skillIndex + 1}
+                                        </span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
             </div>
         </section>
     );

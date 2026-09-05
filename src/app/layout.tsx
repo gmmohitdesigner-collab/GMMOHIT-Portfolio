@@ -7,8 +7,12 @@ import PageTransition from "@/components/PageTransition";
 import CursorTrail from "@/components/CursorTrail";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.gmmohit.com"),
   title: "GM MOHIT | Creative. Designer. Developer.",
   description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "GM MOHIT | Creative. Designer. Developer.",
     description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
@@ -38,8 +42,43 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.gmmohit.com/#person",
+        name: "GM Mohit",
+        url: "https://www.gmmohit.com",
+        jobTitle: ["Creative Developer", "UI/UX Designer"],
+        sameAs: [
+          "https://github.com/gmmohit",
+          "https://linkedin.com/in/gmmohit",
+          "https://twitter.com/gmmohit"
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://www.gmmohit.com/#business",
+        name: "GM Mohit Portfolio",
+        url: "https://www.gmmohit.com",
+        image: "https://www.gmmohit.com/opengraph-image.png",
+        description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
+        founder: {
+          "@id": "https://www.gmmohit.com/#person"
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="antialiased">
         <TransitionProvider>
           <CursorTrail />

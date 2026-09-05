@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
 import { motion, useSpring, useTransform, useMotionValue } from "framer-motion";
 
@@ -10,6 +11,17 @@ export default function ScrollSkew({
     children: React.ReactNode, 
     className?: string 
 }) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // Track the raw velocity from Lenis
     const velocityTracker = useMotionValue(0);
     
@@ -32,7 +44,7 @@ export default function ScrollSkew({
 
     return (
         <motion.div 
-            style={{ skewY: skew }} 
+            style={{ skewY: isMobile ? 0 : skew }} 
             className={`origin-center ${className}`}
         >
             {children}

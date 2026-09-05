@@ -53,11 +53,11 @@ export default function HeroSection() {
                             animate={isExitComplete ? "show" : "hidden"}
                             style={{ y: yParallax }}
                         >
-                            {/* The user provided Image - Home.jpeg */}
-                            <Image
-                                src="/assets/Image - Home.jpeg"
-                                alt="Teauré Website Concept"
-                                fill
+                                {/* The user provided Image - Home.jpeg */}
+                                <Image
+                                    src="/assets/Image - Home.jpeg"
+                                    alt="GM Mohit Portrait and Digital Portfolio"
+                                    fill
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover"
                                 priority
