@@ -22,7 +22,9 @@ export default function HeroSection() {
         hidden: { clipPath: "inset(0 0 0 100%)" },
         show: {
             clipPath: "inset(0 0 0 0%)",
-            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] as const, delay: 2 }
+            // The asset is already cached by the loader, so there is nothing to
+            // wait for -- the old delay:2 was dead time before a ready image.
+            transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] as const, delay: 0.2 }
         },
     };
 
@@ -45,7 +47,11 @@ export default function HeroSection() {
 
                 <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-center md:justify-end gap-10 md:gap-16 lg:gap-32">
 
-                    <ScrollSkew className="relative w-full md:w-[450px] lg:w-[600px] aspect-[16/9] md:aspect-[1.8/1] order-1 md:order-2 z-10">
+                    {/* Negative right margin cancels the parent's px-12/px-16 so the
+                        image bleeds flush to the viewport edge instead of stopping at
+                        the grid gutter. Section already has overflow-hidden, so the
+                        scroll-skew corners can't cause horizontal scroll. */}
+                    <ScrollSkew className="relative w-full md:w-[450px] lg:w-[600px] md:-mr-12 lg:-mr-16 aspect-[16/9] md:aspect-[1.8/1] order-1 md:order-2 z-10">
                         <motion.div
                             className="w-full h-full overflow-hidden"
                             variants={imageVariants}

@@ -29,11 +29,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  // Only `card` is set here. Hardcoding title/description/images would be
+  // inherited by every child page (metadata merges per-field), so case studies
+  // would share as the homepage. Left unset, Next derives them from each
+  // page's own openGraph.
   twitter: {
     card: "summary_large_image",
-    title: "GM MOHIT | Creative. Designer. Developer.",
-    description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
-    images: ["/opengraph-image.png"],
   },
 };
 
@@ -51,10 +52,14 @@ export default function RootLayout({
         name: "GM Mohit",
         url: "https://www.gmmohit.com",
         jobTitle: ["Creative Developer", "UI/UX Designer"],
+        // These must match the URLs actually linked from the site, character for
+        // character -- Google uses them to corroborate the entity. A handle that
+        // doesn't match a real outbound link weakens the signal instead.
         sameAs: [
-          "https://github.com/gmmohit",
-          "https://linkedin.com/in/gmmohit",
-          "https://twitter.com/gmmohit"
+          "https://www.linkedin.com/in/gmmohit/",
+          "https://www.behance.net/gmmohit",
+          "https://x.com/G_M_Mohit",
+          "https://www.instagram.com/noblessedesigns/"
         ]
       },
       {
@@ -66,7 +71,21 @@ export default function RootLayout({
         description: "Portfolio of GM Mohit. I craft digital experiences where elegance meets intention.",
         founder: {
           "@id": "https://www.gmmohit.com/#person"
-        }
+        },
+        // ProfessionalService is a LocalBusiness subtype -- without an address
+        // it is a much weaker entity, and the site targeted no geography at all
+        // despite the footer already saying Bengaluru.
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bengaluru",
+          addressRegion: "Karnataka",
+          addressCountry: "IN"
+        },
+        areaServed: [
+          { "@type": "Country", name: "India" },
+          { "@type": "Place", name: "Worldwide" }
+        ],
+        email: "hello@gmmohit.com"
       }
     ]
   };
@@ -84,9 +103,9 @@ export default function RootLayout({
           <CursorTrail />
           <PageTransition />
           <SmoothScroll>
-            <PreloaderWrapper>
-              <main>{children}</main>
-            </PreloaderWrapper>
+            {/* No <main> here: every page renders its own, and two per
+                document is invalid. Verified no CSS targets `main`. */}
+            <PreloaderWrapper>{children}</PreloaderWrapper>
           </SmoothScroll>
         </TransitionProvider>
       </body>

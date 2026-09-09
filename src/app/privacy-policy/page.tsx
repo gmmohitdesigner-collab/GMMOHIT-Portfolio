@@ -5,6 +5,12 @@ import Footer from '@/components/Footer';
 export const metadata = {
   title: "Privacy Policy | GM MOHIT",
   description: "Privacy policy for GM Mohit's portfolio website.",
+  // Must be set explicitly: metadata is inherited from the root layout, so without
+  // this the page would emit the root's canonical ("/") and be treated as a
+  // duplicate of the homepage.
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicy() {

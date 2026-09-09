@@ -81,7 +81,10 @@ const ProjectCard = ({
                         className="w-full h-[120%] absolute top-[-10%]"
                         key={videoSrc} // Force re-render of frame on source change
                     >
-                        <video autoPlay muted loop playsInline className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]" key={videoSrc}>
+                        {/* preload="metadata" keeps these cards from buffering their full
+                            source before the hero has painted. They still autoplay on sight --
+                            the Loader has already warmed them via prefetch. */}
+                        <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]" key={videoSrc}>
                             <source src={videoSrc} type="video/mp4" />
                         </video>
                     </motion.div>

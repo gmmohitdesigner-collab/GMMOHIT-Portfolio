@@ -2,42 +2,66 @@
 
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+
+// Warm only what the route being loaded actually renders. Previously every page
+// warmed all eight assets, which meant the homepage force-downloaded 36 MB of
+// Teaure-only media -- including a 26 MB scroll loop it never shows -- at high
+// priority, competing with the hero image for bandwidth.
+const ROUTE_ASSETS: Record<string, { images: string[]; videos: string[] }> = {
+  "/": {
+    images: ["/assets/Image - Home.jpeg"],
+    videos: ["/works/teaure/Teaure.mp4", "/works/creative-ants/CreativeAnts.mp4"],
+  },
+  "/works/teaure": {
+    images: [
+      "/works/teaure/Background Element.png",
+      "/works/teaure/Mobilemockup1.png",
+      "/works/teaure/teaure_webshowcase.png",
+    ],
+    videos: ["/works/teaure/teaure-scroll v2.mp4", "/assets/Showreel.mp4"],
+  },
+  "/works/creative-ants": {
+    images: [],
+    videos: ["/works/creative-ants/CreativeAnts.mp4"],
+  },
+};
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   // No need for useMotionValue anymore, we fall back to hardware-accelerated static CSS strips
   // The transition logic is entirely mapped geometrically.
-  
+  const pathname = usePathname();
+
   useEffect(() => {
-    // Array of critical high-quality images
-    const imagesToPreload = [
-      "/assets/Image - Home.jpeg",
-      "/works/teaure/Background Element.png",
-      "/works/teaure/Mobilemockup1.png",
-      "/works/teaure/teaure_webshowcase.png",
-    ];
+    const route = pathname ?? "/";
+    const current = ROUTE_ASSETS[route] ?? { images: [], videos: [] };
+    // Every OTHER route's media still gets cached during the counter, so landing
+    // on a case study later is instant. The loader exists to buy this time.
+    const rest = Object.entries(ROUTE_ASSETS)
+      .filter(([r]) => r !== route)
+      .flatMap(([, a]) => [...a.images, ...a.videos]);
 
-    // Array of critical heavy videos
-    const videosToPreload = [
-      "/assets/Showreel.mp4",
-      "/works/teaure/Teaure.mp4",
-      "/works/creative-ants/CreativeAnts.mp4",
-      "/works/teaure/teaure-scroll v2.mp4"
-    ];
+    const injected: HTMLLinkElement[] = [];
+    const warm = (src: string, priority: "high" | "low") => {
+      const link = document.createElement("link");
+      // prefetch rather than preload: fills the same cache, but a preload is a
+      // *mandatory* high-priority fetch that outranked the hero image.
+      link.rel = "prefetch";
+      link.as = src.endsWith(".mp4") ? "video" : "image";
+      link.href = src;
+      link.fetchPriority = priority;
+      document.head.appendChild(link);
+      injected.push(link);
+    };
 
-    // Preload Images by instantiating them in browser memory
-    imagesToPreload.forEach((src) => {
+    // This route's hero image is the LCP element -- fetch it eagerly, first.
+    current.images.forEach((src) => {
       const img = new Image();
       img.src = src;
     });
-
-    // Preload Videos by injecting <link rel="preload" as="video"> tags into the head
-    videosToPreload.forEach((src) => {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "video";
-      link.href = src;
-      document.head.appendChild(link);
-    });
+    current.videos.forEach((src) => warm(src, "high"));
+    // Everything else backfills behind them for the rest of the 5.3s counter.
+    rest.forEach((src) => warm(src, "low"));
 
     // Hold at 100 for a crisp 300ms (over 5s total animation), then trigger the upward shutter exit natively
     const timer = setTimeout(() => {
@@ -46,8 +70,9 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     
     return () => {
       clearTimeout(timer);
+      injected.forEach((link) => link.remove());
     };
-  }, [onComplete]);
+  }, [onComplete, pathname]);
 
   return (
     <motion.div

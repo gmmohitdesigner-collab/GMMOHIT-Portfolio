@@ -19,7 +19,15 @@ This is the portfolio of GM Mohit, a Creative Developer and UI/UX Designer who s
 - Framer Motion (Physics & Interaction)
 - Tailwind CSS
 
+## Location
+Bengaluru, Karnataka, India (GMT +5:30). Available for projects worldwide.
+
+## Case Studies
+- Teaure — e-commerce UX, brand and motion design: https://www.gmmohit.com/works/teaure
+
 ## Connect
-- GitHub: https://github.com/gmmohit
-- LinkedIn: https://linkedin.com/in/gmmohit
-- Twitter: https://twitter.com/gmmohit
+- Email: hello@gmmohit.com
+- LinkedIn: https://www.linkedin.com/in/gmmohit/
+- Behance: https://www.behance.net/gmmohit
+- X / Twitter: https://x.com/G_M_Mohit
+- Instagram: https://www.instagram.com/noblessedesigns/
