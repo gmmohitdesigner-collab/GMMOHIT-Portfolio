@@ -20,7 +20,9 @@ export const metadata: Metadata = {
     url: "https://www.gmmohit.com/works/teaure",
     images: [
       {
-        url: "/works/teaure/teaure_webshowcase.png",
+        // Real 1200x630 (was teaure_webshowcase.png: 1620x1620 square declared as
+        // 1.91:1, so every platform centre-cropped it). 1.09MB -> 69KB.
+        url: "/works/teaure/og.png",
         width: 1200,
         height: 630,
         alt: "Teaure Case Study by GM Mohit",

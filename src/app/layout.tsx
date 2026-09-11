@@ -85,7 +85,45 @@ export default function RootLayout({
           { "@type": "Country", name: "India" },
           { "@type": "Place", name: "Worldwide" }
         ],
-        email: "hello@gmmohit.com"
+        email: "hello@gmmohit.com",
+        // Mirrors the skills already listed in AboutSection, so the entity states
+        // what it actually does rather than leaving it to be inferred from prose.
+        knowsAbout: [
+          "UI Design", "UX Research", "Brand Identity", "Design Systems",
+          "React", "Next.js", "WebGL", "Three.js", "Framer Motion",
+          "Creative Development", "Motion Design"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.gmmohit.com/#website",
+        url: "https://www.gmmohit.com",
+        name: "GM Mohit Portfolio",
+        inLanguage: "en",
+        publisher: { "@id": "https://www.gmmohit.com/#person" }
+      },
+      {
+        // Declares the case study as a work AUTHORED BY the Person, via @id
+        // reference -- that is what joins these nodes into one graph instead of
+        // three unrelated entities.
+        "@type": "CreativeWork",
+        "@id": "https://www.gmmohit.com/works/teaure/#work",
+        url: "https://www.gmmohit.com/works/teaure",
+        name: "Teaure — E-Commerce UX, Brand and Motion Design",
+        description: "A serene, high-end e-commerce flagship crafted to communicate holistic purity through minimal grid architecture and immersive motion.",
+        image: "https://www.gmmohit.com/works/teaure/og.png",
+        datePublished: "2025-12-01",
+        author: { "@id": "https://www.gmmohit.com/#person" },
+        isPartOf: { "@id": "https://www.gmmohit.com/#website" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.gmmohit.com/works/teaure/#breadcrumb",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.gmmohit.com" },
+          { "@type": "ListItem", position: 2, name: "Works", item: "https://www.gmmohit.com/works" },
+          { "@type": "ListItem", position: 3, name: "Teaure" }
+        ]
       }
     ]
   };

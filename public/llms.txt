@@ -6,7 +6,7 @@ This is the portfolio of GM Mohit, a Creative Developer and UI/UX Designer who s
 - **Name:** GM Mohit
 - **Roles:** Creative Developer, UI/UX Architect, Digital Craftsman
 - **Website:** https://www.gmmohit.com
-- **Philosophy:** "I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that doesn't just look stunning—it performs."
+- **Philosophy:** "I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that performs as well as it looks."
 
 ## Services & Expertise
 1. **Strategy & Direction:** Defining core purpose and pathways to elevate digital presence.

@@ -34,15 +34,22 @@ export default function HeroSection() {
             {/* Hero Content */}
             <div className="w-full flex flex-col z-10 px-4 md:px-12 lg:px-16">
                 <div className="relative">
-                    <h1 id="hero-heading" className="sr-only">GM Mohit - Creative Designer and Developer Portfolio</h1>
-                    <AnimatedText
-                        el="div"
-                        aria-hidden="true"
-                        className="font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
-                        text={["Creative.", "Designer.", "Developer."]}
-                        staggerDuration={0.02}
-                        splitLevel="char"
-                    />
+                    {/* The h1 now WRAPS the visible headline instead of hiding beside
+                        it -- Google discounts text that never renders. aria-label gives
+                        screen readers the clean sentence, since the animation splits the
+                        text into per-character spans that read as "C r e a t i v e". */}
+                    <h1 id="hero-heading" aria-label="GM Mohit — Creative Designer and Developer Portfolio">
+                        {/* el="span" (not div) because an h1 may only contain phrasing
+                            content; `block` keeps the exact same layout the div had. */}
+                        <AnimatedText
+                            el="span"
+                            aria-hidden="true"
+                            className="block font-monument text-[40px] leading-[1.1] md:text-[60px] lg:text-[77px] tracking-tight uppercase"
+                            text={["Creative.", "Designer.", "Developer."]}
+                            staggerDuration={0.02}
+                            splitLevel="char"
+                        />
+                    </h1>
                 </div>
 
                 <div className="w-full mt-10 md:mt-16 lg:mt-24 flex flex-col md:flex-row md:items-center md:justify-end gap-10 md:gap-16 lg:gap-32">
@@ -75,7 +82,7 @@ export default function HeroSection() {
                         <AnimatedText
                             el="p"
                             className="font-circular text-base md:text-lg lg:text-xl leading-relaxed md:max-w-[320px] lg:max-w-[400px]"
-                            text="I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that doesn't just look stunning—it performs."
+                            text="I build digital experiences where elegance meets intention. I help ambitious brands break through the noise with design that performs as well as it looks."
                             staggerDuration={0.01}
                         />
                     </div>

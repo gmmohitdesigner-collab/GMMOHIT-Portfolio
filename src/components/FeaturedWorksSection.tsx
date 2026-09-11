@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import AnimatedText from "./AnimatedText";
 import { useLoading } from "@/context/LoadingContext";
 import { useTransition } from "@/context/TransitionContext";
@@ -200,8 +201,13 @@ export default function FeaturedWorksSection() {
                         <span className="text-transparent" style={{ WebkitTextStroke: "1px #E8E3DA" }}>R</span>
                         <span>KS</span>
                     </motion.div>
+                    {/* Crawlable link to the /works index -- without it that page
+                        would be an orphan reachable only via the sitemap. Same
+                        styling as before, so nothing moves. */}
                     <motion.span className="block text-xs md:text-sm tracking-widest uppercase opacity-60 font-mono" variants={textRevealVariants}>
-                        ( Selected )
+                        <Link href="/works" className="hover:opacity-100 transition-opacity">
+                            ( Selected )
+                        </Link>
                     </motion.span>
                 </div>
             </motion.h2>

@@ -88,7 +88,7 @@ export default function CreativeAntsCaseStudy() {
                         {/* The Problem */}
                         <div className="col-span-1 md:col-span-8 bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden group">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                            <h3 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-8">The Core Challenge</h3>
+                            <h2 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-8">The Core Challenge</h2>
                             <p className="font-circular text-2xl md:text-4xl leading-snug font-medium text-white/90">
                                 How do we design a fully immersive 3D navigation system that feels intuitive to traditional web users without causing motion sickness or confusion?
                             </p>
@@ -96,7 +96,7 @@ export default function CreativeAntsCaseStudy() {
 
                         {/* Design System */}
                         <div className="col-span-1 md:col-span-4 bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                            <h3 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-8">The Approach</h3>
+                            <h2 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-8">The Approach</h2>
                             <ul className="flex flex-col gap-4 font-mono text-sm">
                                 <li className="flex justify-between border-b border-white/5 pb-4">
                                     <span className="opacity-60">UX Strategy</span>
@@ -120,7 +120,7 @@ export default function CreativeAntsCaseStudy() {
                         {/* The Impact */}
                         <div className="col-span-1 md:col-span-12 bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
                             <div className="flex-1">
-                                <h3 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-4">The Output</h3>
+                                <h2 className="font-mono text-xs uppercase tracking-widest opacity-40 mb-4">The Output</h2>
                                 <p className="font-circular text-lg opacity-70 max-w-lg">
                                     A multi-award winning digital environment that pushed visual boundaries while maintaining a frictionless user experience.
                                 </p>

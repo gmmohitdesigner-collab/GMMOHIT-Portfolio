@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: 'https://www.gmmohit.com/works',
+      lastModified: new Date('2026-09-11'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: 'https://www.gmmohit.com/works/teaure',
       lastModified: new Date('2026-09-02'),
       changeFrequency: 'monthly',

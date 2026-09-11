@@ -98,12 +98,16 @@ export default function PageTransition() {
       {/* The Brand Loader Typography */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[50]">
         <div className="overflow-hidden">
-          <h2 
+          {/* Not a heading: this is transition chrome. As an <h2> it rendered
+              before every page's real <h1>, breaking the document outline on
+              all four routes. aria-hidden keeps it out of the a11y tree too. */}
+          <div
             ref={textRef}
+            aria-hidden="true"
             className="text-[#1a1512] text-4xl md:text-6xl tracking-[0.2em] font-serif"
           >
             {transitionTitle || "GMMOHIT"}
-          </h2>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import { useTransition } from "@/context/TransitionContext";
 
@@ -50,8 +51,14 @@ export default function TeaureCaseStudy() {
             {/* 01 - Hero Section */}
             <section className="relative min-h-[100vh] w-full flex flex-col justify-center px-6 md:px-12 pt-48 md:pt-32 pb-24">
                 <motion.div style={{ y: heroY }} className="z-10 flex flex-col">
+                    {/* Display text stays "Teaure."; the sr-only span carries the
+                        descriptive, searchable version. "Teaure" alone is a concept
+                        brand with no search volume, so the h1 targeted nothing. */}
                     <h1 className="font-serif text-[15vw] leading-[0.8] tracking-tighter mb-12">
-                        Teaure.
+                        <span aria-hidden="true">Teaure.</span>
+                        <span className="sr-only">
+                            Teaure — E-Commerce UX, Brand and Motion Design Case Study
+                        </span>
                     </h1>
                     
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start mt-8 md:mt-16">
@@ -326,20 +333,24 @@ This exploration investigates what happens when the digital experience becomes a
                     
                     {/* Left: Square Image (Floating UI) */}
                     <div className="w-full bg-[#EAE8E3] rounded-[6px] aspect-square relative overflow-hidden shadow-sm">
-                        <img 
-                            src="/works/teaure/floatingUI-right-new.png" 
-                            alt="Teaure Floating UI"
-                            className="absolute inset-0 w-full h-full object-cover"
+                        <Image
+                            src="/works/teaure/floatingUI-right-new.png"
+                            alt="Teaure product card UI floating above a soft neutral backdrop"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover"
                         />
                     </div>
                     
                     {/* Right: Environment Image */}
                     <div className="w-full aspect-square md:aspect-auto md:h-1/2 bg-[#EAE8E3] rounded-[6px] relative overflow-hidden shadow-sm">
-                        <img 
+                        <Image
                             key="env-img-center"
-                            src="/works/teaure/teaure_premise_environment.png" 
-                            alt="Teaure Environment View"
-                            className="absolute inset-0 w-full h-full object-cover object-center"
+                            src="/works/teaure/teaure_premise_environment.png"
+                            alt="Teaure packaging styled in a calm, natural environment"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover object-center"
                         />
                     </div>
                     
@@ -415,14 +426,14 @@ The system is designed to support the experience, not dominate it.`}
                 {/* Massive Visual Anchor for Design System */}
                 <div className="w-full mt-24 relative z-10 pb-12">
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-12 xl:gap-6">
-                        <div className="w-[90%] md:w-[80%] xl:w-full mr-auto xl:mr-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3]">
-                            <img src="/works/teaure/UIcard2.png" alt="System Component" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
+                        <div className="relative w-[90%] md:w-[80%] xl:w-full mr-auto xl:mr-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3]">
+                            <Image src="/works/teaure/UIcard2.png" alt="Teaure design system — interface component screen 1 of 3" fill sizes="(max-width: 768px) 90vw, (max-width: 1280px) 80vw, 33vw" className="object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
                         </div>
-                        <div className="w-[90%] md:w-[80%] xl:w-full ml-auto xl:ml-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3] xl:translate-y-16">
-                            <img src="/works/teaure/UIcard3.png" alt="System Component" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
+                        <div className="relative w-[90%] md:w-[80%] xl:w-full ml-auto xl:ml-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3] xl:translate-y-16">
+                            <Image src="/works/teaure/UIcard3.png" alt="Teaure design system — interface component screen 2 of 3" fill sizes="(max-width: 768px) 90vw, (max-width: 1280px) 80vw, 33vw" className="object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
                         </div>
-                        <div className="w-[90%] md:w-[80%] xl:w-full mr-auto xl:mr-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3]">
-                            <img src="/works/teaure/UIcard4.png" alt="System Component" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
+                        <div className="relative w-[90%] md:w-[80%] xl:w-full mr-auto xl:mr-0 aspect-[5/4] rounded-[6px] overflow-hidden shadow-sm group bg-[#EAE8E3]">
+                            <Image src="/works/teaure/UIcard4.png" alt="Teaure design system — interface component screen 3 of 3" fill sizes="(max-width: 768px) 90vw, (max-width: 1280px) 80vw, 33vw" className="object-cover transform group-hover:scale-105 transition-transform duration-[2000ms] ease-out" />
                         </div>
                     </div>
                 </div>
