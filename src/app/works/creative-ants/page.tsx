@@ -48,7 +48,7 @@ export default function CreativeAntsCaseStudy() {
                             muted 
                             playsInline 
                             className="object-cover w-full h-full opacity-40 brightness-75"
-                            src="/works/creative-ants/CreativeAnts.mp4"
+                            src="/works/creative-ants/creative-ants-preview.mp4"
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] mix-blend-multiply" />
                     </div>
@@ -183,7 +183,7 @@ export default function CreativeAntsCaseStudy() {
                                 muted 
                                 playsInline 
                                 className="object-cover w-full h-full opacity-80"
-                                src="/works/creative-ants/CreativeAnts.mp4"
+                                src="/works/creative-ants/creative-ants-preview.mp4"
                             />
                         </div>
                     </div>

@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 // copy the page never displays -- 300 KB of raw JPEG next to the 27 KB WebP the
 // browser actually uses.
 const ROUTE_VIDEOS: Record<string, string[]> = {
-  "/": ["/works/teaure/Teaure.mp4", "/works/creative-ants/CreativeAnts.mp4"],
-  "/works/teaure": ["/works/teaure/teaure-scroll v2.mp4", "/assets/Showreel.mp4"],
-  "/works/creative-ants": ["/works/creative-ants/CreativeAnts.mp4"],
+  "/": ["/works/teaure/teaure-preview.mp4", "/works/creative-ants/creative-ants-preview.mp4"],
+  "/works/teaure": ["/works/teaure/teaure-scroll-loop.mp4", "/assets/showreel.mp4"],
+  "/works/creative-ants": ["/works/creative-ants/creative-ants-preview.mp4"],
 };
 
 // The odometer has five designed stops: 00 -> 02 -> 34 -> 68 -> 100, with the

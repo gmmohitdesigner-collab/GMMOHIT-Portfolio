@@ -46,7 +46,7 @@ export default function ServicesSection() {
             id: "03", 
             title: "CREATIVE", 
             subtitle: "DEVELOPMENT", 
-            desc: "Bringing static pixels to life with physics-driven motion, WebGL, and precise implementation." 
+            desc: "Bringing static pixels to life with physics-driven motion and precise, considered implementation."
         },
     ];
 

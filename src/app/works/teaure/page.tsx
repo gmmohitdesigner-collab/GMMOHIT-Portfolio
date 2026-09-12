@@ -127,7 +127,7 @@ export default function TeaureCaseStudy() {
                         playsInline
                         className="w-full aspect-square md:w-auto md:h-full md:aspect-square object-cover rounded-[6px] md:rounded-none shadow-sm md:shadow-none"
                     >
-                        <source src="/works/teaure/teaure-scroll v2.mp4" type="video/mp4" />
+                        <source src="/works/teaure/teaure-scroll-loop.mp4" type="video/mp4" />
                     </video>
                 </motion.div>
             </section>
@@ -317,7 +317,7 @@ This exploration investigates what happens when the digital experience becomes a
                 
                 <div className="w-full aspect-video xl:aspect-auto xl:w-[80vw] xl:h-[80vh] relative z-10 rounded-[6px] xl:rounded-xl overflow-hidden shadow-2xl border border-[#1C1C1C]/5 bg-[#EAE8E3]">
                     <video 
-                        src="/assets/Showreel.mp4"
+                        src="/assets/showreel.mp4"
                         autoPlay
                         loop
                         muted

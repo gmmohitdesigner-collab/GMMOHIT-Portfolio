@@ -33,7 +33,7 @@ const skillCategories = [
         total: "(04)",
         skills: [
             "React & Next.js",
-            "WebGL & Three.js",
+            "Design systems",
             "Framer Motion",
             "Physics & Interaction"
         ]

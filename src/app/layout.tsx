@@ -88,10 +88,14 @@ export default function RootLayout({
         email: "hello@gmmohit.com",
         // Mirrors the skills already listed in AboutSection, so the entity states
         // what it actually does rather than leaving it to be inferred from prose.
+        // Keep this list to things the site can actually evidence -- it is the
+        // machine-readable version of the skills claim, so it should never be
+        // broader than what AboutSection and the case studies back up.
         knowsAbout: [
           "UI Design", "UX Research", "Brand Identity", "Design Systems",
-          "React", "Next.js", "WebGL", "Three.js", "Framer Motion",
-          "Creative Development", "Motion Design"
+          "Wireframing", "Prototyping", "Usability Testing",
+          "React", "Next.js", "Framer Motion",
+          "Motion Design", "Creative Direction"
         ]
       },
       {

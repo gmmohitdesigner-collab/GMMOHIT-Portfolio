@@ -229,7 +229,7 @@ export default function FeaturedWorksSection() {
                         targetYear="2025"
                         title="TEAURE"
                         description="A serene, high-end e-commerce flagship crafted to communicate holistic purity through minimal grid architecture and immersive motion."
-                        videoSrc="/works/teaure/Teaure.mp4"
+                        videoSrc="/works/teaure/teaure-preview.mp4"
                         link="/works/teaure"
                         itemVariants={itemVariants}
                     />
@@ -241,7 +241,7 @@ export default function FeaturedWorksSection() {
                         targetYear="2025"
                         title="CREATIVE ANTS"
                         description="A modern creative agency pushing the absolute boundaries of spatial interaction and web design."
-                        videoSrc="/works/creative-ants/CreativeAnts.mp4"
+                        videoSrc="/works/creative-ants/creative-ants-preview.mp4"
                         onCustomClick={() => setShowWIP(true)}
                         itemVariants={itemVariants}
                     />

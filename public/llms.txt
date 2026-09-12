@@ -11,11 +11,10 @@ This is the portfolio of GM Mohit, a Creative Developer and UI/UX Designer who s
 ## Services & Expertise
 1. **Strategy & Direction:** Defining core purpose and pathways to elevate digital presence.
 2. **Visual Design:** Creating pixel-perfect, brutalist, and highly aesthetic interfaces that demand attention.
-3. **Creative Development:** Bringing static pixels to life with physics-driven motion, WebGL, and precise implementation.
+3. **Creative Development:** Bringing static pixels to life with physics-driven motion and precise, considered implementation.
 
 ## Technical Stack
 - Next.js & React
-- WebGL & Three.js
 - Framer Motion (Physics & Interaction)
 - Tailwind CSS
 
