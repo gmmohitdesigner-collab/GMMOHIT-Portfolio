@@ -5,6 +5,7 @@ import PreloaderWrapper from "@/components/PreloaderWrapper";
 import { TransitionProvider } from "@/context/TransitionContext";
 import PageTransition from "@/components/PageTransition";
 import CursorTrail from "@/components/CursorTrail";
+import { MotionConfig } from "framer-motion";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gmmohit.com"),
@@ -141,15 +142,22 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <TransitionProvider>
-          <CursorTrail />
-          <PageTransition />
-          <SmoothScroll>
-            {/* No <main> here: every page renders its own, and two per
-                document is invalid. Verified no CSS targets `main`. */}
-            <PreloaderWrapper>{children}</PreloaderWrapper>
-          </SmoothScroll>
-        </TransitionProvider>
+        {/* reducedMotion="user" makes every motion component in the app respect
+            the OS-level "Reduce motion" setting: transform and layout animations
+            are dropped, opacity ones are kept (they don't trigger motion
+            sensitivity). Nothing changes for anyone who hasn't enabled it.
+            To add a manual in-page toggle later, swap "user" for state. */}
+        <MotionConfig reducedMotion="user">
+          <TransitionProvider>
+            <CursorTrail />
+            <PageTransition />
+            <SmoothScroll>
+              {/* No <main> here: every page renders its own, and two per
+                  document is invalid. Verified no CSS targets `main`. */}
+              <PreloaderWrapper>{children}</PreloaderWrapper>
+            </SmoothScroll>
+          </TransitionProvider>
+        </MotionConfig>
       </body>
     </html>
   );

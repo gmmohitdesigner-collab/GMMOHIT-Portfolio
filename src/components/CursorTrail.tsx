@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 type Point = {
   x: number;
@@ -11,6 +12,7 @@ export default function CursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     setIsReady(true);
@@ -145,7 +147,8 @@ export default function CursorTrail() {
     };
   }, [isReady]);
 
-  if (!isReady || isTouchDevice) return null;
+  // Returning null also stops the rAF loop: the effect bails on a null canvas ref.
+  if (!isReady || isTouchDevice || prefersReduced) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none mix-blend-difference">
