@@ -44,6 +44,7 @@ export default function MagneticMenuButton({
                     stroke="currentColor"
                     strokeWidth="2.5"
                     strokeLinecap="round"
+                    d="M 4 11 L 28 11"
                     animate={isOpen ? "open" : "closed"}
                     variants={pathVariants.top}
                     transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
@@ -52,6 +53,7 @@ export default function MagneticMenuButton({
                     stroke="currentColor"
                     strokeWidth="2.5"
                     strokeLinecap="round"
+                    d="M 10 21 L 28 21"
                     animate={isOpen ? "open" : "closed"}
                     variants={pathVariants.bottom}
                     transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
