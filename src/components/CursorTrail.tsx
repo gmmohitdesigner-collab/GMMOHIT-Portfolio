@@ -25,8 +25,12 @@ export default function CursorTrail() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const numPoints = 50; // The length/segments of the ribbon
+    // Tuned to match the trail on obsidianassembly.com, measured off their canvas:
+    //   ~230px trail span, avg alpha ~81/255 (~32%), fully gone <300ms after stop.
+    const numPoints = 32; // tuned against their ~227x284 trail span
     const maxRadius = 1.5; // Fine pen line
+    const TRAIL_OPACITY = 0.85; // matches their measured avg alpha (~81/255 over the ribbon)
+    const COLLAPSE_EPSILON = 4; // squared px: below this the ribbon is a dot, so stop drawing
     const points: Point[] = [];
     
     let animationFrameId: number;
@@ -88,8 +92,16 @@ export default function CursorTrail() {
     // frames the browser happens to drop -- which is why it feels different in
     // Chrome and Opera on the same machine. Normalising by delta time makes the
     // motion identical at 60Hz, 120Hz, 144Hz or while frames are being missed.
-    const HEAD_CHASE = 0.3; // how hard point 0 chases the cursor, per 60fps frame
-    const CHAIN_TENSION = 0.4; // how stiff the ribbon is, per 60fps frame
+    // TUNE THESE BY FEEL. They are now per-60fps-frame, so they mean the same
+    // thing on every display -- but that also means the old 0.3 / 0.4 no longer
+    // match what you tuned: unnormalised, those ran ~2.4x per frame faster on a
+    // 144Hz panel. These values reproduce roughly that feel at any refresh rate.
+    //   higher = snappier, shorter-lived trail
+    //   lower  = looser, longer-lingering trail
+    // To match a specific rate exactly: factor = 1 - (1 - old) ** (rate / 60)
+    //   e.g. old 0.3 on 144Hz -> 1 - 0.7 ** 2.4 = 0.60
+    const HEAD_CHASE = 0.55; // how hard point 0 chases the cursor, per 60fps frame
+    const CHAIN_TENSION = 0.65; // how stiff the ribbon is, per 60fps frame
     const perFrame = (factor: number, dt: number) => 1 - Math.pow(1 - factor, dt * 60);
 
     let lastTime = performance.now();
@@ -120,6 +132,16 @@ export default function CursorTrail() {
       for (let i = 1; i < numPoints; i++) {
         points[i].x += (points[i - 1].x - points[i].x) * chainK;
         points[i].y += (points[i - 1].y - points[i].y) * chainK;
+      }
+
+      // Once the chain has collapsed onto the cursor there is nothing left to
+      // draw but a stationary dot. Theirs clears to genuinely nothing when the
+      // pointer stops; without this the head keeps painting a few pixels forever.
+      const spreadX = points[0].x - points[numPoints - 1].x;
+      const spreadY = points[0].y - points[numPoints - 1].y;
+      if (spreadX * spreadX + spreadY * spreadY < COLLAPSE_EPSILON) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
       }
 
       ctx.lineCap = "round";
@@ -155,7 +177,7 @@ export default function CursorTrail() {
         // Pure white ink, fading out towards the tail
         // When combined with mix-blend-difference on the canvas, this magically 
         // turns dark charcoal/brown over beige backgrounds, and light beige over dark backgrounds!
-        ctx.strokeStyle = `rgba(255, 255, 255, ${easeProgress})`; 
+        ctx.strokeStyle = `rgba(255, 255, 255, ${easeProgress * TRAIL_OPACITY})`;
         ctx.stroke();
       }
 
