@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
 
 interface AsciiTorusProps {
     className?: string;
@@ -49,7 +48,6 @@ const STATIC_B = 0.6;
 
 export default function AsciiTorus({ className = "" }: AsciiTorusProps) {
     const preRef = useRef<HTMLPreElement>(null);
-    const prefersReduced = useReducedMotion();
 
     useEffect(() => {
         const el = preRef.current;
@@ -60,10 +58,10 @@ export default function AsciiTorus({ className = "" }: AsciiTorusProps) {
         // would just cause an extra render.
         const isCoarse = window.matchMedia("(pointer: coarse)").matches;
 
-        // Static frame for anyone who asked for less motion, and for touch
-        // devices -- an uncapped rAF loop on a mid-range phone is a battery and
-        // jank cost for decoration. Still renders, just doesn't spin.
-        if (prefersReduced || isCoarse) {
+        // Touch devices get a static frame: an uncapped rAF loop on a mid-range
+        // phone is a battery and jank cost for decoration. Device capability,
+        // not motion preference. Still renders, just does not spin.
+        if (isCoarse) {
             el.textContent = computeFrame(STATIC_A, STATIC_B);
             return;
         }
@@ -98,7 +96,7 @@ export default function AsciiTorus({ className = "" }: AsciiTorusProps) {
                 else clearTimeout(idleId);
             }
         };
-    }, [prefersReduced]);
+    }, []);
 
     return (
         <div aria-hidden="true" className={`flex items-center justify-center font-mono ${className}`}>

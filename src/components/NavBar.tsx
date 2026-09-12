@@ -1,11 +1,53 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence, Variants } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { useRouter, usePathname } from "next/navigation";
 import MagneticNavLink from "./MagneticNavLink";
 import MagneticMenuButton from "./MagneticMenuButton";
+
+// Measured off the live reference DOM rather than guessed:
+//   outer span  overflow:hidden, height == the line box exactly
+//   inner span  translateY(0 -> -100%)   (16px on a 16px line)
+//   all lines   identical transform at every sample -> zero stagger
+//   easing      hard ease-out with a long tail (-15.15 -> -15.71 -> ... -> -16.00)
+//
+// -100% (not -150%) matters: the line travels exactly its own height, so it
+// settles flush against the mask edge instead of overshooting past it.
+const STAGGER = 0;
+const DURATION = 0.7;
+const EASE = [0.16, 1, 0.3, 1] as const; // expo-out, same curve the Teaure page uses
+
+const lineVariants: Variants = {
+    visible: (i: number) => ({
+        y: "0%",
+        transition: { duration: DURATION, ease: EASE, delay: i * STAGGER },
+    }),
+    hidden: (i: number) => ({
+        y: "-100%",
+        transition: { duration: DURATION, ease: EASE, delay: i * STAGGER },
+    }),
+};
+
+// Declared at module scope, NOT inside NavBar: a component defined in a render
+// body is a new type on every render, so React would unmount and remount every
+// line whenever `hidden` flips -- which is exactly when the animation needs to
+// run, and remounting would skip it entirely.
+//
+// The clip must be TIGHT vertically -- exactly the line box. Earlier this had
+// py-1/-my-1 slack, which put the mask edge 4px above the text: the line then
+// reads as sliding away inside a roomy box rather than being cut at its own
+// baseline, and the mask illusion is lost. Horizontal slack is kept (px-3/-mx-3,
+// cancelled by negative margin) so MagneticNavLink's ~10px hover displacement
+// isn't sheared off; that axis doesn't affect the reveal.
+const NavLine = ({ i, children, className = "" }: { i: number; children: React.ReactNode; className?: string }) => (
+    <span className={`block overflow-hidden px-3 -mx-3 ${className}`}>
+        <motion.span className="block" custom={i} variants={lineVariants}>
+            {children}
+        </motion.span>
+    </span>
+);
 
 export default function NavBar() {
     const { scrollY } = useScroll();
@@ -141,46 +183,51 @@ export default function NavBar() {
 
     return (
         <>
+            {/* The bar itself no longer translates -- each line masks out inside its
+                own clip, staggered left to right. `animate` here is only a variant
+                label; Framer propagates it down to every NavLine child. */}
             <motion.nav
-                variants={{
-                    visible: { y: 0 },
-                    hidden: { y: "-100%" }
-                }}
                 animate={hidden && !menuOpen ? "hidden" : "visible"}
-                transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="fixed top-0 left-0 w-full flex justify-between items-center px-4 md:px-12 lg:px-16 py-6 md:py-8 z-50 text-brand-bg mix-blend-difference pointer-events-auto"
+                initial="visible"
+                className={`fixed top-0 left-0 w-full flex justify-between items-center px-4 md:px-12 lg:px-16 py-6 md:py-8 z-50 text-brand-bg mix-blend-difference ${hidden && !menuOpen ? "pointer-events-none" : "pointer-events-auto"}`}
             >
                 {/* Branding (Left) */}
                 <div className="font-monument text-lg md:text-2xl tracking-[-0.02em] leading-[0.85] z-[61] flex flex-col">
-                    <span>GM</span>
-                    <span>MOHIT</span>
+                    <NavLine i={0}>GM</NavLine>
+                    <NavLine i={1}>MOHIT</NavLine>
                 </div>
 
                 {/* Navigation Links (Center-Left) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
-                    <MagneticNavLink href="#home" onClick={(e) => handleScroll(e, "#home")} className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink>
-                    <MagneticNavLink href="#work" onClick={(e) => handleScroll(e, "#work")} className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> WORKS</MagneticNavLink>
-                    <MagneticNavLink href="#about" onClick={(e) => handleScroll(e, "#about")} className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> ABOUT</MagneticNavLink>
+                    <NavLine i={2}><MagneticNavLink href="#home" onClick={(e) => handleScroll(e, "#home")} className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> HOME</MagneticNavLink></NavLine>
+                    <NavLine i={3}><MagneticNavLink href="#work" onClick={(e) => handleScroll(e, "#work")} className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> WORKS</MagneticNavLink></NavLine>
+                    <NavLine i={4}><MagneticNavLink href="#about" onClick={(e) => handleScroll(e, "#about")} className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> ABOUT</MagneticNavLink></NavLine>
                 </div>
 
                 {/* Social Links (Center-Right) */}
                 <div className="hidden md:flex flex-col gap-1 font-circular text-[12px] tracking-[-0.02em] uppercase">
-                    <MagneticNavLink href="https://www.instagram.com/noblessedesigns/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink>
-                    <MagneticNavLink href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink>
-                    <MagneticNavLink href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink>
+                    <NavLine i={5}><MagneticNavLink href="https://www.instagram.com/noblessedesigns/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-0"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">①</span> INSTAGRAM</MagneticNavLink></NavLine>
+                    <NavLine i={6}><MagneticNavLink href="https://www.linkedin.com/in/gmmohit/" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[20px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">②</span> LINKED IN</MagneticNavLink></NavLine>
+                    <NavLine i={7}><MagneticNavLink href="https://www.behance.net/gmmohit" target="_blank" rel="noopener noreferrer" className="flex items-center ml-[40px]"><span className="font-serif italic mr-1 text-[10px] relative top-[1px]">③</span> BEHANCE</MagneticNavLink></NavLine>
                 </div>
 
                 {/* Availability & Contact (Right) */}
                 <div className="hidden md:flex flex-col items-end gap-1 text-right w-[180px] lg:w-[220px]">
-                    <span className="font-circular text-[12px] opacity-60 uppercase tracking-[-0.02em] leading-relaxed">
-                        AVAILABLE FOR PROJECTS
-                    </span>
-                    <MagneticNavLink href="mailto:HELLO@GMMOHIT.COM" className="font-circular font-normal text-[12px] uppercase tracking-[-0.02em]">
-                        HELLO@GMMOHIT.COM
-                    </MagneticNavLink>
-                    <MagneticNavLink href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-[-0.02em] mt-[2px]">
-                        SEND PROJECT INQUIRY
-                    </MagneticNavLink>
+                    <NavLine i={8} className="w-full">
+                        <span className="block font-circular text-[12px] opacity-60 uppercase tracking-[-0.02em] leading-relaxed">
+                            AVAILABLE FOR PROJECTS
+                        </span>
+                    </NavLine>
+                    <NavLine i={9} className="w-full">
+                        <MagneticNavLink href="mailto:HELLO@GMMOHIT.COM" className="font-circular font-normal text-[12px] uppercase tracking-[-0.02em]">
+                            HELLO@GMMOHIT.COM
+                        </MagneticNavLink>
+                    </NavLine>
+                    <NavLine i={10} className="w-full">
+                        <MagneticNavLink href="#contact" className="font-circular font-normal text-[12px] uppercase tracking-[-0.02em] mt-[2px]">
+                            SEND PROJECT INQUIRY
+                        </MagneticNavLink>
+                    </NavLine>
                 </div>
 
             </motion.nav>

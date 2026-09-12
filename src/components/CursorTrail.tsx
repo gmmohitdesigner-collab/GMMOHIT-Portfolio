@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
 type Point = {
   x: number;
@@ -12,7 +11,6 @@ export default function CursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     setIsReady(true);
@@ -38,10 +36,20 @@ export default function CursorTrail() {
     let currentY = 0;
     let hasMoved = false; // Prevents the trail from drawing from the center on load
 
+    // Tracked in CSS pixels because the context is scaled by dpr below: clearing
+    // with canvas.width/height would clear dpr x dpr times the needed area every
+    // frame (4x the work at 200% scaling, 1.56x at Windows' common 125%).
+    let cssWidth = 0;
+    let cssHeight = 0;
+
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
+      cssWidth = window.innerWidth;
+      cssHeight = window.innerHeight;
+      // Assigning width/height resets the transform, so the scale below is not
+      // cumulative across resizes.
+      canvas.width = cssWidth * dpr;
+      canvas.height = cssHeight * dpr;
       ctx.scale(dpr, dpr);
       
       // Initialize points
@@ -75,8 +83,23 @@ export default function CursorTrail() {
 
     window.addEventListener("mousemove", onMouseMove);
 
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // These factors are authored against a 60fps frame. Applied raw, the trail's
+    // speed becomes a function of the display's refresh rate and of whatever
+    // frames the browser happens to drop -- which is why it feels different in
+    // Chrome and Opera on the same machine. Normalising by delta time makes the
+    // motion identical at 60Hz, 120Hz, 144Hz or while frames are being missed.
+    const HEAD_CHASE = 0.3; // how hard point 0 chases the cursor, per 60fps frame
+    const CHAIN_TENSION = 0.4; // how stiff the ribbon is, per 60fps frame
+    const perFrame = (factor: number, dt: number) => 1 - Math.pow(1 - factor, dt * 60);
+
+    let lastTime = performance.now();
+
+    const render = (now: number) => {
+      // Clamp dt so returning from a background tab doesn't teleport the ribbon.
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      ctx.clearRect(0, 0, cssWidth, cssHeight);
 
       if (!hasMoved) {
         animationFrameId = requestAnimationFrame(render);
@@ -84,18 +107,19 @@ export default function CursorTrail() {
       }
 
       // Spring Physics: The head (point 0) chases the mouse
-      currentX += (mouseX - currentX) * 0.3;
-      currentY += (mouseY - currentY) * 0.3;
-      
+      const headK = perFrame(HEAD_CHASE, dt);
+      currentX += (mouseX - currentX) * headK;
+      currentY += (mouseY - currentY) * headK;
+
       points[0].x = currentX;
       points[0].y = currentY;
 
       // Kinematic Chain: Every subsequent point chases the point immediately in front of it!
       // This creates the physical "whipping" and "ribbon" drag effect
+      const chainK = perFrame(CHAIN_TENSION, dt);
       for (let i = 1; i < numPoints; i++) {
-        // The tension factor (0.4) controls how stiff the ribbon is
-        points[i].x += (points[i - 1].x - points[i].x) * 0.4;
-        points[i].y += (points[i - 1].y - points[i].y) * 0.4;
+        points[i].x += (points[i - 1].x - points[i].x) * chainK;
+        points[i].y += (points[i - 1].y - points[i].y) * chainK;
       }
 
       ctx.lineCap = "round";
@@ -138,7 +162,7 @@ export default function CursorTrail() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    render(performance.now());
 
     return () => {
       window.removeEventListener("resize", resize);
@@ -147,8 +171,10 @@ export default function CursorTrail() {
     };
   }, [isReady]);
 
+  // Touch guard only -- a cursor trail is meaningless without a cursor. This is
+  // a device-capability check, not a motion-preference one.
   // Returning null also stops the rAF loop: the effect bails on a null canvas ref.
-  if (!isReady || isTouchDevice || prefersReduced) return null;
+  if (!isReady || isTouchDevice) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none mix-blend-difference">

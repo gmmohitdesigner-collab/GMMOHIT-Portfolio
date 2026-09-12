@@ -142,12 +142,11 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {/* reducedMotion="user" makes every motion component in the app respect
-            the OS-level "Reduce motion" setting: transform and layout animations
-            are dropped, opacity ones are kept (they don't trigger motion
-            sensitivity). Nothing changes for anyone who hasn't enabled it.
-            To add a manual in-page toggle later, swap "user" for state. */}
-        <MotionConfig reducedMotion="user">
+        {/* reducedMotion="never": motion plays for everyone, including visitors
+            whose OS requests reduced motion. Deliberate product decision -- the
+            motion IS the work here. To restore OS-level respect, change this one
+            value back to "user". */}
+        <MotionConfig reducedMotion="never">
           <TransitionProvider>
             <CursorTrail />
             <PageTransition />

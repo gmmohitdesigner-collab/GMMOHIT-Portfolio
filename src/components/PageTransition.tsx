@@ -72,7 +72,7 @@ export default function PageTransition() {
           initial="IDLE"
           animate={transitionState}
           onAnimationComplete={() => handleRowComplete(i)}
-          className="w-full bg-[#E8E3DA] pointer-events-auto will-change-transform"
+          className="w-full bg-[#E8E3DA] pointer-events-auto"
           style={{ height: `${100 / NUM_ROWS}vh` }}
         />
       ))}
@@ -88,7 +88,7 @@ export default function PageTransition() {
             variants={textVariants}
             initial="IDLE"
             animate={transitionState}
-            className="text-[#1a1512] text-4xl md:text-6xl tracking-[0.2em] font-serif will-change-transform"
+            className="text-[#1a1512] text-4xl md:text-6xl tracking-[0.2em] font-serif"
           >
             {transitionTitle || "GMMOHIT"}
           </motion.div>
