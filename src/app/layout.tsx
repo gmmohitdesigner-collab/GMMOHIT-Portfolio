@@ -141,7 +141,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         {/* reducedMotion="never": motion plays for everyone, including visitors
             whose OS requests reduced motion. Deliberate product decision -- the
             motion IS the work here. To restore OS-level respect, change this one
