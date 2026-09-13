@@ -26,6 +26,12 @@
 }
 
 html {
+  /* `clip`, deliberately not `hidden`: overflow-x:hidden turns the root into a
+     scroll container, which silently breaks `position: sticky` on descendants
+     (the desktop ServicesSection relies on `sticky top-0`). `clip` contains a
+     stray overflow without that side effect. This is a safety net, not a fix --
+     anything that trips it is still a real layout bug worth finding. */
+  overflow-x: clip;
   scrollbar-gutter: stable;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */

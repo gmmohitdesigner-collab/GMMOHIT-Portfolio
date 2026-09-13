@@ -7,7 +7,6 @@ import { useLoading } from "@/context/LoadingContext";
 const skillCategories = [
     {
         title: "UI design",
-        total: "(06)",
         skills: [
             "Visual direction",
             "Design concept",
@@ -19,7 +18,6 @@ const skillCategories = [
     },
     {
         title: "UX design",
-        total: "(05)",
         skills: [
             "UX research",
             "Usability testing",
@@ -30,7 +28,6 @@ const skillCategories = [
     },
     {
         title: "Creative dev",
-        total: "(04)",
         skills: [
             "React & Next.js",
             "Design systems",
@@ -104,13 +101,6 @@ export default function AboutSection() {
                             className="w-full max-w-[280px] lg:max-w-[340px] h-1.5 md:h-2 bg-[#3F352C] mt-8 mb-12 origin-left" 
                         />
                         
-                        {/* Meta tag */}
-                        <div className="overflow-hidden">
-                            <motion.span variants={textRevealVariants} className="block font-mono text-xs opacity-60 mb-8">
-                                (GPT® — 579)
-                            </motion.span>
-                        </div>
-
                         {/* Philosophy */}
                         <div className="overflow-hidden">
                             <motion.p variants={textRevealVariants} className="font-circular text-sm md:text-base lg:text-lg opacity-80 leading-relaxed mb-16 max-w-[320px] m-0">
@@ -151,9 +141,9 @@ export default function AboutSection() {
                                 </motion.h3>
                             </div>
 
-                            <div className="flex flex-col w-full">
+                            <ul className="flex flex-col w-full m-0 p-0">
                                 {category.skills.map((skill, skillIndex) => (
-                                    <motion.div 
+                                    <motion.li 
                                         key={skill}
                                         variants={{
                                             hidden: { opacity: 0, x: -20 },
@@ -161,18 +151,15 @@ export default function AboutSection() {
                                         }}
                                         className="flex w-full items-center py-5 md:py-6 border-b border-[#3F352C]/20 group hover:bg-[#3F352C]/[0.02] transition-colors"
                                     >
-                                        <span className="font-mono text-xs md:text-sm opacity-50 w-16 md:w-20">
-                                            {skillIndex === 0 ? category.total : ""}
-                                        </span>
                                         <span className="font-circular text-base md:text-lg lg:text-xl flex-1 opacity-80 group-hover:opacity-100 transition-opacity">
                                             {skill}
                                         </span>
                                         <span className="font-mono text-xs md:text-sm opacity-60 group-hover:text-[#3F352C] group-hover:opacity-100 transition-all">
-                                            {skillIndex + 1}
+                                            {(skillIndex + 1).toString().padStart(2, '0')}
                                         </span>
-                                    </motion.div>
+                                    </motion.li>
                                 ))}
-                            </div>
+                            </ul>
                         </motion.div>
                     ))}
                 </div>

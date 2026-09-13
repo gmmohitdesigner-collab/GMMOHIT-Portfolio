@@ -23,7 +23,12 @@ export default function PrivacyPolicy() {
           <p className="text-foreground/60 text-lg">Last updated: August 2026</p>
         </div>
 
-        <div className="space-y-12 text-foreground/80 leading-relaxed text-lg">
+        {/* Caps the reading measure. Uncapped this rendered 92 ACTUAL characters
+            per line on desktop, well past the 45-75 that stays comfortable.
+            Tuned against counted line lengths, not against the unit: `ch` is the
+            width of the "0" glyph, and Circular Std's lowercase is far narrower,
+            so 68ch still measured ~92 real characters. The heading keeps full width. */}
+        <div className="space-y-12 text-foreground/80 leading-relaxed text-lg max-w-[52ch]">
           <section>
             <h2 className="text-2xl font-bold mb-4 text-foreground font-[family-name:var(--font-monument)]">1. Introduction</h2>
             <p>

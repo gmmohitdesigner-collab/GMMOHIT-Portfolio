@@ -49,7 +49,7 @@ export default function TeaureCaseStudy() {
             </div>
 
             {/* 01 - Hero Section */}
-            <section className="relative min-h-[100vh] w-full flex flex-col justify-center px-6 md:px-12 pt-48 md:pt-32 pb-24">
+            <section className="relative min-h-[100svh] w-full flex flex-col justify-center px-6 md:px-12 pt-48 md:pt-32 pb-24">
                 <motion.div style={{ y: heroY }} className="z-10 flex flex-col">
                     {/* Display text stays "Teaure."; the sr-only span carries the
                         descriptive, searchable version. "Teaure" alone is a concept
@@ -119,7 +119,7 @@ export default function TeaureCaseStudy() {
                 </div>
 
                 {/* Massive Visual Anchor for Premise */}
-                <motion.div style={{ y: floatY1 }} className="w-full md:w-[100vw] h-auto md:h-[80vh] mt-16 md:mt-32 flex items-center justify-center overflow-hidden">
+                <motion.div style={{ y: floatY1 }} className="w-full md:w-[100vw] h-auto md:h-[80svh] mt-16 md:mt-32 flex items-center justify-center overflow-hidden">
                     <video 
                         autoPlay 
                         loop 
@@ -216,16 +216,16 @@ This exploration investigates what happens when the digital experience becomes a
                 </div>
                 
                 {/* Visual Breakout (Estrela 3-Column Collage) */}
-                <motion.div style={{ y: floatY3 }} className="w-full max-w-6xl mt-12 lg:mt-[-100px] relative z-0 flex flex-col lg:flex-row gap-4 lg:gap-6 h-auto lg:h-[60vh]">
+                <motion.div style={{ y: floatY3 }} className="w-full max-w-6xl mt-12 lg:mt-[-100px] relative z-0 flex flex-col lg:flex-row gap-4 lg:gap-6 h-auto lg:h-[60svh]">
                     {/* Left 50% Photo */}
-                    <div className="w-full lg:w-1/2 h-[40vh] lg:h-full bg-[#D9D7D2] rounded-[6px] relative overflow-hidden flex items-center justify-center shadow-xl">
+                    <div className="w-full lg:w-1/2 h-[40svh] lg:h-full bg-[#D9D7D2] rounded-[6px] relative overflow-hidden flex items-center justify-center shadow-xl">
                         <div 
                             className="absolute inset-0 w-full h-full bg-cover bg-center"
                             style={{ backgroundImage: "url('/works/teaure/teaure_webshowcase.png')" }}
                         />
                     </div>
                     {/* Middle 25% Typography Block */}
-                    <div className="w-full lg:w-1/4 h-[30vh] lg:h-full bg-[#1C1C1C] text-[#FAF9F6] p-8 lg:p-10 flex flex-col justify-between rounded-[6px] shadow-xl relative overflow-hidden">
+                    <div className="w-full lg:w-1/4 h-[30svh] lg:h-full bg-[#1C1C1C] text-[#FAF9F6] p-8 lg:p-10 flex flex-col justify-between rounded-[6px] shadow-xl relative overflow-hidden">
                         <div className="flex justify-between w-full items-start">
                             <span className="font-sans text-[10px] opacity-40 tracking-[0.2em] uppercase">Typeface</span>
                             <span className="font-serif italic text-2xl opacity-40">Aa</span>
@@ -308,7 +308,7 @@ This exploration investigates what happens when the digital experience becomes a
             </section>
 
             {/* 06 - Massive Showreel */}
-            <section className="relative w-full py-24 xl:py-0 xl:h-screen bg-[#FAF9F6] flex items-center justify-center overflow-hidden border-t border-[#1C1C1C]/10 px-6 xl:px-0">
+            <section className="relative w-full py-24 xl:py-0 xl:h-[100svh] bg-[#FAF9F6] flex items-center justify-center overflow-hidden border-t border-[#1C1C1C]/10 px-6 xl:px-0">
                 <div className="absolute top-8 left-6 xl:top-12 xl:left-12 z-20">
                     <button className="px-6 py-2 rounded-full border border-[#1C1C1C]/20 bg-white/50 backdrop-blur-md font-sans text-[10px] uppercase tracking-widest text-[#1C1C1C] hover:bg-[#1C1C1C]/5 transition-colors">
                         All work

@@ -35,9 +35,12 @@ export default function CreativeAntsCaseStudy() {
             </nav>
 
             {/* Hero Section - Sticky & Scaling */}
+            {/* Plain `vh`, deliberately not `svh`/`dvh`: this is a scroll-distance
+                track, not a visual box. `dvh` would re-measure mid-scroll as the
+                mobile address bar collapses and shift the pinned animation. */}
             <div className="h-[200vh] w-full relative">
                 <motion.div 
-                    className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden origin-top"
+                    className="sticky top-0 h-[100svh] w-full flex flex-col items-center justify-center overflow-hidden origin-top"
                     style={{ scale: heroScale, opacity: heroOpacity, borderRadius: heroBorderRadius }}
                 >
                     {/* Background Video */}

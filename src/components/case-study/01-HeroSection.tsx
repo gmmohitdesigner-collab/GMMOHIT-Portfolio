@@ -39,7 +39,7 @@ export default function HeroSection({ title, description, bgVisualSrc, mainUiSrc
     };
 
     return (
-        <section ref={containerRef} className="w-full min-h-[100vh] relative flex items-center overflow-hidden bg-[#1a1512]">
+        <section ref={containerRef} className="w-full min-h-[100svh] relative flex items-center overflow-hidden bg-[#1a1512]">
             {/* DEPTH LEVEL 1: Background */}
             <motion.div 
                 className="absolute inset-0 w-full h-full"
@@ -98,7 +98,7 @@ export default function HeroSection({ title, description, bgVisualSrc, mainUiSrc
                 </motion.div>
 
                 {/* DEPTH LEVEL 2 & 3: Midground and Foreground UI */}
-                <div className="w-full md:w-[60%] h-[60vh] md:h-[90vh] relative perspective-1000 flex items-center justify-center md:justify-end mt-12 md:mt-0">
+                <div className="w-full md:w-[60%] h-[60svh] md:h-[90svh] relative perspective-1000 flex items-center justify-center md:justify-end mt-12 md:mt-0">
                     
                     {/* Midground: Main UI Mockup */}
                     <motion.div 

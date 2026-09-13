@@ -42,7 +42,7 @@ export default function FeatureBreakdownSection({ features }: FeatureBreakdownSe
 
                     {/* Dominant Visual Block (60-70% of section height) */}
                     <motion.div 
-                        className="w-full md:w-[65%] min-h-[50vh] md:min-h-[80vh] relative bg-[#e8e6e1] rounded-[2rem] overflow-hidden shadow-2xl"
+                        className="w-full md:w-[65%] min-h-[50svh] md:min-h-[80svh] relative bg-[#e8e6e1] rounded-[2rem] overflow-hidden shadow-2xl"
                         variants={fadeUpVariants}
                     >
                         {feature.isVideo ? (

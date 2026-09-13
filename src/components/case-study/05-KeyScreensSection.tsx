@@ -49,7 +49,7 @@ export default function KeyScreensSection({ heading, subheading, description, co
                         <motion.div key={idx} className="flex flex-col items-center gap-16 md:gap-24 w-full" variants={fadeUpVariants}>
                             
                             {/* Layered Composition Block */}
-                            <div className="w-full relative flex items-center justify-center min-h-[60vh] md:min-h-[90vh]">
+                            <div className="w-full relative flex items-center justify-center min-h-[60svh] md:min-h-[90svh]">
                                 {/* Main Visual (Full Width Container) */}
                                 <div className="absolute inset-0 w-full h-full bg-[#e8e6e1] rounded-[2rem] overflow-hidden shadow-2xl">
                                     <Image 

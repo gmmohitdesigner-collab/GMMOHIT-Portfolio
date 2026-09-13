@@ -14,7 +14,7 @@ export default function WowSection({ statement, subStatement }: WowSectionProps)
     };
 
     return (
-        <section className="w-full min-h-[80vh] bg-[#050505] text-[#fcf5ee] flex flex-col items-center justify-center py-32 md:py-64 relative overflow-hidden">
+        <section className="w-full min-h-[80svh] bg-[#050505] text-[#fcf5ee] flex flex-col items-center justify-center py-32 md:py-64 relative overflow-hidden">
             {/* Subtle Texture / Noise could be added here via a CSS class or image overlay */}
             <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none mix-blend-overlay"></div>
             

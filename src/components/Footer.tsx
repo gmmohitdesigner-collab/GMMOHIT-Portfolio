@@ -40,10 +40,10 @@ export default function Footer() {
                             className="flex flex-col gap-5"
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Navigation</span>
-                            <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
-                                <a href="#home" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> HOME</a>
-                                <a href="#about" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> ABOUT</a>
-                                <a href="#work" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> WORKS</a>
+                            <div className="flex flex-col gap-0 -mt-2 font-circular text-sm md:text-base uppercase tracking-widest">
+                                <a href="#home" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> HOME</a>
+                                <a href="#about" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> ABOUT</a>
+                                <a href="#work" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> WORKS</a>
                             </div>
                         </motion.div>
 
@@ -55,11 +55,11 @@ export default function Footer() {
                             className="flex flex-col gap-5"
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Socials</span>
-                            <div className="flex flex-col gap-2 font-circular text-sm md:text-base uppercase tracking-widest">
-                                <a href="https://www.instagram.com/noblessedesigns/" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
-                                <a href="https://x.com/G_M_Mohit" aria-label="Visit X Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> X / TWITTER</a>
-                                <a href="https://www.linkedin.com/in/gmmohit/" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> LINKED IN</a>
-                                <a href="https://www.behance.net/gmmohit" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">④</span> BEHANCE</a>
+                            <div className="flex flex-col gap-0 -mt-2 font-circular text-sm md:text-base uppercase tracking-widest">
+                                <a href="https://www.instagram.com/noblessedesigns/" aria-label="Visit Instagram Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">①</span> INSTAGRAM</a>
+                                <a href="https://x.com/G_M_Mohit" aria-label="Visit X Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">②</span> X / TWITTER</a>
+                                <a href="https://www.linkedin.com/in/gmmohit/" aria-label="Visit LinkedIn Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">③</span> LINKED IN</a>
+                                <a href="https://www.behance.net/gmmohit" aria-label="Visit Behance Profile" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity flex items-center py-2"><span className="font-serif italic mr-2 text-[10px] relative top-[1px]">④</span> BEHANCE</a>
                             </div>
                         </motion.div>
 
@@ -72,7 +72,7 @@ export default function Footer() {
                         >
                             <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">Contact</span>
                             <div className="flex flex-col gap-1">
-                                <a href="mailto:HELLO@GMMOHIT.COM" aria-label="Email Address: HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity">
+                                <a href="mailto:HELLO@GMMOHIT.COM" aria-label="Email Address: HELLO@GMMOHIT.COM" className="font-circular text-sm md:text-base uppercase tracking-widest hover:opacity-70 transition-opacity py-2 -mt-2">
                                     HELLO@GMMOHIT.COM
                                 </a>
                                 <span className="font-mono text-[10px] tracking-widest opacity-60 mt-2 max-w-[180px] leading-relaxed">

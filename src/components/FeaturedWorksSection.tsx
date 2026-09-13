@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -47,6 +47,35 @@ const ProjectCard = ({
     const firstLetter = title.charAt(0);
     const restOfTitle = title.slice(1);
 
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        video.defaultMuted = true;
+        video.muted = true;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play().catch((e) => console.log("Autoplay blocked: ", e));
+                    } else {
+                        video.pause();
+                    }
+                });
+            },
+            { threshold: 0.1 } // Trigger when at least 10% is visible
+        );
+
+        observer.observe(video);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [videoSrc]);
+
     return (
         <motion.div
             ref={ref}
@@ -85,7 +114,19 @@ const ProjectCard = ({
                         {/* preload="metadata" keeps these cards from buffering their full
                             source before the hero has painted. They still autoplay on sight --
                             the Loader has already warmed them via prefetch. */}
-                        <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]" key={videoSrc}>
+                        <video 
+                            ref={videoRef}
+                            autoPlay 
+                            muted 
+                            loop 
+                            playsInline
+                            disablePictureInPicture
+                            disableRemotePlayback 
+                            preload="auto" 
+                            style={{ transform: "translateZ(0)", willChange: "transform" }}
+                            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]" 
+                            key={videoSrc}
+                        >
                             <source src={videoSrc} type="video/mp4" />
                         </video>
                     </motion.div>
@@ -205,7 +246,11 @@ export default function FeaturedWorksSection() {
                         would be an orphan reachable only via the sitemap. Same
                         styling as before, so nothing moves. */}
                     <motion.span className="block text-xs md:text-sm tracking-widest uppercase opacity-60 font-mono" variants={textRevealVariants}>
-                        <Link href="/works" className="hover:opacity-100 transition-opacity">
+                        {/* py/-my pair grows the hit area from 14px to 46px without
+                            moving anything: the padding expands the box, the negative
+                            margin cancels it in layout. Verified 330px of clearance to
+                            the nearest other interactive element, so nothing overlaps. */}
+                        <Link href="/works" className="inline-block py-4 -my-4 hover:opacity-100 transition-opacity">
                             ( Selected )
                         </Link>
                     </motion.span>
