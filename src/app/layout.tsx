@@ -6,6 +6,7 @@ import { TransitionProvider } from "@/context/TransitionContext";
 import PageTransition from "@/components/PageTransition";
 import CursorTrail from "@/components/CursorTrail";
 import { MotionConfig } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gmmohit.com"),
@@ -157,6 +158,7 @@ export default function RootLayout({
             </SmoothScroll>
           </TransitionProvider>
         </MotionConfig>
+        <Analytics />
       </body>
     </html>
   );
