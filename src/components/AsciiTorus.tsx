@@ -100,7 +100,16 @@ export default function AsciiTorus({ className = "" }: AsciiTorusProps) {
 
     return (
         <div aria-hidden="true" className={`flex items-center justify-center font-mono ${className}`}>
-            <pre ref={preRef} className="text-[#3F352C] opacity-70 leading-none text-[6px] sm:text-[8px] md:text-[10px] tracking-tight" />
+            {/* No colour of its own: it inherits from the wrapper. It used to
+                hard-code #3F352C, which is the exact background of the Services
+                section, so the glyphs were brown-on-brown. On mobile
+                mix-blend-screen lifted them just enough to see; on desktop the
+                torus sits inside the framer-motion transform that drives the
+                horizontal scroll, and a transform creates a stacking context, so
+                `screen` blended against that group's transparent backdrop and
+                returned the source unchanged -- invisible. Measured contrast
+                across the 300px box was 2.0 out of 255. */}
+            <pre ref={preRef} className="opacity-70 leading-none text-[6px] sm:text-[8px] md:text-[10px] tracking-tight" />
         </div>
     );
 }
