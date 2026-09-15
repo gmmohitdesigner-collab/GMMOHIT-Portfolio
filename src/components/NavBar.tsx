@@ -300,7 +300,7 @@ export default function NavBar() {
 
                             <div className="flex items-center gap-4 text-[10px] sm:text-xs font-circular opacity-60 uppercase tracking-widest w-full justify-between mt-4">
                                 <span>✦</span>
-                                <span>FOR WORK — CONTACT BELOW</span>
+                                <span>FOR WORK • CONTACT BELOW</span>
                                 <span>✦</span>
                             </div>
                             <a href="mailto:HELLO@GMMOHIT.COM" aria-label="Email G M Mohit" className="w-full py-5 sm:py-6 rounded-full bg-[#3F352C] text-[#E8E3DA] flex justify-center items-center hover:opacity-90 transition-opacity">

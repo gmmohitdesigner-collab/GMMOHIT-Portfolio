@@ -2,10 +2,20 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLenis } from "lenis/react";
 
 export default function Footer() {
+    const lenis = useLenis();
+
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (lenis) {
+            lenis.scrollTo(0, {
+                duration: 2.0,
+                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     };
 
     return (
@@ -129,7 +139,7 @@ export default function Footer() {
                         privacy
                     </Link>
 
-                    <span className="opacity-60">Designed & Hand-Coded</span>
+                    <span className="opacity-60">Designed and Developed by GM Mohit</span>
                 </div>
             </div>
 

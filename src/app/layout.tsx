@@ -115,7 +115,7 @@ export default function RootLayout({
         "@type": "CreativeWork",
         "@id": "https://www.gmmohit.com/works/teaure/#work",
         url: "https://www.gmmohit.com/works/teaure",
-        name: "Teaure — E-Commerce UX, Brand and Motion Design",
+        name: "Teaure | E-Commerce UX, Brand and Motion Design",
         description: "A serene, high-end e-commerce flagship crafted to communicate holistic purity through minimal grid architecture and immersive motion.",
         image: "https://www.gmmohit.com/works/teaure/og.png",
         datePublished: "2025-12-01",

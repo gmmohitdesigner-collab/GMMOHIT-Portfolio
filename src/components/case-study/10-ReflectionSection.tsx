@@ -38,7 +38,7 @@ export default function ReflectionSection({ learnings, futureScope, closingThoug
                         <ul className="flex flex-col gap-6 font-circular text-xl md:text-2xl leading-relaxed opacity-80 list-none">
                             {learnings.map((learning, idx) => (
                                 <li key={idx} className="flex gap-6 items-start">
-                                    <span className="opacity-40 mt-1">—</span>
+                                    <span className="opacity-40 mt-1">•</span>
                                     <span>{learning}</span>
                                 </li>
                             ))}
@@ -51,7 +51,7 @@ export default function ReflectionSection({ learnings, futureScope, closingThoug
                             <ul className="flex flex-col gap-6 font-circular text-xl md:text-2xl leading-relaxed opacity-80 list-none">
                                 {futureScope.map((scope, idx) => (
                                     <li key={idx} className="flex gap-6 items-start">
-                                        <span className="opacity-40 mt-1">—</span>
+                                        <span className="opacity-40 mt-1">•</span>
                                         <span>{scope}</span>
                                     </li>
                                 ))}

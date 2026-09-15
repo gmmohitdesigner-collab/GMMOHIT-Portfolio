@@ -161,7 +161,7 @@ const ProjectCard = ({
             <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-4 md:px-12 lg:px-16 mt-6 md:mt-10 gap-6 md:w-[90%] lg:w-[85%] mx-auto">
                 <motion.div variants={itemVariants} className="flex gap-4 font-mono text-[10px] md:text-[11px] tracking-widest uppercase opacity-60">
                     <span>{index}</span>
-                    <span>—</span>
+                    <span>|</span>
                     <span>{category} / {targetYear}</span>
                 </motion.div>
 

@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Works — Selected Case Studies | GM Mohit",
+  title: "Works | Selected Case Studies | GM Mohit",
   description:
     "Selected design and development case studies by GM Mohit: e-commerce UX, brand identity, design systems and motion-led web experiences built in Bengaluru, India.",
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "GM Mohit Portfolio",
     locale: "en_US",
-    title: "Works — Selected Case Studies | GM Mohit",
+    title: "Works | Selected Case Studies | GM Mohit",
     description:
       "Selected design and development case studies by GM Mohit: e-commerce UX, brand identity, design systems and motion-led web experiences.",
     url: "https://www.gmmohit.com/works",
@@ -71,7 +71,7 @@ export default function WorksIndex() {
                 <div className="relative w-full md:w-[46%] aspect-[1.9/1] overflow-hidden rounded-[6px] bg-[#EAE8E3]">
                   <Image
                     src={p.image}
-                    alt={`${p.title} — ${p.subtitle}`}
+                    alt={`${p.title} | ${p.subtitle}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 46vw"
                     className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-[1.03]"

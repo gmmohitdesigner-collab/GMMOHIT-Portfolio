@@ -45,7 +45,7 @@ export default function ServicesSection() {
                 {/* Slide 1 Mobile Equivalent */}
                 <div className="flex flex-col gap-12 min-h-[80svh] justify-center relative">
                     <p className="font-circular text-xl leading-tight max-w-sm">
-                        Most designers make things look good. I make things feel inevitable — where every pixel has a reason.
+                        Most designers make things look good. I make things feel inevitable. Every pixel has a reason.
                     </p>
                     <div className="w-full h-[400px] flex justify-center items-center overflow-hidden relative mix-blend-difference text-white" aria-hidden="true">
                         <AsciiHypercube />
@@ -97,7 +97,7 @@ export default function ServicesSection() {
                             {/* Top Left Quote */}
                             <div className="w-full max-w-[500px] mt-8">
                                 <p className="font-circular text-2xl lg:text-[2rem] leading-[1.1] tracking-tight m-0">
-                                    Most designers make things look good. I make things feel inevitable — where every pixel has a reason.
+                                    Most designers make things look good. I make things feel inevitable. Every pixel has a reason.
                                 </p>
                             </div>
 

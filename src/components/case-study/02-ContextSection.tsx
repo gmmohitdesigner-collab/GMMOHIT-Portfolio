@@ -37,7 +37,7 @@ export default function ContextSection({ heading, paragraph, bullets }: ContextS
                     <ul className="flex flex-col gap-6 font-circular text-lg md:text-xl opacity-70 list-none mt-8">
                         {bullets.map((bullet, idx) => (
                             <li key={idx} className="flex gap-6 items-start">
-                                <span className="opacity-40 mt-1.5">—</span>
+                                <span className="opacity-40 mt-1.5">•</span>
                                 <span className="leading-relaxed">{bullet}</span>
                             </li>
                         ))}

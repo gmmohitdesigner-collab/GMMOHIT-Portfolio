@@ -107,7 +107,7 @@ export default function HeroSection() {
                         it -- Google discounts text that never renders. aria-label gives
                         screen readers the clean sentence, since the animation splits the
                         text into per-character spans that read as "C r e a t i v e". */}
-                    <h1 id="hero-heading" aria-label="GM Mohit — Creative Designer and Developer Portfolio">
+                    <h1 id="hero-heading" aria-label="GM Mohit | Creative Designer and Developer Portfolio">
                         {/* el="span" (not div) because an h1 may only contain phrasing
                             content; `block` keeps the exact same layout the div had. */}
                         <AnimatedText

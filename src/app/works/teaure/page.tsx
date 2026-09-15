@@ -41,7 +41,7 @@ export default function TeaureCaseStudy() {
 
             <div className="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-8 mix-blend-difference text-white pointer-events-none">
                 <div className="font-sans text-[10px] uppercase tracking-[0.2em] opacity-50">
-                    TEAURE — CONCEPT
+                    TEAURE CONCEPT
                 </div>
                 <div className="font-sans text-[10px] uppercase tracking-[0.2em] opacity-50">
                     SCROLL TO EXPLORE
@@ -547,19 +547,19 @@ The system is designed to support the experience, not dominate it.`}
                             <div>
                                 <span className="text-[10px] uppercase tracking-[0.2em] opacity-50 mb-6 block border-b border-[#1C1C1C]/10 pb-2">Key Learnings</span>
                                 <ul className="flex flex-col gap-4 text-base opacity-80">
-                                    <li>— Emotion requires restraint, not excess.</li>
-                                    <li>— Motion shapes navigation, not just aesthetics.</li>
-                                    <li>— Simplicity is the result of deliberate decisions.</li>
-                                    <li>— Brand storytelling influences perceived value.</li>
+                                    <li>Emotion requires restraint, not excess.</li>
+                                    <li>Motion shapes navigation, not just aesthetics.</li>
+                                    <li>Simplicity is the result of deliberate decisions.</li>
+                                    <li>Brand storytelling influences perceived value.</li>
                                 </ul>
                             </div>
                             
                             <div>
                                 <span className="text-[10px] uppercase tracking-[0.2em] opacity-50 mb-6 block border-b border-[#1C1C1C]/10 pb-2">Future Exploration</span>
                                 <ul className="flex flex-col gap-4 text-base opacity-80">
-                                    <li>— Personalized experiences based on behavior.</li>
-                                    <li>— Richer motion systems across product flows.</li>
-                                    <li>— Interactive exploration using emerging web tech.</li>
+                                    <li>Personalized experiences based on behavior.</li>
+                                    <li>Richer motion systems across product flows.</li>
+                                    <li>Interactive exploration using emerging web tech.</li>
                                 </ul>
                             </div>
                         </div>
