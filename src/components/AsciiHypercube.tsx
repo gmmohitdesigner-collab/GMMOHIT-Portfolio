@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface AsciiHypercubeProps {
     className?: string;
@@ -50,19 +50,61 @@ const densityChars = " .,-~:;=!*#$@";
 export default function AsciiHypercube({ className = "" }: AsciiHypercubeProps) {
     const preRef = useRef<HTMLPreElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-    useEffect(() => {
-        setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
-    }, []);
 
     useEffect(() => {
         const el = preRef.current;
-        if (!el) return;
+        const container = containerRef.current;
+        if (!el || !container) return;
 
-        const width = 320; // Massive grid to prevent clipping
-        const height = 120;  
-        
+        // The grid is measured from the container rather than hard-coded, so it
+        // covers exactly what is on screen: a fixed size is either too small (the
+        // blast debris pops out of existence partway to the edge) or too large
+        // (glyphs laid out every frame that are clipped and never seen).
+        //
+        // MAX_CELLS bounds the cost on very large displays. Above it the grid
+        // stops growing and debris does vanish a little inside the edge again --
+        // the alternative is a 5K monitor laying out ~200k glyphs per frame.
+        const MAX_CELLS = 60000;
+        // One newline baked into each row so the whole frame is a single join()
+        // rather than tens of thousands of string concatenations per frame.
+        let width = 0;
+        let height = 0;
+        let stride = 0;
+
+        const measureGrid = () => {
+            // A display:none container reports 0x0. Keep the last good grid
+            // rather than collapsing to the floor and rescaling every particle.
+            if (!container.clientWidth || !container.clientHeight) return;
+            const cs = getComputedStyle(el);
+            const probe = document.createElement("canvas").getContext("2d");
+            let charW = 0;
+            if (probe) {
+                probe.font = `${cs.fontSize} ${cs.fontFamily}`;
+                charW = probe.measureText("M").width;
+            }
+            const fontPx = parseFloat(cs.fontSize) || 9;
+            if (!charW) charW = fontPx * 0.6;
+            // measureText reports the glyph advance only. `tracking-tight` adds
+            // letter-spacing on top of it, which made every character ~0.22px
+            // narrower than measured and left the grid 3% short of the container.
+            charW += parseFloat(cs.letterSpacing) || 0;
+            const lineH = parseFloat(cs.lineHeight) || fontPx * 1.1;
+
+            // +6 cells of margin so a particle is already well off screen by the
+            // time it leaves the buffer, instead of blinking out at the last column.
+            let w = Math.ceil(container.clientWidth / charW) + 6;
+            let h = Math.ceil(container.clientHeight / lineH) + 6;
+            if (w * h > MAX_CELLS) {
+                const k = Math.sqrt(MAX_CELLS / (w * h));
+                w = Math.floor(w * k);
+                h = Math.floor(h * k);
+            }
+            width = Math.max(32, w);
+            height = Math.max(16, h);
+            stride = width + 1;
+        };
+        measureGrid();
+
         const particles: Particle[] = [];
         for (let i = 0; i < totalParticles; i++) {
             particles.push({
@@ -87,8 +129,7 @@ export default function AsciiHypercube({ className = "" }: AsciiHypercubeProps) 
         let wasHovering = false;
 
         const onMouseMove = (e: MouseEvent) => {
-            if (!containerRef.current) return;
-            const rect = containerRef.current.getBoundingClientRect();
+            const rect = container.getBoundingClientRect();
             mouseX = ((e.clientX - rect.left) / rect.width) * width;
             mouseY = ((e.clientY - rect.top) / rect.height) * height;
         };
@@ -114,9 +155,12 @@ export default function AsciiHypercube({ className = "" }: AsciiHypercubeProps) 
         };
 
         // Always attach mouse events. Touchscreen laptops use mice too!
-        containerRef.current?.addEventListener("mousemove", onMouseMove);
-        containerRef.current?.addEventListener("mouseleave", onMouseLeave);
-        containerRef.current?.addEventListener("touchstart", onTouchStart, { passive: true });
+        // Bound to the captured `container`, not containerRef.current: the ref is
+        // already null by the time cleanup runs, so the old removeEventListener
+        // calls were silently no-ops.
+        container.addEventListener("mousemove", onMouseMove);
+        container.addEventListener("mouseleave", onMouseLeave);
+        container.addEventListener("touchstart", onTouchStart, { passive: true });
 
         const renderFrame = () => {
             angleXW += 0.003;
@@ -181,8 +225,9 @@ export default function AsciiHypercube({ className = "" }: AsciiHypercubeProps) 
                 }
             }
 
-            const frame = new Array(width * height).fill(" ");
-            
+            const frame = new Array(height * stride).fill(" ");
+            for (let y = 0; y < height; y++) frame[y * stride + width] = "\n";
+
             // Calculate proximity to the hypercube mass
             const dxCenter = mouseX - (width / 2);
             const dyCenter = mouseY - (height / 2);
@@ -230,33 +275,74 @@ export default function AsciiHypercube({ className = "" }: AsciiHypercubeProps) 
                 const drawY = Math.floor(p.cy);
 
                 if (drawX >= 0 && drawX < width && drawY >= 0 && drawY < height) {
-                    const idx = drawY * width + drawX;
+                    const idx = drawY * stride + drawX;
                     frame[idx] = p.char;
                 }
             }
 
-            let out = "";
-            for (let y = 0; y < height; y++) {
-                for (let x = 0; x < width; x++) {
-                    out += frame[y * width + x];
-                }
-                out += "\n";
-            }
-            
             wasHovering = isHovering;
 
-            el.textContent = out;
-            frameId = requestAnimationFrame(renderFrame);
+            el.textContent = frame.join("");
+            if (running) frameId = requestAnimationFrame(renderFrame);
         };
 
-        frameId = requestAnimationFrame(renderFrame);
+        // Only animate while on screen. Writing textContent on this <pre> forces a
+        // full text layout of every glyph, which measured as the single largest
+        // main-thread cost on the page -- and it was running from mount, on the
+        // hero, with the cube nowhere near the viewport.
+        //
+        // This also parks the duplicate instance for free: one of the two call
+        // sites is always `display:none` behind the md: breakpoint, and an element
+        // with no box never intersects, so the hidden one never starts.
+        let running = false;
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting === running) return;
+                running = entry.isIntersecting;
+                if (running) frameId = requestAnimationFrame(renderFrame);
+                else cancelAnimationFrame(frameId);
+            },
+            { rootMargin: "200px" }
+        );
+        io.observe(container);
+
+        // Re-measure when the container changes size. This covers viewport
+        // resizes, orientation changes, and crossing the md: breakpoint (where
+        // this instance switches between being the visible one and display:none).
+        const ro = new ResizeObserver(() => {
+            const prevW = width;
+            const prevH = height;
+            measureGrid();
+            if (width === prevW && height === prevH) return;
+            if (!prevW || !prevH) {
+                // First real measurement: this instance mounted display:none, so
+                // there is no previous grid to scale from. Seat them at centre.
+                for (const p of particles) {
+                    p.cx = width / 2;
+                    p.cy = height / 2;
+                }
+                return;
+            }
+            // Carry particles across proportionally so a resize mid-blast does
+            // not teleport them; the idle path eases them back to target anyway.
+            const sx = width / prevW;
+            const sy = height / prevH;
+            for (const p of particles) {
+                p.cx *= sx;
+                p.cy *= sy;
+            }
+        });
+        ro.observe(container);
 
         return () => {
+            ro.disconnect();
+            running = false;
+            io.disconnect();
             cancelAnimationFrame(frameId);
             if (touchTimeout) clearTimeout(touchTimeout);
-            containerRef.current?.removeEventListener("mousemove", onMouseMove);
-            containerRef.current?.removeEventListener("mouseleave", onMouseLeave);
-            containerRef.current?.removeEventListener("touchstart", onTouchStart);
+            container.removeEventListener("mousemove", onMouseMove);
+            container.removeEventListener("mouseleave", onMouseLeave);
+            container.removeEventListener("touchstart", onTouchStart);
         };
     }, []);
 

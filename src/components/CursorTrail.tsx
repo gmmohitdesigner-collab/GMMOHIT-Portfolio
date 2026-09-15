@@ -10,9 +10,13 @@ type Point = {
 export default function CursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
+  // Read after mount, never during render: the server has no matchMedia, so
+  // deciding this inline would hydrate differently than it rendered.
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
   useEffect(() => {
     setIsReady(true);
+    setIsCoarsePointer(window.matchMedia("(pointer: coarse)").matches);
   }, []);
 
   useEffect(() => {
@@ -143,7 +147,10 @@ export default function CursorTrail() {
     };
   }, [isReady]);
 
-  if (!isReady) return null;
+  // A trail with no cursor to follow: on touch devices this mounted a
+  // full-screen canvas and ran its rAF loop forever while drawing nothing
+  // measurable. Pure battery cost, zero visible output.
+  if (!isReady || isCoarsePointer) return null;
 
   return (
     <div
