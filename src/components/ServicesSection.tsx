@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import AsciiTorus from "./AsciiTorus";
+import AsciiHypercube from "./AsciiHypercube";
 
 export default function ServicesSection() {
     const targetRef = useRef<HTMLElement>(null);
@@ -47,8 +47,8 @@ export default function ServicesSection() {
                     <p className="font-circular text-xl leading-tight max-w-sm">
                         Most designers make things look good. I make things feel inevitable — where every pixel has a reason.
                     </p>
-                    <div className="w-full flex justify-center py-16 opacity-80 mix-blend-screen text-[#E8E3DA]" aria-hidden="true">
-                        <AsciiTorus />
+                    <div className="w-full h-[400px] flex justify-center items-center overflow-hidden relative mix-blend-difference text-white" aria-hidden="true">
+                        <AsciiHypercube />
                     </div>
                     <div className="flex flex-col gap-4">
                         <div className="flex justify-between font-mono text-xs opacity-50">
@@ -115,8 +115,8 @@ export default function ServicesSection() {
                             </div>
 
                             {/* Center Graphic */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] flex items-center justify-center opacity-90 text-[#E8E3DA] mix-blend-screen pointer-events-none" aria-hidden="true">
-                                <AsciiTorus />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vh] flex items-center justify-center text-white mix-blend-difference pointer-events-auto z-50" aria-hidden="true">
+                                <AsciiHypercube />
                             </div>
 
                             {/* Bottom Left Title */}
